@@ -1,0 +1,45 @@
+body{
+    background: darkgrey;
+}
+
+.grid-container {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    width: 80vh;
+    height: 80vh;
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    grid-template-rows: repeat(15, 1fr);
+}
+
+.grid-item {
+    color: white;
+}
+
+.solid-wall {
+    background-color: silver;
+    border: 2px solid white;
+}
+
+.empty-field {
+    background-color: green;
+}
+
+.starting-point {
+    background-color: green;
+}
+
+#game {
+    background-color: black;
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    /* margin-top: -15%;
+    margin-left: -15%; */
+    width: 70%;
+    height: 70%;
+}
