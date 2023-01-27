@@ -1,0 +1,9 @@
+TODO list for the Bomberman project:
+
+- create the grid
+- create necessary classes (grid, player, bomb, enemy, endpoint)
+- create basic functions (grid generation, enemy movement, bomb behaviour/physics, player lives, scoring, endings)
+- event listeners for player movement (keydown/keyup)
+- function to load all assets/resources
+- start, pause and game over screens
+- set up css classes for grid elements
