@@ -28,9 +28,8 @@ export function player() {
     moveUp: function () {
       let x = player.x
       let y = player.y
-      console.log("MOVEUP:", player.x, player.y)
-      if (template[y - 1][x] === undefined || template[y - 1][x] === " ") {
-        template[y][x] = " ";
+      if (template[y - 1][x] === undefined || template[y - 1][x] === "") {
+        template[y][x] = "";
         template[y - 1][x] = "P";
         player.y--;
         drawMap();
@@ -42,8 +41,8 @@ export function player() {
     moveDown: function () {
       let x = player.x;
       let y = player.y;
-      if (template[y + 1][x] === undefined || template[y + 1][x] === " ") {
-        template[y][x] = " ";
+      if (template[y + 1][x] === undefined || template[y + 1][x] === "") {
+        template[y][x] = "";
         template[y + 1][x] = "P";
         player.y++;
         drawMap();
@@ -54,8 +53,8 @@ export function player() {
     moveLeft: function () {
       let x = player.x;
       let y = player.y;
-      if (template[y][x - 1] === undefined || template[y][x - 1] === " ") {
-        template[y][x] = " ";
+      if (template[y][x - 1] === undefined || template[y][x - 1] === "") {
+        template[y][x] = "";
         template[y][x - 1] = "P";
         player.x--;
         drawMap();
@@ -66,8 +65,8 @@ export function player() {
     moveRight: function () {
       let x = player.x;
       let y = player.y;
-      if (template[y][x + 1] === undefined || template[y][x + 1] === " ") {
-        template[y][x] = " ";
+      if (template[y][x + 1] === undefined || template[y][x + 1] === "") {
+        template[y][x] = "";
         template[y][x + 1] = "P";
         player.x++;
         drawMap();
