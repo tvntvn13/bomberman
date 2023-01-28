@@ -1,12 +1,13 @@
-//import { drawMap } from "./field.js";
 import { drawMap, template } from "./field.js";
 
+// set startpoint for player
 export function setStartpoint() {
   let x = 3;
   let y = 3;
   template[x][y] = "P";
 }
 
+// helper function to get players coordinates
 function getPlayerLocation() {
   for (let i = 1; i < template.length - 1; i++) {
     let index = template[i].indexOf("P");
@@ -16,17 +17,14 @@ function getPlayerLocation() {
   }
 }
 
+// player function/object that has the x and y coordinates
+// and movement functions
 export function player() {
   player = {
     x: getPlayerLocation(template)[0],
     y: getPlayerLocation(template)[1],
-
-
-    // console.log("this",player.x)
-    // console.log("this",player.y)
     playerMarker: "P",
-    // playerModel.classList.add("player")
-    // playerModel.id = "player";
+
     moveUp: function () {
       let x = player.x
       let y = player.y
@@ -36,9 +34,9 @@ export function player() {
         template[y - 1][x] = "P";
         player.y--;
         drawMap();
+      } else {
+        drawMap();
       }
-      console.log("player.y", player.y)
-      console.log(template[4]);
 
     },
     moveDown: function () {
@@ -49,8 +47,9 @@ export function player() {
         template[y + 1][x] = "P";
         player.y++;
         drawMap();
+      } else {
+        drawMap();
       }
-
     },
     moveLeft: function () {
       let x = player.x;
@@ -60,9 +59,9 @@ export function player() {
         template[y][x - 1] = "P";
         player.x--;
         drawMap();
+      } else {
+        drawMap();
       }
-
-
     },
     moveRight: function () {
       let x = player.x;
@@ -72,8 +71,9 @@ export function player() {
         template[y][x + 1] = "P";
         player.x++;
         drawMap();
+      } else {
+        drawMap();
       }
-
     }
   }
 }

@@ -20,10 +20,12 @@ function loop() {
     // requestAnimationFrame(loop)
 }
 
+// eventlistener for player movement
 document.body.addEventListener("keydown", (e) => {
+    // delete the old map and update it with new one
     document.querySelectorAll(".grid-container").forEach((e) => e.remove())
+    // delete old player position and updfate it with new one 
     document.querySelectorAll(".player").forEach((e) => e.remove());
-    console.log(e.key)
     // let moveInterval;
     switch (e.key) {
       case "ArrowUp":
@@ -42,12 +44,13 @@ document.body.addEventListener("keydown", (e) => {
         player.moveDown();
         break;
         // moveInterval = setInteral(player.moveDown(player.x,player.y),500);
-        default: 
+        default:
+            // if player cant move, just draw the map
+            drawMap();
         
     }
 
   })
+  window.onload = init();
 
 // requestAnimationFrame(loop);
-
-window.onload = init();
