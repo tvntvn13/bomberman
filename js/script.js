@@ -1,4 +1,4 @@
-import { drawMap, template } from "./field.js";
+import { drawMap } from "./field.js";
 import { player, setStartpoint } from "./player.js";
 
 function init() {
@@ -6,8 +6,48 @@ function init() {
     game.className = 'game';
     game.id = 'game';
     document.body.append(game);
+    setStartpoint();
     player();
-    drawMap(setStartpoint(template));
+    drawMap();
 }
+
+
+
+function loop() {
+    //document.querySelectorAll("grid-container").forEach((e) => e.remove())
+    // player();
+    drawMap();
+    // requestAnimationFrame(loop)
+}
+
+document.body.addEventListener("keydown", (e) => {
+    document.querySelectorAll(".grid-container").forEach((e) => e.remove())
+    document.querySelectorAll(".player").forEach((e) => e.remove());
+    console.log(e.key)
+    // let moveInterval;
+    switch (e.key) {
+      case "ArrowUp":
+        player.moveUp();
+        break;
+        // moveInterval = setInterval(player.moveUp(player.x,player.y),500);
+      case "ArrowLeft":
+        player.moveLeft();
+        break;
+        // moveInterval = setInteval(player.moveLeft(player.x,player.y),500);
+      case "ArrowRight":
+        player.moveRight();
+        break;
+        // moveInterval = setInteral(player.moveRigth(player.x,player.y),500);
+      case "ArrowDown":
+        player.moveDown();
+        break;
+        // moveInterval = setInteral(player.moveDown(player.x,player.y),500);
+        default: 
+        
+    }
+
+  })
+
+// requestAnimationFrame(loop);
 
 window.onload = init();

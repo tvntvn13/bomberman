@@ -2,74 +2,78 @@
 import { drawMap, template } from "./field.js";
 
 export function setStartpoint() {
-  let x = 4;
+  let x = 3;
   let y = 3;
   template[x][y] = "P";
-  return template;
+}
+
+function getPlayerLocation() {
+  for (let i = 1; i < template.length - 1; i++) {
+    let index = template[i].indexOf("P");
+    if (index != -1) {
+      return [i, index];
+    }
+  }
 }
 
 export function player() {
-  let x = setStartpoint.x
-  let y = setStartpoint.y
-  let playerMarker = "P"
-  // playerModel.classList.add("player")
-  // playerModel.id = "player";
-  function moveUp(x,y) {
-    // let x = this.x
-    // let y = this.y
-    if (template[x][y + 1] === undefined || template[x][y + 1] === " ") {
-      template[x][y] = " ";
-      template[x][y + 1] = "P";
-    }
-    drawMap();
-  }
-  function moveDown(x,y) {
-    // let x = this.x;
-    // let y = this.y;
-    if (template[x][y - 1] === undefined || template[x][y - 1] === " ") {
-      template[x][y] = " ";
-      template[x][y - 1] = "P";
-    }
-    drawMap();
-  }
-    function moveLeft(x,y) {
-      // let x = this.x;
-      // let y = this.y;
-      if (template[x - 1][y] === undefined || template[x - 1][y] === " ") {
-        template[x][y] = " ";
-        template[x - 1][y] = "P";
+  player = {
+    x: getPlayerLocation(template)[0],
+    y: getPlayerLocation(template)[1],
+
+
+    // console.log("this",player.x)
+    // console.log("this",player.y)
+    playerMarker: "P",
+    // playerModel.classList.add("player")
+    // playerModel.id = "player";
+    moveUp: function () {
+      let x = player.x
+      let y = player.y
+      console.log("MOVEUP:", player.x, player.y)
+      if (template[y - 1][x] === undefined || template[y - 1][x] === " ") {
+        template[y][x] = " ";
+        template[y - 1][x] = "P";
+        player.y--;
+        drawMap();
       }
-      drawMap();
+      console.log("player.y", player.y)
+      console.log(template[4]);
 
-    }
-    function moveRigth(x,y) {
-      // let x = this.x;
-      // let y = this.y;
-      if (template[x+1][y] === undefined || template[x+1][y] === " ") {
-        template[x][y] = " ";
-        template[x+1][y] = "P";
-    }
-    drawMap();
-  }
-
-    document.body.addEventListener("keydown", (e) => {
-      document.querySelectorAll(".player").forEach(e => e.remove());
-      let moveInterval;
-      switch (e.key) {
-        case "arrowUp":
-          moveInterval = setInterval(player.moveUp(player.x,player.y),500);
-        case "arrowLeft":
-          moveInterval = setInteval(player.moveLeft(player.x,player.y),500);
-        case "arrowRigth":
-          moveInterval = setInteral(player.moveRigth(player.x,player.y),500);
-        case "arrowDown":
-          moveInterval = setInteral(player.moveDown(player.x,player.y),500);
+    },
+    moveDown: function () {
+      let x = player.x;
+      let y = player.y;
+      if (template[y + 1][x] === undefined || template[y + 1][x] === " ") {
+        template[y][x] = " ";
+        template[y + 1][x] = "P";
+        player.y++;
+        drawMap();
       }
 
-    })
+    },
+    moveLeft: function () {
+      let x = player.x;
+      let y = player.y;
+      if (template[y][x - 1] === undefined || template[y][x - 1] === " ") {
+        template[y][x] = " ";
+        template[y][x - 1] = "P";
+        player.x--;
+        drawMap();
+      }
 
-    // document.body.addEventListener("keyup", (e) => {
-    //   if (moveInterval) clearInterval(moveInterval);
-    // })
+
+    },
+    moveRight: function () {
+      let x = player.x;
+      let y = player.y;
+      if (template[y][x + 1] === undefined || template[y][x + 1] === " ") {
+        template[y][x] = " ";
+        template[y][x + 1] = "P";
+        player.x++;
+        drawMap();
+      }
+
+    }
   }
-
+}
