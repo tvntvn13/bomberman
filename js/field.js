@@ -1,6 +1,6 @@
 
 // template is the default level design, the '▉' characters are solid walls, the 'x' characters are the starting points and the neighbouring areas
-const template = [
+export let template = [
     ['▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉'],
     ['▉', 'x', 'x', , , , , , , , , , 'x', 'x', '▉'],
     ['▉', 'x', '▉', , '▉', , '▉', , '▉', , '▉', , '▉', 'x', '▉'],
@@ -12,7 +12,7 @@ const template = [
     ['▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉'],
     ['▉', 'x', , , , , , , , , , , , 'x', '▉'],
     ['▉', 'x', '▉', , '▉', , '▉', , '▉', , '▉', , '▉', 'x', '▉'],
-    ['▉', 'x', 'x', , , , , , , , , , 'x', 'x', '▉'],
+    ['▉', '', 'x', , , , , , , , , , 'x', 'x', '▉'],
     ['▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉']
 ];
 
@@ -32,6 +32,8 @@ export function drawMap(templ=template) {
                 mapBlock.classList.add('starting-point');
             } else if (templ[i][j] === undefined) {
                 mapBlock.classList.add('empty-field');
+            } else if (templ[i][j] === "P") {
+                mapBlock.classList.add("player");
             }
             mapBlock.innerHTML = templ[i][j] === undefined ? ' ' : templ[i][j];
             mainMap.append(mapBlock);
