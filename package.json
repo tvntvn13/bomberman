@@ -1,0 +1,16 @@
+{
+  "name": "bomberman",
+  "version": "1.0.0",
+  "description": "none",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://01.gritlab.ax/git/petrus_ambrosius/make-your-game.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
