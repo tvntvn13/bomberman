@@ -19,6 +19,7 @@ export let template = [
 export function drawMap(templ=template) {
     let game = document.getElementById('game');
     let mainMap = document.createElement('div');
+    // document.querySelectorAll('.grid-container').forEach((e) => e.remove());
     mainMap.className = 'grid-container';
     mainMap.id = 'mainMap';
     for (let i = 0; i < templ.length; i++) {
@@ -34,10 +35,15 @@ export function drawMap(templ=template) {
                 mapBlock.classList.add('empty-field');
             } else if (templ[i][j] === "P") {
                 mapBlock.classList.add("player");
+            } else if (templ[i][j].includes("B")) {
+                mapBlock.classList.add("bomb");
+            } else if (templ[i][j].includes("X")) {
+                mapBlock.classList.add("explosion");
             }
             mapBlock.innerHTML = templ[i][j] === undefined ? ' ' : templ[i][j];
             mainMap.append(mapBlock);
         }
     }
     game.append(mainMap);
+    //requestAnimationFrame(drawMap);
 }

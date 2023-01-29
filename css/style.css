@@ -41,6 +41,13 @@ body{
 
 }
 
+.bomb {
+    color: transparent;
+    background-color: black;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
 #game {
     background-color: green;
     position: absolute;
@@ -50,4 +57,9 @@ body{
     margin-left: -15%; */
     width: 70%;
     height: 70%;
+}
+
+.explosion {
+    background-color: rgb(255, 0, 0);
+    
 }

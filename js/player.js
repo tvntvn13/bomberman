@@ -1,4 +1,5 @@
 import { drawMap, template } from "./field.js";
+import { bomb } from "./bomb.js";
 
 // set startpoint for player
 export function setStartpoint() {
@@ -19,7 +20,7 @@ function getPlayerLocation() {
 
 // player function/object that has the x and y coordinates
 // and movement functions
-export function player() {
+export async function player() {
   player = {
     x: getPlayerLocation(template)[0],
     y: getPlayerLocation(template)[1],
@@ -29,12 +30,12 @@ export function player() {
       let x = player.x
       let y = player.y
       if (template[y - 1][x] === undefined || template[y - 1][x] === "") {
-        template[y][x] = "";
+        if (template[y][x] !== "P B") template[y][x] = "";
         template[y - 1][x] = "P";
         player.y--;
         drawMap();
-      } else {
-        drawMap();
+      // } else {
+      //   drawMap();
       }
 
     },
@@ -42,37 +43,44 @@ export function player() {
       let x = player.x;
       let y = player.y;
       if (template[y + 1][x] === undefined || template[y + 1][x] === "") {
-        template[y][x] = "";
+        if (template[y][x] !== "P B") template[y][x] = "";
         template[y + 1][x] = "P";
         player.y++;
         drawMap();
-      } else {
-        drawMap();
+      // } else {
+      //   drawMap();
       }
     },
     moveLeft: function () {
       let x = player.x;
       let y = player.y;
       if (template[y][x - 1] === undefined || template[y][x - 1] === "") {
-        template[y][x] = "";
+        if (template[y][x] !== "P B") template[y][x] = "";
         template[y][x - 1] = "P";
         player.x--;
         drawMap();
-      } else {
-        drawMap();
+      // } else {
+      //   drawMap();
       }
     },
     moveRight: function () {
       let x = player.x;
       let y = player.y;
       if (template[y][x + 1] === undefined || template[y][x + 1] === "") {
-        template[y][x] = "";
+        if (template[y][x] !== "P B") template[y][x] = "";
         template[y][x + 1] = "P";
         player.x++;
         drawMap();
-      } else {
-        drawMap();
+      // } else {
+      //   drawMap();
       }
+    },
+    placeBomb: function () {
+      let x = player.x;
+      let y = player.y;
+      template[y][x] += " B";
+      bomb(x,y);
+      // drawMap();
     }
   }
 }

@@ -2,13 +2,14 @@ import { drawMap } from "./field.js";
 import { player, setStartpoint } from "./player.js";
 
 function init() {
-    let game = document.createElement('div');
-    game.className = 'game';
-    game.id = 'game';
-    document.body.append(game);
+    // let game = document.createElement('div');
+    // game.className = 'game';
+    // game.id = 'game';
+    // document.body.append(game);
     setStartpoint();
     player();
     drawMap();
+    //window.requestAnimationFrame(drawMap);
 }
 
 
@@ -25,7 +26,11 @@ document.body.addEventListener("keydown", (e) => {
     // delete the old map and update it with new one
     document.querySelectorAll(".grid-container").forEach((e) => e.remove())
     // delete old player position and updfate it with new one 
-    document.querySelectorAll(".player").forEach((e) => e.remove());
+    // document.querySelectorAll(".player").forEach((e) => e.remove());
+    // setTimeout(() => {
+    //   document.querySelectorAll(".explosion").forEach((e) => 
+    //   e.classList.remove("explosion").add("emptyfield").textContent = "");
+    // },1000)
     // let moveInterval;
     switch (e.key) {
       case "ArrowUp":
@@ -44,6 +49,9 @@ document.body.addEventListener("keydown", (e) => {
         player.moveDown();
         break;
         // moveInterval = setInteral(player.moveDown(player.x,player.y),500);
+        case " ":
+          player.placeBomb();
+          break;
         default:
             // if player cant move, just draw the map
             drawMap();
