@@ -34,8 +34,8 @@ export async function player() {
         template[y - 1][x] = "P";
         player.y--;
         drawMap();
-      // } else {
-      //   drawMap();
+      } else {
+        drawMap();
       }
 
     },
@@ -47,8 +47,8 @@ export async function player() {
         template[y + 1][x] = "P";
         player.y++;
         drawMap();
-      // } else {
-      //   drawMap();
+      } else {
+        drawMap();
       }
     },
     moveLeft: function () {
@@ -59,8 +59,8 @@ export async function player() {
         template[y][x - 1] = "P";
         player.x--;
         drawMap();
-      // } else {
-      //   drawMap();
+      } else {
+        drawMap();
       }
     },
     moveRight: function () {
@@ -71,8 +71,8 @@ export async function player() {
         template[y][x + 1] = "P";
         player.x++;
         drawMap();
-      // } else {
-      //   drawMap();
+      } else {
+        drawMap();
       }
     },
     placeBomb: function () {

@@ -2,10 +2,10 @@ import { drawMap } from "./field.js";
 import { player, setStartpoint } from "./player.js";
 
 function init() {
-    // let game = document.createElement('div');
-    // game.className = 'game';
-    // game.id = 'game';
-    // document.body.append(game);
+    let game = document.createElement('div');
+    game.className = 'game';
+    game.id = 'game';
+    document.body.append(game);
     setStartpoint();
     player();
     drawMap();
@@ -26,7 +26,8 @@ document.body.addEventListener("keydown", (e) => {
     // delete the old map and update it with new one
     document.querySelectorAll(".grid-container").forEach((e) => e.remove())
     // delete old player position and updfate it with new one 
-    // document.querySelectorAll(".player").forEach((e) => e.remove());
+    document.querySelectorAll(".player").forEach((e) => e.remove());
+    document.querySelectorAll(".explosion").forEach((e)=> e.remove());
     // setTimeout(() => {
     //   document.querySelectorAll(".explosion").forEach((e) => 
     //   e.classList.remove("explosion").add("emptyfield").textContent = "");

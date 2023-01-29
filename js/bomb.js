@@ -82,6 +82,7 @@ export function explosion(x, y) {
     // }
     bombClearOut(explFields);
   }, 3000);
+  drawMap();
   // setTimeout(() => {
   //   for (let elem of template) {
   //     template[elem[0]][elem[1]] = undefined;
@@ -105,4 +106,5 @@ function bombClearOut(arr) {
     }
     
   }, 1000);
+  // drawMap();
 }
