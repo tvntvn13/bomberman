@@ -25,6 +25,7 @@ export async function player() {
     x: getPlayerLocation(template)[0],
     y: getPlayerLocation(template)[1],
     playerMarker: "P",
+    bombs: 0,
 
     moveUp: function () {
       let x = player.x
@@ -76,10 +77,13 @@ export async function player() {
       }
     },
     placeBomb: function () {
+      if (this.bombs < 3) {
       let x = player.x;
       let y = player.y;
       template[y][x] += " B";
       bomb(x,y);
+      this.bombs++;
+      }
       // drawMap();
     }
   }

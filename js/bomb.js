@@ -1,4 +1,5 @@
 import { template } from "./field.js";
+import { player } from "./player.js";
 
 export function bomb(x, y) {
   explosion(x, y);
@@ -91,6 +92,7 @@ export function explosion(x, y) {
     //   explFields.push([y, x - 1]);
     // }
     bombClearOut(explFields);
+    player.bombs--;
   }, 3000);
   // drawMap();
   // setTimeout(() => {
@@ -115,6 +117,6 @@ function bombClearOut(arr) {
       template[elem[0]][elem[1]] = undefined;
     }
 
-  }, 1000);
+  }, 500);
   // drawMap();
 }
