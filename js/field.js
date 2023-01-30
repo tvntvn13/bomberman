@@ -1,20 +1,24 @@
+import { map } from "./maps.js";
 
-// template is the default level design, the '▉' characters are solid walls, the 'x' characters are the starting points and the neighbouring areas
-export let template = [
-    ['▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉'],
-    ['▉', '', '', , , , , , , , , , '', '', '▉'],
-    ['▉', '', '▉', , '▉', , '▉', , '▉', , '▉', , '▉', '', '▉'],
-    ['▉', '', , , , , , , , , , , , '', '▉'],
-    ['▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉'],
-    ['▉', , , , , , , , , , , , , , '▉'],
-    ['▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉'],
-    ['▉', , , , , , , , , , , , , , '▉'],
-    ['▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉'],
-    ['▉', '', , , , , , , , , , , , '', '▉'],
-    ['▉', '', '▉', , '▉', , '▉', , '▉', , '▉', , '▉', '', '▉'],
-    ['▉', '', '', , , , , , , , , , '', '', '▉'],
-    ['▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉']
-];
+//template is the default level design, the '▉' characters are solid walls, the 'x' characters are the starting points and the neighbouring areas
+// export let template = [
+//     ['▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉'],
+//     ['▉', '', '', , , , , , , , , , '', '', '▉'],
+//     ['▉', '', '▉', , '▉', , '▉', , '▉', , '▉', , '▉', '', '▉'],
+//     ['▉', '', , , , , , , , , , , , '', '▉'],
+//     ['▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉'],
+//     ['▉', , , , , , , , , , , , , , '▉'],
+//     ['▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉'],
+//     ['▉', , , , , , , , , , , , , , '▉'],
+//     ['▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉'],
+//     ['▉', , , , , , , , , , , , , '', '▉'],
+//     ['▉', '', '▉', , '▉', , '▉', , '▉', , '▉', , '▉', '', '▉'],
+//     ['▉', '', '', , , , , , , , , , '', '', '▉'],
+//     ['▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉']
+// ];
+
+
+export let template = map;
 
 export function drawMap(templ=template) {
     let game = document.getElementById('game');
@@ -39,6 +43,8 @@ export function drawMap(templ=template) {
                 mapBlock.classList.add("bomb");
             } else if (templ[i][j].includes("X")) {
                 mapBlock.classList.add("explosion");
+            } else if (templ[i][j].includes("W")) {
+                mapBlock.classList.add("softWall");
             }
             mapBlock.innerHTML = templ[i][j] === undefined ? ' ' : templ[i][j];
             mainMap.append(mapBlock);

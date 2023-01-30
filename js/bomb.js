@@ -1,4 +1,4 @@
-import { drawMap, template } from "./field.js";
+import { template } from "./field.js";
 
 export function bomb(x, y) {
   explosion(x, y);
@@ -82,7 +82,7 @@ export function explosion(x, y) {
     // }
     bombClearOut(explFields);
   }, 3000);
-  drawMap();
+  // drawMap();
   // setTimeout(() => {
   //   for (let elem of template) {
   //     template[elem[0]][elem[1]] = undefined;

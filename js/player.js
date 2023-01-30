@@ -33,9 +33,9 @@ export async function player() {
         if (template[y][x] !== "P B") template[y][x] = "";
         template[y - 1][x] = "P";
         player.y--;
-        drawMap();
-      } else {
-        drawMap();
+      //   drawMap();
+      // } else {
+      //   drawMap();
       }
 
     },
@@ -46,9 +46,9 @@ export async function player() {
         if (template[y][x] !== "P B") template[y][x] = "";
         template[y + 1][x] = "P";
         player.y++;
-        drawMap();
-      } else {
-        drawMap();
+      //   drawMap();
+      // } else {
+      //   drawMap();
       }
     },
     moveLeft: function () {
@@ -58,9 +58,9 @@ export async function player() {
         if (template[y][x] !== "P B") template[y][x] = "";
         template[y][x - 1] = "P";
         player.x--;
-        drawMap();
-      } else {
-        drawMap();
+      //   drawMap();
+      // } else {
+      //   drawMap();
       }
     },
     moveRight: function () {
@@ -70,9 +70,9 @@ export async function player() {
         if (template[y][x] !== "P B") template[y][x] = "";
         template[y][x + 1] = "P";
         player.x++;
-        drawMap();
-      } else {
-        drawMap();
+      //   drawMap();
+      // } else {
+      //   drawMap();
       }
     },
     placeBomb: function () {
