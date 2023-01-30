@@ -6,35 +6,46 @@ export function bomb(x, y) {
 
 export function explosion(x, y) {
   let explFields = [];
-  for (let i = y; i > 0 && i >= y-3; i--) {
+  for (let i = y; i > 0 && i >= y - 3; i--) {
     if (template[i][x] === "▉") {
+      break;
+    } else if (template[i][x] === "W") {
+      explFields.push([i, x]);
       break;
     } else {
       explFields.push([i, x]);
     }
   }
-  for (let i = y; i < template.length-1 && i <= y+3; i++) {
+  for (let i = y; i < template.length - 1 && i <= y + 3; i++) {
     if (template[i][x] === "▉") {
+      break;
+    } else if (template[i][x] === "W") {
+      explFields.push([i, x]);
       break;
     } else {
       explFields.push([i, x]);
     }
   }
-  for (let i = x; i > 0 && i >= x-3; i--) {
+  for (let i = x; i > 0 && i >= x - 3; i--) {
     if (template[y][i] === "▉") {
       break;
-    } else {
-    explFields.push([y, i]);
-    }
-  }
-  for (let i = x; i < template[y].length-1 && i <= x+3; i++) {
-    if (template[y][i] === "▉") {
+    } else if (template[y][i] === "W") {
+      explFields.push([y, i]);
       break;
     } else {
       explFields.push([y, i]);
     }
   }
-  console.log('filled', explFields);
+  for (let i = x; i < template[y].length - 1 && i <= x + 3; i++) {
+    if (template[y][i] === "▉") {
+      break;
+    } else if (template[y][i] === "W") {
+      explFields.push([y, i]);
+      break;
+    } else {
+      explFields.push([y, i]);
+    }
+  }
   for (let elem of explFields) {
     template[elem[0][elem[1]]] = "X";
   }
@@ -86,14 +97,14 @@ export function explosion(x, y) {
   //   for (let elem of template) {
   //     template[elem[0]][elem[1]] = undefined;
   //   }
-    
+
   // }, 1000);
   // for (let i = 0; i < template.length; i++) {
   //   for ( let j = 0; j < template[0].length; j++) {
   //     if (template[i][j] === "X")
   //   }
   // }
-  
+
   // console.log('this', explFields);
 }
 
@@ -103,7 +114,7 @@ function bombClearOut(arr) {
     for (let elem of arr) {
       template[elem[0]][elem[1]] = undefined;
     }
-    
+
   }, 1000);
   // drawMap();
 }
