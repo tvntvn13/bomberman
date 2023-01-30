@@ -44,8 +44,16 @@ body{
     background-color: rgb(120, 0, 120);
     border-radius: 50%;
     overflow: hidden;
-
+    /* animation-name: move;
+    animation-duration: 50ms; */
 }
+
+/* @keyframes move {
+    from{transform: translateX 0%;}
+    to{transform: translateX 50%;}
+} */
+
+
 
 .bomb {
     color: transparent;

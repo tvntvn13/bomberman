@@ -6,7 +6,6 @@ export function bomb(x, y) {
 
 export function explosion(x, y) {
   let explFields = [];
-  console.log('empty', explFields);
   for (let i = y; i > 0 && i >= y-3; i--) {
     if (template[i][x] === "▉") {
       break;

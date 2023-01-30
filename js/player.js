@@ -1,4 +1,4 @@
-import { drawMap, template } from "./field.js";
+import { template } from "./field.js";
 import { bomb } from "./bomb.js";
 
 // set startpoint for player
