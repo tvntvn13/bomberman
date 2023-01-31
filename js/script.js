@@ -40,7 +40,7 @@ function update(timestamp) {
   if (startTime === undefined) {
     startTime = timestamp;
   }
-  if (timestamp - startTime > 60) {
+  if (timestamp - startTime > 75) {
     startTime = timestamp;
     movement();
   }
@@ -52,11 +52,18 @@ function update(timestamp) {
 
 
 
+document.addEventListener("keypress", (e)=>{
+  if (e.key === " ") player.placeBomb();
+  if (e.key === "Escape") {
+    cancelAnimationFrame(animationID);
+    let pause = document.getElementById("pauseScreen");
+    pause.style.display = "inline-block";
+  }
+})
 
 
-
-document.body.addEventListener("keyup", () => {
-  keyPressed = null;
+document.body.addEventListener("keyup", (e) => {
+  if (e.key !== " ") keyPressed = null;
 })
 
 document.body.addEventListener("keydown", (e) => {
@@ -74,31 +81,8 @@ document.body.addEventListener("keydown", (e) => {
       case "ArrowDown":
         keyPressed = "down";
         break;
-      case " ":
-        player.placeBomb();
-        break;
-      case "Escape":
-        cancelAnimationFrame(animationID);
-        let pause = document.getElementById("pauseScreen");
-        pause.style.display = "inline-block";
-        break;
     }
   }
 });
-
-function throttle(func, delay) {
-  let waitingTime = false
-
-  return (...args) => {
-    if (waitingTime) return
-    func(...args)
-
-    waitingTime = true;
-
-    setTimeout(() => {
-      waitingTime = false
-    }, delay);
-  }
-}
 
 
