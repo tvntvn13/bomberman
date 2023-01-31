@@ -1,23 +1,25 @@
 import { drawMap } from "./field.js";
-import { player, setStartpoint } from "./player.js";
+import { Player, setStartpoint } from "./player.js";
 
+let sp = setStartpoint();
+export let player = new Player(sp[0], sp[1]);
+drawMap();
+let startPoint = document.getElementById(`block-${player.x}:${player.y}`);
+startPoint.classList.add('player');
+update();
 function init() {
   // let game = document.createElement('div');
   // game.className = 'game';
   // game.id = 'game';
   // document.body.append(game);
-  setStartpoint();
-  player();
-  drawMap();
-  update();
 }
 
-let fps = 60;
-let now;
-let interval = 1000 / fps;
-let then = Date.now();
-let delta;
-let animationID;
+// let fps = 60;
+// let now;
+// let interval = 1000 / fps;
+// let then = Date.now();
+// let delta;
+// let animationID;
 
 function update() {
   // document.querySelectorAll(".grid-container").forEach((e) => e.remove());
@@ -25,8 +27,8 @@ function update() {
   // document.querySelectorAll(".explosion").forEach((e) => e.remove());
 
 
-  animationID = requestAnimationFrame(update);
-
+  // animationID = requestAnimationFrame(update);
+  requestAnimationFrame(update)
   // now = Date.now();
   // delta = now - then;
 
@@ -73,5 +75,5 @@ document.body.addEventListener("keydown", (e) => {
   }
 
 })
-window.onload = init();
+// window.onload = init();
 

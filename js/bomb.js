@@ -1,5 +1,5 @@
 import { template } from "./field.js";
-import { player } from "./player.js";
+import { player } from "./script.js";
 
 export function bomb(x, y) {
   explosion(x, y);
