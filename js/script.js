@@ -1,53 +1,36 @@
 import { drawMap } from "./field.js";
-import { Player, setStartpoint } from "./player.js";
+import { setStartpoint } from "./tools.js";
+import { Enemy, Player } from "./classes.js";
 
+let startTime;
 let sp = setStartpoint();
-export let player = new Player(sp[0], sp[1]);
 drawMap();
-let startPoint = document.getElementById(`block-${player.x}:${player.y}`);
-startPoint.classList.add('player');
+export let player = new Player(sp[0], sp[1]);
+// let startPoint = document.getElementById(`block-${player.x}:${player.y}`);
+// startPoint.classList.add('player');
+let enemy = new Enemy(5,5);
+let enemyStartPoint = document.getElementById(`block-${enemy.x}:${enemy.y}`);
+enemyStartPoint.classList.add('enemy');
+// console.log('thiss', `block-${enemy.x}:${enemy.y}`)
+// enemy.move();
 update();
-function init() {
-  // let game = document.createElement('div');
-  // game.className = 'game';
-  // game.id = 'game';
-  // document.body.append(game);
-}
 
-// let fps = 60;
-// let now;
-// let interval = 1000 / fps;
-// let then = Date.now();
-// let delta;
-// let animationID;
-
-function update() {
-  // document.querySelectorAll(".grid-container").forEach((e) => e.remove());
-  // document.querySelectorAll(".player").forEach((e) => e.remove());
-  // document.querySelectorAll(".explosion").forEach((e) => e.remove());
-
-
-  // animationID = requestAnimationFrame(update);
+function update(timestamp) {
+  if (startTime === undefined) {
+    startTime = timestamp;
+  }
+  const elapsed = timestamp - startTime;
+  if (elapsed > 500) {
+    startTime = timestamp;
+    enemy.move();
+  }
   requestAnimationFrame(update)
-  // now = Date.now();
-  // delta = now - then;
-
-  // if (delta > interval) {
-
-  //   drawMap();
-
-  //   then = now - (delta % interval);
-  // }
 }
-
-// update();
 
 // let resumeButton = document.getElementById("continueButton");
 // let quitButton = document.getElementById("quitButton");
 // resumeButton.addEventListener("click",update());
 // quitButton.addEventListener("click",init());
-
-// const resume = () => update();
 
 // eventlistener for player movement
 document.body.addEventListener("keydown", (e) => {
