@@ -59,8 +59,7 @@ export class Player {
       this.y--;
       // currentSpot.classList.toggle('empty-field');
       currentSpot.classList.toggle('player');
-      currentSpot.classList.remove('moveUp');
-    }
+      currentSpot.classList.remove('moveRight','moveLeft','moveUp','moveDown');    }
   }
   moveDown() {
     let x = this.x;
@@ -76,8 +75,7 @@ export class Player {
       this.y++;
       // currentSpot.classList.toggle('empty-field');
       currentSpot.classList.toggle('player');
-      currentSpot.classList.remove("moveDown")
-    }
+      currentSpot.classList.remove('moveRight','moveLeft','moveUp','moveDown');    }
   }
   moveLeft() {
     let x = this.x;
@@ -93,8 +91,7 @@ export class Player {
       this.x--;
       // currentSpot.classList.toggle('empty-field');
       currentSpot.classList.toggle('player');
-      currentSpot.classList.remove('moveLeft');
-    }
+      currentSpot.classList.remove('moveRight','moveLeft','moveUp','moveDown');    }
   }
   moveRight() {
     let x = this.x;
@@ -110,7 +107,7 @@ export class Player {
       this.x++;
       // currentSpot.classList.toggle('empty-field');
       currentSpot.classList.toggle('player');
-      currentSpot.classList.remove('moveRight');
+      currentSpot.classList.remove('moveRight','moveLeft','moveUp','moveDown');
     }
   }
   placeBomb() {
@@ -125,81 +122,3 @@ export class Player {
   }
 }
 
-// player function/object that has the x and y coordinates
-// and movement functions
-// export function player(x, y) {
-//   player = {
-//     x: x,
-//     y: y,
-//     playerMarker: "P",
-//     bombs: 0,
-
-//     moveUp: function () {
-//       let x = player.x
-//       let y = player.y
-//       let nextSpotY = player.y - 1;
-//       let currentSpot = document.getElementById(`block-${x}:${y}`);
-//       let nextSpot = document.getElementById(`block-${x}:${nextSpotY}`);
-//       if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
-//         nextSpot.classList.toggle('empty-field');
-//         nextSpot.classList.toggle('player');
-//         player.y--;
-//         currentSpot.classList.toggle('empty-field');
-//         currentSpot.classList.toggle('player');
-//       }
-//     },
-//     moveDown: function () {
-//       let x = player.x;
-//       let y = player.y;
-//       let nextSpotY = player.y + 1;
-//       let currentSpot = document.getElementById(`block-${x}:${y}`);
-//       let nextSpot = document.getElementById(`block-${x}:${nextSpotY}`);
-//       if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
-//         nextSpot.classList.toggle('empty-field');
-//         nextSpot.classList.toggle('player');
-//         player.y++;
-//         currentSpot.classList.toggle('empty-field');
-//         currentSpot.classList.toggle('player');
-//       }
-//     },
-//     moveLeft: function () {
-//       let x = player.x;
-//       let y = player.y;
-//       let nextSpotX = player.x - 1;
-//       let currentSpot = document.getElementById(`block-${x}:${y}`);
-//       let nextSpot = document.getElementById(`block-${nextSpotX}:${y}`);
-//       if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
-//         nextSpot.classList.toggle('empty-field');
-//         nextSpot.classList.toggle('player');
-//         player.x--;
-//         currentSpot.classList.toggle('empty-field');
-//         currentSpot.classList.toggle('player');
-//       }
-//     },
-//     moveRight: function () {
-//       let x = player.x;
-//       let y = player.y;
-//       let nextSpotX = player.x + 1;
-//       let currentSpot = document.getElementById(`block-${x}:${y}`);
-//       let nextSpot = document.getElementById(`block-${nextSpotX}:${y}`);
-//       if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
-//         nextSpot.classList.toggle('empty-field');
-//         nextSpot.classList.toggle('player');
-//         player.x++;
-//         currentSpot.classList.toggle('empty-field');
-//         currentSpot.classList.toggle('player');
-//       }
-//     },
-//     placeBomb: function () {
-//       if (this.bombs < 3) {
-//         let x = player.x;
-//         let y = player.y;
-//         let currentSpot = document.getElementById(`block-${x}:${y}`);
-//         currentSpot.classList.add('bomb');
-//         bomb(x, y);
-//         this.bombs++;
-//       }
-//     }
-//   }
-//   return player;
-// }

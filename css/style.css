@@ -43,10 +43,6 @@ body{
     color: transparent;
     background-color: rgb(120, 0, 120);
     border-radius: 50%;
-   
-    /* animation-name: moveRight;
-    animation-duration: 100ms;
-    animation-timing-function: ease-in-out; */
     overflow: hidden !important;
 }
 

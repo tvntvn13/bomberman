@@ -1,12 +1,14 @@
 import { drawMap } from "./field.js";
 import { Player, setStartpoint } from "./player.js";
 
-// let sp = setStartpoint();
+let startTime;
+let keyPressed = null;
 export let player = new Player(1, 1);
 drawMap();
 let startPoint = document.getElementById(`block-${player.x}:${player.y}`);
 startPoint.classList.add('player');
-update();
+// update();
+requestAnimationFrame(update)
 function init() {
   // let game = document.createElement('div');
   // game.className = 'game';
@@ -14,71 +16,89 @@ function init() {
   // document.body.append(game);
 }
 
-// let fps = 60;
-// let now;
-// let interval = 1000 / fps;
-// let then = Date.now();
-// let delta;
-// let animationID;
-
-function update() {
-  // document.querySelectorAll(".grid-container").forEach((e) => e.remove());
-  // document.querySelectorAll(".player").forEach((e) => e.remove());
-  // document.querySelectorAll(".explosion").forEach((e) => e.remove());
-
-
-  // animationID = requestAnimationFrame(update);
-  requestAnimationFrame(update)
-  // now = Date.now();
-  // delta = now - then;
-
-  // if (delta > interval) {
-
-  //   drawMap();
-
-  //   then = now - (delta % interval);
-  // }
+function movement(){
+    if (keyPressed !== null) {
+      switch (keyPressed) {
+        case "down":
+          player.moveDown();
+          break;
+        case "up":
+          player.moveUp();
+          break;
+        case "left":
+          player.moveLeft();
+          break;
+        case "right":
+          player.moveRight();
+          break;
+      }
+    }
 }
 
-// update();
 
-// let resumeButton = document.getElementById("continueButton");
-// let quitButton = document.getElementById("quitButton");
-// resumeButton.addEventListener("click",update());
-// quitButton.addEventListener("click",init());
-
-// const resume = () => update();
-// let playerDiv = document.getElementsByClassName("player");
-// console.log(playerDiv)
-// eventlistener for player movement
-document.body.addEventListener("keydown", (e) => {
- 
-  switch (e.key) {
-    case "ArrowUp":  
-    // playerDiv[0].style.animationName = "moveUp"
-    player.moveUp();
-      break;
-    case "ArrowLeft":
-      // playerDiv[0].style.animationName = "moveLeft"
-      player.moveLeft();
-      break;
-    case "ArrowRight":
-      // playerDiv[0].style.animationName = "moveRight"
-      player.moveRight();
-      break;
-    case "ArrowDown":
-      // playerDiv[0].style.animationName = "moveDown";
-      player.moveDown();
-      break;
-    case " ":
-      player.placeBomb();
-      break;
-    case "Escape":
-      cancelAnimationFrame(animationID);
-      let pause = document.getElementById("pauseScreen");
-      pause.style.display = "inline-block";
+function update(timestamp) {
+  if (startTime === undefined) {
+    startTime = timestamp;
+  }
+  if (timestamp - startTime > 60) {
+    startTime = timestamp;
+    movement();
   }
 
-},false);
-// window.onload = init();
+  requestAnimationFrame(update)
+}
+
+
+
+
+
+
+
+
+document.body.addEventListener("keyup", () => {
+  keyPressed = null;
+})
+
+document.body.addEventListener("keydown", (e) => {
+  if (keyPressed === null) {
+    switch (e.key) {
+      case "ArrowUp":
+        keyPressed = "up";
+        break;
+      case "ArrowLeft":
+        keyPressed = "left";
+        break;
+      case "ArrowRight":
+        keyPressed = "right";
+        break;
+      case "ArrowDown":
+        keyPressed = "down";
+        break;
+      case " ":
+        player.placeBomb();
+        break;
+      case "Escape":
+        cancelAnimationFrame(animationID);
+        let pause = document.getElementById("pauseScreen");
+        pause.style.display = "inline-block";
+        break;
+    }
+  }
+});
+
+function throttle(func, delay) {
+  let waitingTime = false
+
+  return (...args) => {
+    if (waitingTime) return
+    func(...args)
+
+    waitingTime = true;
+
+    setTimeout(() => {
+      waitingTime = false
+    }, delay);
+  }
+}
+
 
