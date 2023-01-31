@@ -46,7 +46,7 @@ export function drawMap(templ=template) {
             } else if (templ[i][j].includes("W")) {
                 mapBlock.classList.add("softWall");
             }
-            mapBlock.innerHTML = templ[i][j] === undefined ? ' ' : templ[i][j];
+            // mapBlock.innerHTML = templ[i][j] === undefined ? ' ' : templ[i][j];
             mainMap.append(mapBlock);
         }
     }

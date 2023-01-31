@@ -59,65 +59,14 @@ export function explosion(x, y) {
     // bombPlaced.classList.remove('bomb');
     for (let elem of explFields) {
       let bombBlock = document.getElementById(`block-${elem[1]}:${elem[0]}`);
-      bombBlock.classList.remove('bomb');
+      bombBlock.classList.remove('bomb', 'softWall');
       bombBlock.classList.add('explosion');
-      bombBlock.classList.remove('softWall');
+      // bombBlock.classList.remove('softWall');
       // template[elem[0]][elem[1]] = "X"
     }
-
-    // if (template[y + 2][x] !== "▉") {
-    //   explFields.push([y + 2, x]);
-    //   explFields.push([y + 1, x]);
-    //   template[y + 2][x] = "X";
-    //   template[y + 1][x] = "X";
-    // } else if (template[y + 1][x] !== "▉") {
-    //   explFields.push([y + 1, x]);
-    //   template[y + 1][x] = "X";
-    // }
-    // if (template[y - 2][x] !== "▉") {
-    //   template[y - 2][x] = "X";
-    //   template[y - 1][x] = "X";
-    //   explFields.push([y - 2, x]);
-    //   explFields.push([y - 1, x]);
-    // } else if (template[y - 1][x] !== "▉") {
-    //   template[y - 1][x] = "X";
-    //   explFields.push([y - 1, x]);
-    // }
-    // if (template[y][x + 2] !== "▉") {
-    //   template[y][x + 2] = "X";
-    //   template[y][x + 1] = "X";
-    //   explFields.push([y, x + 2]);
-    //   explFields.push([y, x + 1]);
-    // } else if (template[y][x + 1] !== "▉") {
-    //   template[y][x + 1] = "X";
-    //   explFields.push([y, x + 1]);
-    // }
-    // if (template[y][x - 2] !== "▉") {
-    //   template[y][x - 2] = "X";
-    //   template[y][x - 1] = "X";
-    //   explFields.push([y, x - 2]);
-    //   explFields.push([y, x - 1]);
-    // } else if (template[y][x - 1] !== "▉") {
-    //   template[y][x - 1] = "X";
-    //   explFields.push([y, x - 1]);
-    // }
     bombClearOut(explFields);
     player.bombs--;
   }, 3000);
-  // drawMap();
-  // setTimeout(() => {
-  //   for (let elem of template) {
-  //     template[elem[0]][elem[1]] = undefined;
-  //   }
-
-  // }, 1000);
-  // for (let i = 0; i < template.length; i++) {
-  //   for ( let j = 0; j < template[0].length; j++) {
-  //     if (template[i][j] === "X")
-  //   }
-  // }
-
-  // console.log('this', explFields);
 }
 
 
@@ -127,9 +76,7 @@ function bombClearOut(arr) {
       let bombBlock = document.getElementById(`block-${elem[1]}:${elem[0]}`);
       bombBlock.classList.remove('explosion');
       bombBlock.classList.add('empty-field');
-      // template[elem[0]][elem[1]] = undefined;
     }
 
   }, 500);
-  // drawMap();
 }
