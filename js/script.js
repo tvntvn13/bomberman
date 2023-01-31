@@ -2,13 +2,14 @@ import { drawMap } from "./field.js";
 import { player, setStartpoint } from "./player.js";
 
 function init() {
-  let game = document.createElement('div');
-  game.className = 'game';
-  game.id = 'game';
-  document.body.append(game);
+  // let game = document.createElement('div');
+  // game.className = 'game';
+  // game.id = 'game';
+  // document.body.append(game);
   setStartpoint();
   player();
-  // drawMap();
+  drawMap();
+  update();
 }
 
 let fps = 60;
@@ -19,25 +20,25 @@ let delta;
 let animationID;
 
 function update() {
-  document.querySelectorAll(".grid-container").forEach((e) => e.remove());
-  document.querySelectorAll(".player").forEach((e) => e.remove());
-  document.querySelectorAll(".explosion").forEach((e) => e.remove());
+  // document.querySelectorAll(".grid-container").forEach((e) => e.remove());
+  // document.querySelectorAll(".player").forEach((e) => e.remove());
+  // document.querySelectorAll(".explosion").forEach((e) => e.remove());
 
 
   animationID = requestAnimationFrame(update);
 
-  now = Date.now();
-  delta = now - then;
+  // now = Date.now();
+  // delta = now - then;
 
-  if (delta > interval) {
+  // if (delta > interval) {
 
-    drawMap();
+  //   drawMap();
 
-    then = now - (delta % interval);
-  }
+  //   then = now - (delta % interval);
+  // }
 }
 
-update();
+// update();
 
 // let resumeButton = document.getElementById("continueButton");
 // let quitButton = document.getElementById("quitButton");

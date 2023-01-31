@@ -22,10 +22,10 @@ export let template = map;
 
 export function drawMap(templ=template) {
     let game = document.getElementById('game');
-    let mainMap = document.createElement('div');
+    let mainMap = document.getElementById('mainMap');
     // document.querySelectorAll('.grid-container').forEach((e) => e.remove());
-    mainMap.className = 'grid-container';
-    mainMap.id = 'mainMap';
+    // mainMap.className = 'grid-container';
+    // mainMap.id = 'mainMap';
     for (let i = 0; i < templ.length; i++) {
         for (let j = 0; j < templ[i].length; j++) {
             let mapBlock = document.createElement('div');

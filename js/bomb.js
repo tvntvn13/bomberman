@@ -8,9 +8,10 @@ export function bomb(x, y) {
 export function explosion(x, y) {
   let explFields = [];
   for (let i = y; i > 0 && i >= y - 3; i--) {
+    let currentBlock = document.getElementById(`block-${x}:${i}`);
     if (template[i][x] === "▉") {
       break;
-    } else if (template[i][x] === "W") {
+    } else if (currentBlock.classList.contains('softWall')) {
       explFields.push([i, x]);
       break;
     } else {
@@ -18,9 +19,10 @@ export function explosion(x, y) {
     }
   }
   for (let i = y; i < template.length - 1 && i <= y + 3; i++) {
+    let currentBlock = document.getElementById(`block-${x}:${i}`);
     if (template[i][x] === "▉") {
       break;
-    } else if (template[i][x] === "W") {
+    } else if (currentBlock.classList.contains('softWall')) {
       explFields.push([i, x]);
       break;
     } else {
@@ -28,9 +30,10 @@ export function explosion(x, y) {
     }
   }
   for (let i = x; i > 0 && i >= x - 3; i--) {
+    let currentBlock = document.getElementById(`block-${i}:${y}`);
     if (template[y][i] === "▉") {
       break;
-    } else if (template[y][i] === "W") {
+    } else if (currentBlock.classList.contains('softWall')) {
       explFields.push([y, i]);
       break;
     } else {
@@ -38,21 +41,28 @@ export function explosion(x, y) {
     }
   }
   for (let i = x; i < template[y].length - 1 && i <= x + 3; i++) {
+    let currentBlock = document.getElementById(`block-${i}:${y}`);
     if (template[y][i] === "▉") {
       break;
-    } else if (template[y][i] === "W") {
+    } else if (currentBlock.classList.contains('softWall')) {
       explFields.push([y, i]);
       break;
     } else {
       explFields.push([y, i]);
     }
   }
-  for (let elem of explFields) {
-    template[elem[0][elem[1]]] = "X";
-  }
+  // for (let elem of explFields) {
+  //   template[elem[0][elem[1]]] = "X";
+  // }
   setTimeout(() => {
+    // let bombPlaced = document.getElementById(`block-${x}:${y}`);
+    // bombPlaced.classList.remove('bomb');
     for (let elem of explFields) {
-      template[elem[0]][elem[1]] = "X"
+      let bombBlock = document.getElementById(`block-${elem[1]}:${elem[0]}`);
+      bombBlock.classList.remove('bomb');
+      bombBlock.classList.add('explosion');
+      bombBlock.classList.remove('softWall');
+      // template[elem[0]][elem[1]] = "X"
     }
 
     // if (template[y + 2][x] !== "▉") {
@@ -114,7 +124,10 @@ export function explosion(x, y) {
 function bombClearOut(arr) {
   setTimeout(() => {
     for (let elem of arr) {
-      template[elem[0]][elem[1]] = undefined;
+      let bombBlock = document.getElementById(`block-${elem[1]}:${elem[0]}`);
+      bombBlock.classList.remove('explosion');
+      bombBlock.classList.add('empty-field');
+      // template[elem[0]][elem[1]] = undefined;
     }
 
   }, 500);

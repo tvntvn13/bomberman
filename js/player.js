@@ -30,57 +30,100 @@ export async function player() {
     moveUp: function () {
       let x = player.x
       let y = player.y
-      if (template[y - 1][x] === undefined || template[y - 1][x] === "") {
-        if (template[y][x] !== "P B") template[y][x] = "";
-        template[y - 1][x] = "P";
+      let nextSpotY = player.y-1;
+      let currentSpot = document.getElementById(`block-${x}:${y}`);
+      let nextSpot = document.getElementById(`block-${x}:${nextSpotY}`);
+      if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
+        nextSpot.classList.toggle('empty-field');
+        nextSpot.classList.toggle('player');
         player.y--;
+        currentSpot.classList.toggle('empty-field');
+        currentSpot.classList.toggle('player');
+      }
+      // if (template[y - 1][x] === undefined || template[y - 1][x] === "") {
+      //   if (template[y][x] !== "P B") template[y][x] = "";
+      //   template[y - 1][x] = "P";
+      //   player.y--;
+
       //   drawMap();
       // } else {
       //   drawMap();
-      }
+      // }
 
     },
     moveDown: function () {
       let x = player.x;
       let y = player.y;
-      if (template[y + 1][x] === undefined || template[y + 1][x] === "") {
-        if (template[y][x] !== "P B") template[y][x] = "";
-        template[y + 1][x] = "P";
+      let nextSpotY = player.y+1;
+      let currentSpot = document.getElementById(`block-${x}:${y}`);
+      let nextSpot = document.getElementById(`block-${x}:${nextSpotY}`);
+      if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
+        nextSpot.classList.toggle('empty-field');
+        nextSpot.classList.toggle('player');
         player.y++;
-      //   drawMap();
-      // } else {
-      //   drawMap();
+        currentSpot.classList.toggle('empty-field');
+        currentSpot.classList.toggle('player');
       }
+      // if (template[y + 1][x] === undefined || template[y + 1][x] === "") {
+      //   if (template[y][x] !== "P B") template[y][x] = "";
+      //   template[y + 1][x] = "P";
+      //   player.y++;
+      // //   drawMap();
+      // // } else {
+      // //   drawMap();
+      // }
     },
     moveLeft: function () {
       let x = player.x;
       let y = player.y;
-      if (template[y][x - 1] === undefined || template[y][x - 1] === "") {
-        if (template[y][x] !== "P B") template[y][x] = "";
-        template[y][x - 1] = "P";
+      let nextSpotX = player.x-1;
+      let currentSpot = document.getElementById(`block-${x}:${y}`);
+      let nextSpot = document.getElementById(`block-${nextSpotX}:${y}`);
+      if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
+        nextSpot.classList.toggle('empty-field');
+        nextSpot.classList.toggle('player');
         player.x--;
-      //   drawMap();
-      // } else {
-      //   drawMap();
+        currentSpot.classList.toggle('empty-field');
+        currentSpot.classList.toggle('player');
       }
+      // if (template[y][x - 1] === undefined || template[y][x - 1] === "") {
+      //   if (template[y][x] !== "P B") template[y][x] = "";
+      //   template[y][x - 1] = "P";
+      //   player.x--;
+      // //   drawMap();
+      // // } else {
+      // //   drawMap();
+      // }
     },
     moveRight: function () {
       let x = player.x;
       let y = player.y;
-      if (template[y][x + 1] === undefined || template[y][x + 1] === "") {
-        if (template[y][x] !== "P B") template[y][x] = "";
-        template[y][x + 1] = "P";
+      let nextSpotX = player.x+1;
+      let currentSpot = document.getElementById(`block-${x}:${y}`);
+      let nextSpot = document.getElementById(`block-${nextSpotX}:${y}`);
+      if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
+        nextSpot.classList.toggle('empty-field');
+        nextSpot.classList.toggle('player');
         player.x++;
-      //   drawMap();
-      // } else {
-      //   drawMap();
+        currentSpot.classList.toggle('empty-field');
+        currentSpot.classList.toggle('player');
       }
+      // if (template[y][x + 1] === undefined || template[y][x + 1] === "") {
+      //   if (template[y][x] !== "P B") template[y][x] = "";
+      //   template[y][x + 1] = "P";
+      //   player.x++;
+      // //   drawMap();
+      // // } else {
+      // //   drawMap();
+      // }
     },
     placeBomb: function () {
       if (this.bombs < 3) {
       let x = player.x;
       let y = player.y;
-      template[y][x] += " B";
+      let currentSpot = document.getElementById(`block-${x}:${y}`);
+      currentSpot.classList.add('bomb');
+      // template[y][x] += " B";
       bomb(x,y);
       this.bombs++;
       }
