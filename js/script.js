@@ -1,8 +1,8 @@
 import { drawMap } from "./field.js";
 import { Player, setStartpoint } from "./player.js";
 
-let sp = setStartpoint();
-export let player = new Player(sp[0], sp[1]);
+// let sp = setStartpoint();
+export let player = new Player(1, 1);
 drawMap();
 let startPoint = document.getElementById(`block-${player.x}:${player.y}`);
 startPoint.classList.add('player');
@@ -48,21 +48,26 @@ function update() {
 // quitButton.addEventListener("click",init());
 
 // const resume = () => update();
-
+// let playerDiv = document.getElementsByClassName("player");
+// console.log(playerDiv)
 // eventlistener for player movement
 document.body.addEventListener("keydown", (e) => {
-
+ 
   switch (e.key) {
-    case "ArrowUp":
-      player.moveUp();
+    case "ArrowUp":  
+    // playerDiv[0].style.animationName = "moveUp"
+    player.moveUp();
       break;
     case "ArrowLeft":
+      // playerDiv[0].style.animationName = "moveLeft"
       player.moveLeft();
       break;
     case "ArrowRight":
+      // playerDiv[0].style.animationName = "moveRight"
       player.moveRight();
       break;
     case "ArrowDown":
+      // playerDiv[0].style.animationName = "moveDown";
       player.moveDown();
       break;
     case " ":
@@ -74,6 +79,6 @@ document.body.addEventListener("keydown", (e) => {
       pause.style.display = "inline-block";
   }
 
-})
+},false);
 // window.onload = init();
 

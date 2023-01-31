@@ -54,9 +54,12 @@ export class Player {
     if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
       // nextSpot.classList.toggle('empty-field');
       nextSpot.classList.toggle('player');
+      nextSpot.classList.add('moveUp');
+      // nextSpot.classList.toggle('moveUp');
       this.y--;
       // currentSpot.classList.toggle('empty-field');
       currentSpot.classList.toggle('player');
+      currentSpot.classList.remove('moveUp');
     }
   }
   moveDown() {
@@ -68,9 +71,12 @@ export class Player {
     if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
       // nextSpot.classList.toggle('empty-field');
       nextSpot.classList.toggle('player');
+      nextSpot.classList.add('moveDown');
+      // nextSpot.classList.toggle('moveDown');
       this.y++;
       // currentSpot.classList.toggle('empty-field');
       currentSpot.classList.toggle('player');
+      currentSpot.classList.remove("moveDown")
     }
   }
   moveLeft() {
@@ -82,9 +88,12 @@ export class Player {
     if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
       // nextSpot.classList.toggle('empty-field');
       nextSpot.classList.toggle('player');
+      nextSpot.classList.add('moveLeft');
+      // nextSpot.classList.toggle('moveLeft');
       this.x--;
       // currentSpot.classList.toggle('empty-field');
       currentSpot.classList.toggle('player');
+      currentSpot.classList.remove('moveLeft');
     }
   }
   moveRight() {
@@ -96,9 +105,12 @@ export class Player {
     if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
       // nextSpot.classList.toggle('empty-field');
       nextSpot.classList.toggle('player');
+      nextSpot.classList.add('moveRight');
+      // nextSpot.classList.toggle('moveRight');
       this.x++;
       // currentSpot.classList.toggle('empty-field');
       currentSpot.classList.toggle('player');
+      currentSpot.classList.remove('moveRight');
     }
   }
   placeBomb() {

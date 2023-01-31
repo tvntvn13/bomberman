@@ -43,15 +43,58 @@ body{
     color: transparent;
     background-color: rgb(120, 0, 120);
     border-radius: 50%;
-    overflow: hidden;
-    /* animation-name: move;
-    animation-duration: 50ms; */
+   
+    /* animation-name: moveRight;
+    animation-duration: 100ms;
+    animation-timing-function: ease-in-out; */
+    overflow: hidden !important;
 }
 
-/* @keyframes move {
-    from{transform: translateX 0%;}
-    to{transform: translateX 50%;}
-} */
+.player.moveRight {
+    animation-name: moveRight;
+    animation-duration: 100ms;
+    animation-timing-function: ease-out;
+}
+
+.player.moveLeft {
+    animation-name: moveLeft;
+    animation-duration: 100ms;
+    animation-timing-function: ease-out;
+}
+
+.player.moveUp {
+    animation-name: moveUp;
+    animation-duration: 100ms;
+    animation-timing-function: ease-out;
+}
+
+.player.moveDown{
+    animation-name: moveDown;
+    animation-duration: 100ms;
+    animation-timing-function: ease-out;
+} 
+
+@keyframes moveRight {
+    from{transform: translateX(-50%); opacity: 100%; overflow: hidden;}
+    to{transform: translateX(50%); opacity: 100%; overflow: hidden;}
+}
+
+@keyframes moveLeft {
+    from{transform: translateX(50%); opacity: 100%; overflow: hidden;}
+    to{transform: translateX(-50%); opacity: 100%; overflow: hidden;}
+}
+
+@keyframes moveUp {
+    from{transform: translateY(50%); opacity: 100%; overflow: hidden;}
+    to{transform: translateY(-50%); opacity: 100%; overflow: hidden;}
+}
+
+@keyframes moveDown {
+    from{transform: translateY(-50%); opacity: 100%; overflow: hidden;}
+    to{transform: translateY(50%); opacity: 100%; overflow: hidden;}
+}
+
+
 
 
 
