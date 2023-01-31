@@ -35,22 +35,17 @@ function movement(){
     }
 }
 
-
 function update(timestamp) {
   if (startTime === undefined) {
     startTime = timestamp;
   }
-  if (timestamp - startTime > 75) {
+  if (timestamp - startTime > 70) {
     startTime = timestamp;
     movement();
   }
 
   requestAnimationFrame(update)
 }
-
-
-
-
 
 document.addEventListener("keypress", (e)=>{
   if (e.key === " ") player.placeBomb();
@@ -60,7 +55,6 @@ document.addEventListener("keypress", (e)=>{
     pause.style.display = "inline-block";
   }
 })
-
 
 document.body.addEventListener("keyup", (e) => {
   if (e.key !== " ") keyPressed = null;
