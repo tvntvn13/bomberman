@@ -1,22 +1,22 @@
 import { drawMap } from "./field.js";
-import { Player } from "./player.js";
+import { setStartpoint } from "./tools.js";
+import { Enemy, Player } from "./classes.js";
 
 let pause = false;
 let startTime;
+let startTime2;
+let sp = setStartpoint();
 let keyPressed = null;
-export let player = new Player(1, 1);
 drawMap();
+export let player = new Player(sp[0], sp[1]);
+let enemy = new Enemy(5,5);
+let enemyStartPoint = document.getElementById(`block-${enemy.x}:${enemy.y}`);
+enemyStartPoint.classList.add('enemy');
 let pauseScreen = document.getElementById("pauseScreen");
 let startPoint = document.getElementById(`block-${player.x}:${player.y}`);
 startPoint.classList.add('player');
 // update();
 requestAnimationFrame(update)
-function init() {
-  // let game = document.createElement('div');
-  // game.className = 'game';
-  // game.id = 'game';
-  // document.body.append(game);
-}
 
 function movement() {
   if (keyPressed !== null) {
@@ -70,8 +70,17 @@ function update(timestamp) {
   if (startTime === undefined) {
     startTime = timestamp;
   }
-  if (timestamp - startTime > 70) {
+  const elapsed = timestamp - startTime;
+  if (elapsed > 500) {
     startTime = timestamp;
+    enemy.move();
+  }
+
+  if (startTime2 === undefined) {
+    startTime2 = timestamp;
+  }
+  if (timestamp - startTime2 > 70) {
+    startTime2 = timestamp;
     movement();
   }
   if (!pause) {
