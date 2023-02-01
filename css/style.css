@@ -99,6 +99,7 @@ body{
     background-color: brown;
     border: 4px solid rgb(108, 32, 32);
     color: brown;
+    z-index: 100;
 }
 
 .empty-field {
@@ -107,6 +108,12 @@ body{
 
 .starting-point {
     background-color: green;
+}
+
+.goal {
+    background-color: cyan;
+    z-index: 1;
+
 }
 
 .player {

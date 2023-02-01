@@ -9,12 +9,13 @@ let startTime2;
 let startTime3;
 let sp = setStartpoint();
 let keyPressed = null;
-let time = 999;
+let time = 300;
 
 // comment out this part to get rid of the loading bar !!!
 loadingBar();
 setTimeout(() => {
-  document.getElementById("loadingScreen").remove();
+    //this part needs to stay.
+   document.getElementById("loadingScreen").remove();
 },3200);
 // ^^^ loading bar shit above ^^^
 
@@ -30,7 +31,7 @@ let pauseScreen = document.getElementById("pauseScreen");
 let startPoint = document.getElementById(`block-${player.x}:${player.y}`);
 startPoint.classList.add('player');
 update();
-// requestAnimationFrame(update)
+//requestAnimationFrame(update)
 
 function movement() {
   if (keyPressed !== null) {
@@ -54,33 +55,35 @@ function movement() {
   }
 }
 
+document.body.addEventListener("keyup", (e) => {
+  if (e.key !== " ") keyPressed = null;
+})
+
+document.body.addEventListener("keydown", (e) => {
+  if (keyPressed === null) {
+    switch (e.key) {
+      case "ArrowUp":
+        keyPressed = "up";
+        break;
+      case "ArrowLeft":
+        keyPressed = "left";
+        break;
+      case "ArrowRight":
+        keyPressed = "right";
+        break;
+      case "ArrowDown":
+        keyPressed = "down";
+        break;
+      case "Escape":
+        togglePause();
+        break;
+    }
+  }
+});
+
+
 function update(timestamp) {
   
-  document.body.addEventListener("keyup", (e) => {
-    if (e.key !== " ") keyPressed = null;
-  })
-  
-  document.body.addEventListener("keydown", (e) => {
-    if (keyPressed === null) {
-      switch (e.key) {
-        case "ArrowUp":
-          keyPressed = "up";
-          break;
-        case "ArrowLeft":
-          keyPressed = "left";
-          break;
-        case "ArrowRight":
-          keyPressed = "right";
-          break;
-        case "ArrowDown":
-          keyPressed = "down";
-          break;
-        case "Escape":
-          togglePause();
-          break;
-      }
-    }
-  });
   if (startTime === undefined) {
     startTime = timestamp;
   }
