@@ -1,5 +1,5 @@
 import { drawMap } from "./field.js";
-import { setStartpoint } from "./tools.js";
+import { setStartpoint, loadingBar } from "./tools.js";
 import { Enemy, Player } from "./classes.js";
 
 
@@ -10,6 +10,14 @@ let startTime3;
 let sp = setStartpoint();
 let keyPressed = null;
 let time = 999;
+
+// comment out this part to get rid of the loading bar !!!
+loadingBar();
+setTimeout(() => {
+  document.getElementById("loadingScreen").remove();
+},3200);
+// ^^^ loading bar shit above ^^^
+
 lives();
 score();
 timer(time);

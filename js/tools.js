@@ -1,5 +1,4 @@
 import { template } from "./field.js";
-import { bomb } from "./bomb.js";
 
 // set startpoint for player
 export function setStartpoint() {
@@ -36,3 +35,22 @@ function getPlayerLocation() {
     }
   }
 }
+
+let i = 0;
+export function loadingBar() {
+  if (i == 0) {
+      i = 1;
+      let elem = document.getElementById("loadingBarFill");
+      let width = 1;
+      let id = setInterval(frame, 30);
+      function frame() {
+        if (width >= 100) {
+          clearInterval(id);
+          i = 0;
+        } else {
+          width++;
+          elem.style.width = width + "%";
+        }
+      }
+    }
+  }
