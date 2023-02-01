@@ -1,6 +1,8 @@
 import { drawMap } from "./field.js";
 import { setStartpoint } from "./tools.js";
 import { Enemy, Player } from "./classes.js";
+import { setStartpoint } from "./tools.js";
+import { Enemy, Player } from "./classes.js";
 
 let pause = false;
 let startTime;

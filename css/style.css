@@ -80,7 +80,12 @@ body{
     to{transform: translateX(-50%); opacity: 100%; overflow: hidden;}
 }
 
-@keyframes moveUp {
+.enemy {
+    color: transparent;
+    background-color: rgb(191, 158, 9);
+    border-radius: 50%;
+    overflow: hidden;
+}@keyframes moveUp {
     from{transform: translateY(50%); opacity: 100%; overflow: hidden;}
     to{transform: translateY(-50%); opacity: 100%; overflow: hidden;}
 }
