@@ -8,7 +8,7 @@ body{
     margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
-
+    z-index: 2;
     width: 80vh;
     height: 80vh;
     display: grid;
@@ -43,7 +43,7 @@ body{
     color: transparent;
     background-color: rgb(120, 0, 120);
     border-radius: 50%;
-    overflow: hidden !important;
+    overflow: hidden;
 }
 
 .player.moveRight {
@@ -108,6 +108,10 @@ body{
     100%{transform: scale(115%);}
 }
 
+.wrapper {
+    position: relative;
+}
+
 #game {
     background-color: green;
     position: relative;
@@ -117,7 +121,7 @@ body{
     margin-left: -15%; */
     width: 70%;
     height: 70%;
-    z-index: 10;
+    z-index: 1;
 }
 
 .explosion {
@@ -128,7 +132,7 @@ body{
 .pauseScreen {
     background-color: black;
     color: green;
-    position: fixed;
+    position: absolute;
     display: none;
     margin-top: 20%;
     padding-top: 4px;
@@ -158,5 +162,9 @@ body{
     padding-bottom: 10px;
     /* margin-left: auto;
     margin-right: auto; */
+}
+
+.pauseButton:focus {
+    transform: scale(120%);
 }
 
