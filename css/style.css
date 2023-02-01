@@ -2,6 +2,10 @@ body{
     background: darkgrey;
 }
 
+.wrapper {
+    position: absolute;
+}
+
 .grid-container {
     position: relative;
     margin-left: auto;
@@ -70,6 +74,37 @@ body{
     animation-timing-function: ease-out;
 } 
 
+.enemy {
+    color: transparent;
+    background-color: rgb(191, 158, 9);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+/* .enemy.moveRight {
+    animation-name: moveRight;
+    animation-duration: 100ms;
+    animation-timing-function: ease-out;
+}
+
+.enemy.moveLeft {
+    animation-name: moveLeft;
+    animation-duration: 100ms;
+    animation-timing-function: ease-out;
+}
+
+.enemy.moveUp {
+    animation-name: moveUp;
+    animation-duration: 100ms;
+    animation-timing-function: ease-out;
+}
+
+.enemy.moveDown{
+    animation-name: moveDown;
+    animation-duration: 100ms;
+    animation-timing-function: ease-out;
+} */
+
 @keyframes moveRight {
     from{transform: translateX(-50%); opacity: 100%; overflow: hidden;}
     to{transform: translateX(50%); opacity: 100%; overflow: hidden;}
@@ -80,12 +115,7 @@ body{
     to{transform: translateX(-50%); opacity: 100%; overflow: hidden;}
 }
 
-.enemy {
-    color: transparent;
-    background-color: rgb(191, 158, 9);
-    border-radius: 50%;
-    overflow: hidden;
-}@keyframes moveUp {
+@keyframes moveUp {
     from{transform: translateY(50%); opacity: 100%; overflow: hidden;}
     to{transform: translateY(-50%); opacity: 100%; overflow: hidden;}
 }

@@ -15,9 +15,11 @@ export class MovingElement {
         if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
             // nextSpot.classList.toggle('empty-field');
             nextSpot.classList.toggle(this.type);
+            nextSpot.classList.add("moveUp")
             this.y--;
             // currentSpot.classList.toggle('empty-field');
             currentSpot.classList.toggle(this.type);
+            currentSpot.classList.remove('moveRight','moveLeft','moveUp','moveDown')
             return true;
         } else {
             return false;
@@ -32,9 +34,11 @@ export class MovingElement {
         if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
             // nextSpot.classList.toggle('empty-field');
             nextSpot.classList.toggle(this.type);
+            nextSpot.classList.add('moveDown');
             this.y++;
             // currentSpot.classList.toggle('empty-field');
             currentSpot.classList.toggle(this.type);
+            currentSpot.classList.remove('moveRight','moveLeft','moveUp','moveDown')
             return true;
         } else {
             return false;
@@ -49,9 +53,11 @@ export class MovingElement {
         if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
             // nextSpot.classList.toggle('empty-field');
             nextSpot.classList.toggle(this.type);
+            nextSpot.classList.add('moveLeft');
             this.x--;
             // currentSpot.classList.toggle('empty-field');
             currentSpot.classList.toggle(this.type);
+            currentSpot.classList.remove('moveRight','moveLeft','moveUp','moveDown')
             return true;
         } else {
             return false;
@@ -66,9 +72,11 @@ export class MovingElement {
         if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
             // nextSpot.classList.toggle('empty-field');
             nextSpot.classList.toggle(this.type);
+            nextSpot.classList.add('moveRight');
             this.x++;
             // currentSpot.classList.toggle('empty-field');
             currentSpot.classList.toggle(this.type);
+            currentSpot.classList.remove('moveRight','moveLeft','moveUp','moveDown');
             return true;
         } else {
             return false;

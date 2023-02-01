@@ -1,8 +1,7 @@
 import { drawMap } from "./field.js";
 import { setStartpoint } from "./tools.js";
 import { Enemy, Player } from "./classes.js";
-import { setStartpoint } from "./tools.js";
-import { Enemy, Player } from "./classes.js";
+
 
 let pause = false;
 let startTime;
@@ -17,8 +16,8 @@ enemyStartPoint.classList.add('enemy');
 let pauseScreen = document.getElementById("pauseScreen");
 let startPoint = document.getElementById(`block-${player.x}:${player.y}`);
 startPoint.classList.add('player');
-// update();
-requestAnimationFrame(update)
+update();
+// requestAnimationFrame(update)
 
 function movement() {
   if (keyPressed !== null) {
@@ -137,7 +136,6 @@ function togglePause() {
   } else {
     pause = true;
   }
-  console.log("pause")
   pauseScreen.style.display = "block";
   // requestAnimationFrame(update);
 }
