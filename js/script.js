@@ -6,8 +6,13 @@ import { Enemy, Player } from "./classes.js";
 let pause = false;
 let startTime;
 let startTime2;
+let startTime3;
 let sp = setStartpoint();
 let keyPressed = null;
+let time = 999;
+lives();
+score();
+timer(time);
 drawMap();
 export let player = new Player(sp[0], sp[1]);
 let enemy = new Enemy(5,5);
@@ -72,7 +77,7 @@ function update(timestamp) {
     startTime = timestamp;
   }
   const elapsed = timestamp - startTime;
-  if (elapsed > 500) {
+  if (elapsed > 300) {
     startTime = timestamp;
     enemy.move();
   }
@@ -83,6 +88,13 @@ function update(timestamp) {
   if (timestamp - startTime2 > 70) {
     startTime2 = timestamp;
     movement();
+  }
+  if (startTime3 === undefined) {
+    startTime3 = timestamp;
+  }
+  if (timestamp - startTime3 > 1100) {
+    startTime3 = timestamp;
+    timer(time--);
   }
   if (!pause) {
     requestAnimationFrame(update)
@@ -107,7 +119,7 @@ pauseMenu.addEventListener("keypress", (e)=>{
   if (e.key === " " || e.key === "Enter") {
     document.activeElement.click();
   }
-});
+}); 
 
 function restart() {
   window.location.reload();
@@ -138,6 +150,24 @@ function togglePause() {
   }
   pauseScreen.style.display = "block";
   // requestAnimationFrame(update);
+}
+
+function score() {
+  let scoreDiv = document.getElementById("score");
+  let scoreAmount = 0;
+  scoreDiv.textContent = scoreAmount.toString().padStart(6,"0");
+}
+
+function timer(time) {
+  let timerDiv = document.getElementById("timer");
+  timerDiv.textContent = time;
+  return;
+}
+
+function lives() {
+  let livesDiv = document.getElementById("lives");
+  let livesAmount = 3;
+  livesDiv.textContent = "♥ ".repeat(livesAmount);
 }
 
 
