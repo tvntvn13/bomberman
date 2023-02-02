@@ -71,6 +71,10 @@ export function loadingBar() {
 function gameOver(){
   let gameOverScreen = document.getElementById("gameOverScreen");
   gameOverScreen.style.display = "block";
+  document.getElementById("wrapper").style.display = "none";
   cancelAnimationFrame(rafID);
+  document.body.addEventListener("keydown", (e) =>{
+    if (e.key === " " || e.key === "Enter") window.location.reload();
+  });
 
 }
