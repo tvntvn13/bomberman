@@ -95,7 +95,7 @@ export function winner(){
   cancelAnimationFrame(rafID);
   document.body.addEventListener("keydown", (e) => {
     if (e.key === " " || e.key === "Enter") {
-      winScreen.remove();
+      congrats.style.display = "none";
     }
   });
 
