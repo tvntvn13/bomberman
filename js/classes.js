@@ -1,4 +1,5 @@
-import { bomb } from "./bomb.js";
+import { player } from "./script.js";
+import { template } from "./field.js";
 
 export class MovingElement {
     constructor(x, y, type) {
@@ -19,7 +20,7 @@ export class MovingElement {
             this.y--;
             // currentSpot.classList.toggle('empty-field');
             currentSpot.classList.toggle(this.type);
-            currentSpot.classList.remove('moveRight','moveLeft','moveUp','moveDown')
+            currentSpot.classList.remove('moveRight', 'moveLeft', 'moveUp', 'moveDown')
             return true;
         } else {
             return false;
@@ -38,7 +39,7 @@ export class MovingElement {
             this.y++;
             // currentSpot.classList.toggle('empty-field');
             currentSpot.classList.toggle(this.type);
-            currentSpot.classList.remove('moveRight','moveLeft','moveUp','moveDown')
+            currentSpot.classList.remove('moveRight', 'moveLeft', 'moveUp', 'moveDown')
             return true;
         } else {
             return false;
@@ -57,7 +58,7 @@ export class MovingElement {
             this.x--;
             // currentSpot.classList.toggle('empty-field');
             currentSpot.classList.toggle(this.type);
-            currentSpot.classList.remove('moveRight','moveLeft','moveUp','moveDown')
+            currentSpot.classList.remove('moveRight', 'moveLeft', 'moveUp', 'moveDown')
             return true;
         } else {
             return false;
@@ -76,7 +77,7 @@ export class MovingElement {
             this.x++;
             // currentSpot.classList.toggle('empty-field');
             currentSpot.classList.toggle(this.type);
-            currentSpot.classList.remove('moveRight','moveLeft','moveUp','moveDown');
+            currentSpot.classList.remove('moveRight', 'moveLeft', 'moveUp', 'moveDown');
             return true;
         } else {
             return false;
@@ -84,25 +85,25 @@ export class MovingElement {
     }
     movement(keyPressed) {
         if (keyPressed !== null) {
-          switch (keyPressed) {
-            case "down":
-              this.moveDown();
-              break;
-            case "up":
-              this.moveUp();
-              break;
-            case "left":
-              this.moveLeft();
-              break;
-            case "right":
-              this.moveRight();
-              break;
-            case "escape":
-              togglePause();
-              break;
-          }
+            switch (keyPressed) {
+                case "down":
+                    this.moveDown();
+                    break;
+                case "up":
+                    this.moveUp();
+                    break;
+                case "left":
+                    this.moveLeft();
+                    break;
+                case "right":
+                    this.moveRight();
+                    break;
+                case "escape":
+                    togglePause();
+                    break;
+            }
         }
-      }
+    }
 }
 
 export class Player extends MovingElement {
@@ -129,9 +130,10 @@ export class Player extends MovingElement {
         if (this.bombs < 3) {
             let x = this.x;
             let y = this.y;
-            let currentSpot = document.getElementById(`block-${x}:${y}`);
-            currentSpot.classList.add('bomb');
-            bomb(x, y);
+            // let currentSpot = document.getElementById(`block-${x}:${y}`);
+            // currentSpot.classList.add('bomb');
+            // bomb(x, y);
+            let thisBomb = new Bomb(x, y);
             this.bombs++;
         }
     }
@@ -190,5 +192,91 @@ export class Enemy extends MovingElement {
                 return;
             }
         }
+    }
+}
+
+export class Bomb {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.isTicking = true;
+        let bombBlock = document.getElementById(`block-${x}:${y}`);
+        bombBlock.classList.add('bomb');
+        this.range = this.explosionPrep()
+        this.timerId = this.explodeOnTimer(this.range);
+    }
+    explosionPrep() {
+        let explFields = [];
+        for (let i = this.y; i > 0 && i >= this.y - 3; i--) {
+            let currentBlock = document.getElementById(`block-${this.x}:${i}`);
+            if (currentBlock.classList.contains('solid-wall')) {
+                break;
+            } else if (currentBlock.classList.contains('softWall')) {
+                explFields.push([i, this.x]);
+                break;
+            } else {
+                explFields.push([i, this.x]);
+            }
+        }
+        for (let i = this.y; i < template.length - 1 && i <= this.y + 3; i++) {
+            let currentBlock = document.getElementById(`block-${this.x}:${i}`);
+            if (currentBlock.classList.contains('solid-wall')) {
+                break;
+            } else if (currentBlock.classList.contains('softWall')) {
+                explFields.push([i, this.x]);
+                break;
+            } else {
+                explFields.push([i, this.x]);
+            }
+        }
+        for (let i = this.x; i > 0 && i >= this.x - 3; i--) {
+            let currentBlock = document.getElementById(`block-${i}:${this.y}`);
+            if (currentBlock.classList.contains('solid-wall')) {
+                break;
+            } else if (currentBlock.classList.contains('softWall')) {
+                explFields.push([this.y, i]);
+                break;
+            } else {
+                explFields.push([this.y, i]);
+            }
+        }
+        for (let i = this.x; i < template[this.y].length - 1 && i <= this.x + 3; i++) {
+            let currentBlock = document.getElementById(`block-${i}:${this.y}`);
+            if (currentBlock.classList.contains('solid-wall')) {
+                break;
+            } else if (currentBlock.classList.contains('softWall')) {
+                explFields.push([this.y, i]);
+                break;
+            } else {
+                explFields.push([this.y, i]);
+            }
+        }
+        return explFields;
+    }
+    explodeNow(fields) {
+        for (let elem of fields) {
+            let bombBlock = document.getElementById(`block-${elem[1]}:${elem[0]}`);
+            bombBlock.classList.remove('bomb', 'softWall');
+            bombBlock.classList.add('explosion');
+            // bombBlock.classList.remove('softWall');
+            // template[elem[0]][elem[1]] = "X"
+        }
+        this.bombClearOut(fields);
+        player.bombs--;
+    }
+    explodeOnTimer(fields) {
+        let id = setTimeout(() => {
+            this.explodeNow(fields);
+        }, 3000);
+        return id;
+    }
+    bombClearOut(fields) {
+        setTimeout(() => {
+            for (let elem of fields) {
+                let bombBlock = document.getElementById(`block-${elem[1]}:${elem[0]}`);
+                bombBlock.classList.remove('explosion');
+                bombBlock.classList.add('empty-field');
+            }
+        }, 500);
     }
 }
