@@ -195,6 +195,8 @@ export class Enemy extends MovingElement {
     }
 }
 
+let bombsPlaced = {};
+
 export class Bomb {
     constructor(x, y) {
         this.x = x;
@@ -204,9 +206,14 @@ export class Bomb {
         bombBlock.classList.add('bomb');
         this.range = this.explosionPrep()
         this.timerId = this.explodeOnTimer(this.range);
+        bombsPlaced[`${x}:${y}`] = this;
+        console.log(bombsPlaced);
     }
     explosionPrep() {
         let explFields = [];
+        // checking explosion range upwards
+        // the bomb's location should be added only once, so the loop starts on this.y (and this.x) on this loop only
+        // rest of the checks start from the spot after the bomb's location
         for (let i = this.y; i > 0 && i >= this.y - 3; i--) {
             let currentBlock = document.getElementById(`block-${this.x}:${i}`);
             if (currentBlock.classList.contains('solid-wall')) {
@@ -218,7 +225,8 @@ export class Bomb {
                 explFields.push([i, this.x]);
             }
         }
-        for (let i = this.y; i < template.length - 1 && i <= this.y + 3; i++) {
+        // checking downwards
+        for (let i = this.y+1; i < template.length - 1 && i <= this.y + 3; i++) {
             let currentBlock = document.getElementById(`block-${this.x}:${i}`);
             if (currentBlock.classList.contains('solid-wall')) {
                 break;
@@ -229,7 +237,8 @@ export class Bomb {
                 explFields.push([i, this.x]);
             }
         }
-        for (let i = this.x; i > 0 && i >= this.x - 3; i--) {
+        // checking to the left
+        for (let i = this.x-1; i > 0 && i >= this.x - 3; i--) {
             let currentBlock = document.getElementById(`block-${i}:${this.y}`);
             if (currentBlock.classList.contains('solid-wall')) {
                 break;
@@ -240,7 +249,8 @@ export class Bomb {
                 explFields.push([this.y, i]);
             }
         }
-        for (let i = this.x; i < template[this.y].length - 1 && i <= this.x + 3; i++) {
+        // checking to the right
+        for (let i = this.x+1; i < template[this.y].length - 1 && i <= this.x + 3; i++) {
             let currentBlock = document.getElementById(`block-${i}:${this.y}`);
             if (currentBlock.classList.contains('solid-wall')) {
                 break;
@@ -253,16 +263,20 @@ export class Bomb {
         }
         return explFields;
     }
-    explodeNow(fields) {
-        for (let elem of fields) {
+    explodeNow() {
+        for (let [index, elem] of this.range.entries()) {
             let bombBlock = document.getElementById(`block-${elem[1]}:${elem[0]}`);
+            if (index !== 0 && bombBlock.classList.contains('bomb')) {
+                let chainedBomb = bombsPlaced[`${elem[1]}:${elem[0]}`];
+                clearTimeout(chainedBomb.timerId);
+                chainedBomb.explodeNow();
+            }
             bombBlock.classList.remove('bomb', 'softWall');
             bombBlock.classList.add('explosion');
-            // bombBlock.classList.remove('softWall');
-            // template[elem[0]][elem[1]] = "X"
         }
-        this.bombClearOut(fields);
+        this.bombClearOut();
         player.bombs--;
+        delete bombsPlaced[`${this.x}:${this.y}`];
     }
     explodeOnTimer(fields) {
         let id = setTimeout(() => {
@@ -270,9 +284,9 @@ export class Bomb {
         }, 3000);
         return id;
     }
-    bombClearOut(fields) {
+    bombClearOut() {
         setTimeout(() => {
-            for (let elem of fields) {
+            for (let elem of this.range) {
                 let bombBlock = document.getElementById(`block-${elem[1]}:${elem[0]}`);
                 bombBlock.classList.remove('explosion');
                 bombBlock.classList.add('empty-field');
