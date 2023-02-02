@@ -78,3 +78,26 @@ export function gameOver(){
   });
 
 }
+
+export function winner(){
+  // let winScreen = document.createElement("div");
+  // winScreen.classList.add("winScreen");
+  let congrats = document.createElement("h1");
+  let win = document.createElement("p");
+  win.textContent = "you cleared the level!";
+  win.classList.add("winP");
+  congrats.classList.add("congratulations");
+  congrats.textContent = "CONGRATULATIONS!!!";
+  congrats.append(win);
+  // winScreen.append(congrats);
+  let info = document.getElementById("info");
+  info.append(congrats);
+  cancelAnimationFrame(rafID);
+  document.body.addEventListener("keydown", (e) => {
+    if (e.key === " " || e.key === "Enter") {
+      congrats.style.display = "none";
+    }
+  });
+
+
+}

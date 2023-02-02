@@ -1,5 +1,5 @@
 import { drawMap } from "./field.js";
-import { setStartpoint, loadingBar, score, timer, lives, gameOver } from "./tools.js";
+import { setStartpoint, loadingBar, score, timer, lives, gameOver, winner } from "./tools.js";
 import { Enemy, Player } from "./classes.js";
 
 
@@ -9,7 +9,7 @@ let startTime2;
 let startTime3;
 let sp = setStartpoint();
 let keyPressed = null;
-let time = 300;
+let time = 200;
 export let rafID = requestAnimationFrame(update)
 
 // comment out this part to get rid of the loading bar !!!
@@ -74,6 +74,11 @@ function update(timestamp) {
   if (enemyPosition.classList.contains("explosion")) {
     enemy.death();
   }
+  if (playerPosition.classList.contains("goal")) {
+    pause = true;
+    winner();
+    return;
+  }
   
   if (startTime === undefined) {
     startTime = timestamp;
@@ -96,12 +101,17 @@ function update(timestamp) {
   }
   if (timestamp - startTime3 > 1100) {
     startTime3 = timestamp;
-    if (time === 0) gameOver();
+    if (time === 0) {
+      pause = true;
+      gameOver();
+    }
     timer(time--);
   }
   
   if (!pause) {
     requestAnimationFrame(update)
+  } else {
+    return
   }
 }
 
