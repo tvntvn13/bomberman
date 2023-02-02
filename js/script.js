@@ -12,11 +12,11 @@ let keyPressed = null;
 let time = 300;
 
 // comment out this part to get rid of the loading bar !!!
-// loadingBar();
-// setTimeout(() => {
+loadingBar();
+setTimeout(() => {
     //this part needs to stay.
    document.getElementById("loadingScreen").remove();
-// },3200);
+},3200);
 // ^^^ loading bar shit above ^^^
 
 lives();
