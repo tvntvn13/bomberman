@@ -1,4 +1,5 @@
-import { bomb } from "./bomb.js";
+import { player } from "./script.js";
+import { template } from "./field.js";
 
 export class MovingElement {
     constructor(x, y, type) {
@@ -19,7 +20,7 @@ export class MovingElement {
             this.y--;
             // currentSpot.classList.toggle('empty-field');
             currentSpot.classList.toggle(this.type);
-            currentSpot.classList.remove('moveRight','moveLeft','moveUp','moveDown')
+            currentSpot.classList.remove('moveRight', 'moveLeft', 'moveUp', 'moveDown')
             return true;
         } else {
             return false;
@@ -38,7 +39,7 @@ export class MovingElement {
             this.y++;
             // currentSpot.classList.toggle('empty-field');
             currentSpot.classList.toggle(this.type);
-            currentSpot.classList.remove('moveRight','moveLeft','moveUp','moveDown')
+            currentSpot.classList.remove('moveRight', 'moveLeft', 'moveUp', 'moveDown')
             return true;
         } else {
             return false;
@@ -57,7 +58,7 @@ export class MovingElement {
             this.x--;
             // currentSpot.classList.toggle('empty-field');
             currentSpot.classList.toggle(this.type);
-            currentSpot.classList.remove('moveRight','moveLeft','moveUp','moveDown')
+            currentSpot.classList.remove('moveRight', 'moveLeft', 'moveUp', 'moveDown')
             return true;
         } else {
             return false;
@@ -76,7 +77,7 @@ export class MovingElement {
             this.x++;
             // currentSpot.classList.toggle('empty-field');
             currentSpot.classList.toggle(this.type);
-            currentSpot.classList.remove('moveRight','moveLeft','moveUp','moveDown');
+            currentSpot.classList.remove('moveRight', 'moveLeft', 'moveUp', 'moveDown');
             return true;
         } else {
             return false;
@@ -84,25 +85,25 @@ export class MovingElement {
     }
     movement(keyPressed) {
         if (keyPressed !== null) {
-          switch (keyPressed) {
-            case "down":
-              this.moveDown();
-              break;
-            case "up":
-              this.moveUp();
-              break;
-            case "left":
-              this.moveLeft();
-              break;
-            case "right":
-              this.moveRight();
-              break;
-            case "escape":
-              togglePause();
-              break;
-          }
+            switch (keyPressed) {
+                case "down":
+                    this.moveDown();
+                    break;
+                case "up":
+                    this.moveUp();
+                    break;
+                case "left":
+                    this.moveLeft();
+                    break;
+                case "right":
+                    this.moveRight();
+                    break;
+                case "escape":
+                    togglePause();
+                    break;
+            }
         }
-      }
+    }
 }
 
 export class Player extends MovingElement {
@@ -129,9 +130,10 @@ export class Player extends MovingElement {
         if (this.bombs < 3) {
             let x = this.x;
             let y = this.y;
-            let currentSpot = document.getElementById(`block-${x}:${y}`);
-            currentSpot.classList.add('bomb');
-            bomb(x, y);
+            // let currentSpot = document.getElementById(`block-${x}:${y}`);
+            // currentSpot.classList.add('bomb');
+            // bomb(x, y);
+            let thisBomb = new Bomb(x, y);
             this.bombs++;
         }
     }
@@ -190,5 +192,105 @@ export class Enemy extends MovingElement {
                 return;
             }
         }
+    }
+}
+
+let bombsPlaced = {};
+
+export class Bomb {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.isTicking = true;
+        let bombBlock = document.getElementById(`block-${x}:${y}`);
+        bombBlock.classList.add('bomb');
+        this.range = this.explosionPrep()
+        this.timerId = this.explodeOnTimer(this.range);
+        bombsPlaced[`${x}:${y}`] = this;
+        console.log(bombsPlaced);
+    }
+    explosionPrep() {
+        let explFields = [];
+        // checking explosion range upwards
+        // the bomb's location should be added only once, so the loop starts on this.y (and this.x) on this loop only
+        // rest of the checks start from the spot after the bomb's location
+        for (let i = this.y; i > 0 && i >= this.y - 3; i--) {
+            let currentBlock = document.getElementById(`block-${this.x}:${i}`);
+            if (currentBlock.classList.contains('solid-wall')) {
+                break;
+            } else if (currentBlock.classList.contains('softWall')) {
+                explFields.push([i, this.x]);
+                break;
+            } else {
+                explFields.push([i, this.x]);
+            }
+        }
+        // checking downwards
+        for (let i = this.y+1; i < template.length - 1 && i <= this.y + 3; i++) {
+            let currentBlock = document.getElementById(`block-${this.x}:${i}`);
+            if (currentBlock.classList.contains('solid-wall')) {
+                break;
+            } else if (currentBlock.classList.contains('softWall')) {
+                explFields.push([i, this.x]);
+                break;
+            } else {
+                explFields.push([i, this.x]);
+            }
+        }
+        // checking to the left
+        for (let i = this.x-1; i > 0 && i >= this.x - 3; i--) {
+            let currentBlock = document.getElementById(`block-${i}:${this.y}`);
+            if (currentBlock.classList.contains('solid-wall')) {
+                break;
+            } else if (currentBlock.classList.contains('softWall')) {
+                explFields.push([this.y, i]);
+                break;
+            } else {
+                explFields.push([this.y, i]);
+            }
+        }
+        // checking to the right
+        for (let i = this.x+1; i < template[this.y].length - 1 && i <= this.x + 3; i++) {
+            let currentBlock = document.getElementById(`block-${i}:${this.y}`);
+            if (currentBlock.classList.contains('solid-wall')) {
+                break;
+            } else if (currentBlock.classList.contains('softWall')) {
+                explFields.push([this.y, i]);
+                break;
+            } else {
+                explFields.push([this.y, i]);
+            }
+        }
+        return explFields;
+    }
+    explodeNow() {
+        for (let [index, elem] of this.range.entries()) {
+            let bombBlock = document.getElementById(`block-${elem[1]}:${elem[0]}`);
+            if (index !== 0 && bombBlock.classList.contains('bomb')) {
+                let chainedBomb = bombsPlaced[`${elem[1]}:${elem[0]}`];
+                clearTimeout(chainedBomb.timerId);
+                chainedBomb.explodeNow();
+            }
+            bombBlock.classList.remove('bomb', 'softWall');
+            bombBlock.classList.add('explosion');
+        }
+        this.bombClearOut();
+        player.bombs--;
+        delete bombsPlaced[`${this.x}:${this.y}`];
+    }
+    explodeOnTimer(fields) {
+        let id = setTimeout(() => {
+            this.explodeNow(fields);
+        }, 3000);
+        return id;
+    }
+    bombClearOut() {
+        setTimeout(() => {
+            for (let elem of this.range) {
+                let bombBlock = document.getElementById(`block-${elem[1]}:${elem[0]}`);
+                bombBlock.classList.remove('explosion');
+                bombBlock.classList.add('empty-field');
+            }
+        }, 500);
     }
 }
