@@ -113,6 +113,7 @@ export class Player extends MovingElement {
         this.bombs = 0;
         this.lives = 3;
         this.type = 'player';
+        this.score = 0;
         let startPoint = document.getElementById(`block-${x}:${y}`);
         startPoint.classList.add(this.type);
     }
