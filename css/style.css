@@ -41,7 +41,7 @@ body{
 .info {
     height: 3em;
     width: auto;
-    justify-content: center;
+    /* justify-content: center; */
 }
 
 .timer {
@@ -110,7 +110,7 @@ body{
     background-color: green;
 }
 
-.goal {
+.empty-field.goal {
     background-color: cyan;
     z-index: 1;
 
