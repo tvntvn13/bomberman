@@ -3,14 +3,14 @@ import { setStartpoint, loadingBar, score, timer, lives } from "./tools.js";
 import { Enemy, Player } from "./classes.js";
 
 
-let pause = false;
+export let pause = false;
 let startTime;
 let startTime2;
 let startTime3;
 let sp = setStartpoint();
 let keyPressed = null;
 let time = 300;
-let rafID = requestAnimationFrame(update)
+export let rafID = requestAnimationFrame(update)
 
 // comment out this part to get rid of the loading bar !!!
 // loadingBar();

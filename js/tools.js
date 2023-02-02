@@ -1,5 +1,6 @@
 import { template } from "./field.js";
-import { player } from "./script.js";
+import { player, rafID, pause } from "./script.js";
+
 
 // set startpoint for player
 export function setStartpoint() {
@@ -30,7 +31,7 @@ export function setStartpoint() {
 export function score() {
   let scoreDiv = document.getElementById("score");
   let scoreAmount = 0;
-  scoreDiv.textContent = scoreAmount.toString().padStart(6,"0");
+  scoreDiv.textContent = scoreAmount.toString().padStart(6, "0");
 }
 
 
@@ -40,32 +41,36 @@ export function timer(time) {
 }
 
 export function lives() {
-  let livesDiv = document.getElementById("lives");
-  let livesAmount = player.lives;
-  livesDiv.textContent = "♥ ".repeat(livesAmount);
+  if (player.lives < 1) {
+    gameOver();
+  } else {
+    let livesDiv = document.getElementById("lives");
+    livesDiv.textContent = "♥ ".repeat(player.lives);
+  }
 }
 
 let i = 0;
 export function loadingBar() {
   if (i == 0) {
-      i = 1;
-      let elem = document.getElementById("loadingBarFill");
-      let width = 1;
-      let id = setInterval(frame, 30);
-      function frame() {
-        if (width >= 100) {
-          clearInterval(id);
-          i = 0;
-        } else {
-          width++;
-          elem.style.width = width + "%";
-        }
+    i = 1;
+    let elem = document.getElementById("loadingBarFill");
+    let width = 1;
+    let id = setInterval(frame, 30);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
       }
     }
+  }
 }
 
-export function death() {
-  
-
+function gameOver(){
+  let gameOverScreen = document.getElementById("gameOverScreen");
+  gameOverScreen.style.display = "block";
+  cancelAnimationFrame(rafID);
 
 }
