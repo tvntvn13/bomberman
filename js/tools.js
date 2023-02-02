@@ -1,4 +1,5 @@
 import { template } from "./field.js";
+import { player } from "./script.js";
 
 // set startpoint for player
 export function setStartpoint() {
@@ -40,7 +41,7 @@ export function timer(time) {
 
 export function lives() {
   let livesDiv = document.getElementById("lives");
-  let livesAmount = 3;
+  let livesAmount = player.lives;
   livesDiv.textContent = "♥ ".repeat(livesAmount);
 }
 

@@ -1,5 +1,6 @@
 import { player } from "./script.js";
 import { template } from "./field.js";
+import { setStartpoint } from "./tools.js";
 
 export class MovingElement {
     constructor(x, y, type) {
@@ -110,6 +111,7 @@ export class Player extends MovingElement {
     constructor(x, y) {
         super(x, y)
         this.bombs = 0;
+        this.lives = 3;
         this.type = 'player';
         let startPoint = document.getElementById(`block-${x}:${y}`);
         startPoint.classList.add(this.type);
@@ -136,6 +138,16 @@ export class Player extends MovingElement {
             let thisBomb = new Bomb(x, y);
             this.bombs++;
         }
+    }
+    death() {
+        let spot = document.getElementById(`block-${this.x}:${this.y}`);
+        spot.classList.remove("moveRight", "moveLeft","moveUp","moveDown","player");
+        let respawn = setStartpoint();
+        this.x = respawn[0]
+        this.y = respawn[1]
+        document.getElementById(`block-${this.x}:${this.y}`).classList.add("player");
+        player.lives--;
+        console.log("you died!");
     }
 }
 
@@ -193,6 +205,11 @@ export class Enemy extends MovingElement {
             }
         }
     }
+    death(){
+        let spot = document.getElementById(`block-${this.x}:${this.y}`);
+        spot.classList.remove("enemy");
+        console.log("enemy died");
+    }
 }
 
 let bombsPlaced = {};
@@ -207,7 +224,6 @@ export class Bomb {
         this.range = this.explosionPrep()
         this.timerId = this.explodeOnTimer(this.range);
         bombsPlaced[`${x}:${y}`] = this;
-        console.log(bombsPlaced);
     }
     explosionPrep() {
         let explFields = [];

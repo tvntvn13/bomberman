@@ -13,18 +13,19 @@ let time = 300;
 let rafID = requestAnimationFrame(update)
 
 // comment out this part to get rid of the loading bar !!!
-loadingBar();
-setTimeout(() => {
+// loadingBar();
+// setTimeout(() => {
     //this part needs to stay.
    document.getElementById("loadingScreen").remove();
-},3200);
+// },3200);
 // ^^^ loading bar shit above ^^^
 
-lives();
+
 score();
 timer(time);
 drawMap();
 export let player = new Player(sp[0], sp[1]);
+lives();
 let enemy = new Enemy(5,5);
 let enemyStartPoint = document.getElementById(`block-${enemy.x}:${enemy.y}`);
 enemyStartPoint.classList.add('enemy');
@@ -64,6 +65,15 @@ document.body.addEventListener("keydown", (e) => {
 
 
 function update(timestamp) {
+  let playerPosition = document.getElementById(`block-${player.x}:${player.y}`);
+  let enemyPosition = document.getElementById(`block-${enemy.x}:${enemy.y}`);
+  if (playerPosition.classList.contains("enemy") || playerPosition.classList.contains("explosion")) {
+    player.death();
+    lives();
+  }
+  if (enemyPosition.classList.contains("explosion")) {
+    enemy.death();
+  }
   
   if (startTime === undefined) {
     startTime = timestamp;
