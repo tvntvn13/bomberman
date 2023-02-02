@@ -12,5 +12,8 @@
     "url": "https://01.gritlab.ax/git/petrus_ambrosius/make-your-game.git"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.20"
+  }
 }
