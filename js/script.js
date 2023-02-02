@@ -9,7 +9,7 @@ let startTime2;
 let startTime3;
 let sp = setStartpoint();
 let keyPressed = null;
-let time = 10;
+let time = 300;
 export let rafID = requestAnimationFrame(update)
 
 // comment out this part to get rid of the loading bar !!!
