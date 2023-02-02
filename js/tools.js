@@ -68,7 +68,7 @@ export function loadingBar() {
   }
 }
 
-function gameOver(){
+export function gameOver(){
   let gameOverScreen = document.getElementById("gameOverScreen");
   gameOverScreen.style.display = "block";
   document.getElementById("wrapper").style.display = "none";

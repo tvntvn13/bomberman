@@ -1,5 +1,5 @@
 import { drawMap } from "./field.js";
-import { setStartpoint, loadingBar, score, timer, lives } from "./tools.js";
+import { setStartpoint, loadingBar, score, timer, lives, gameOver } from "./tools.js";
 import { Enemy, Player } from "./classes.js";
 
 
@@ -9,7 +9,7 @@ let startTime2;
 let startTime3;
 let sp = setStartpoint();
 let keyPressed = null;
-let time = 300;
+let time = 10;
 export let rafID = requestAnimationFrame(update)
 
 // comment out this part to get rid of the loading bar !!!
@@ -96,6 +96,7 @@ function update(timestamp) {
   }
   if (timestamp - startTime3 > 1100) {
     startTime3 = timestamp;
+    if (time === 0) gameOver();
     timer(time--);
   }
   

@@ -111,7 +111,7 @@ export class Player extends MovingElement {
     constructor(x, y) {
         super(x, y)
         this.bombs = 0;
-        this.lives = 1;
+        this.lives = 3;
         this.type = 'player';
         let startPoint = document.getElementById(`block-${x}:${y}`);
         startPoint.classList.add(this.type);
