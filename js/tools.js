@@ -26,14 +26,22 @@ export function setStartpoint() {
   return [x, y];
 }
 
-// helper function to get players coordinates
-function getPlayerLocation() {
-  for (let i = 1; i < template.length - 1; i++) {
-    let index = template[i].indexOf("P");
-    if (index != -1) {
-      return [i, index];
-    }
-  }
+export function score() {
+  let scoreDiv = document.getElementById("score");
+  let scoreAmount = 0;
+  scoreDiv.textContent = scoreAmount.toString().padStart(6,"0");
+}
+
+
+export function timer(time) {
+  let timerDiv = document.getElementById("timer");
+  timerDiv.textContent = time;
+}
+
+export function lives() {
+  let livesDiv = document.getElementById("lives");
+  let livesAmount = 3;
+  livesDiv.textContent = "♥ ".repeat(livesAmount);
 }
 
 let i = 0;
@@ -53,4 +61,10 @@ export function loadingBar() {
         }
       }
     }
-  }
+}
+
+export function death() {
+  
+
+
+}
