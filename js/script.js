@@ -12,11 +12,11 @@ let keyPressed = null;
 let time = 300;
 
 // comment out this part to get rid of the loading bar !!!
-loadingBar();
-setTimeout(() => {
+// loadingBar();
+// setTimeout(() => {
     //this part needs to stay.
    document.getElementById("loadingScreen").remove();
-},3200);
+// },3200);
 // ^^^ loading bar shit above ^^^
 
 lives();
@@ -33,27 +33,7 @@ startPoint.classList.add('player');
 update();
 //requestAnimationFrame(update)
 
-function movement() {
-  if (keyPressed !== null) {
-    switch (keyPressed) {
-      case "down":
-        player.moveDown();
-        break;
-      case "up":
-        player.moveUp();
-        break;
-      case "left":
-        player.moveLeft();
-        break;
-      case "right":
-        player.moveRight();
-        break;
-      case "escape":
-        togglePause();
-        break;
-    }
-  }
-}
+
 
 document.body.addEventListener("keyup", (e) => {
   if (e.key !== " ") keyPressed = null;
@@ -98,7 +78,7 @@ function update(timestamp) {
   }
   if (timestamp - startTime2 > 70) {
     startTime2 = timestamp;
-    movement();
+    player.movement(keyPressed);
   }
   if (startTime3 === undefined) {
     startTime3 = timestamp;
@@ -107,6 +87,7 @@ function update(timestamp) {
     startTime3 = timestamp;
     timer(time--);
   }
+  
   if (!pause) {
     requestAnimationFrame(update)
   }

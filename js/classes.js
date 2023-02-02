@@ -82,6 +82,27 @@ export class MovingElement {
             return false;
         }
     }
+    movement(keyPressed) {
+        if (keyPressed !== null) {
+          switch (keyPressed) {
+            case "down":
+              this.moveDown();
+              break;
+            case "up":
+              this.moveUp();
+              break;
+            case "left":
+              this.moveLeft();
+              break;
+            case "right":
+              this.moveRight();
+              break;
+            case "escape":
+              togglePause();
+              break;
+          }
+        }
+      }
 }
 
 export class Player extends MovingElement {
