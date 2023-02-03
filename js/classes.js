@@ -156,6 +156,7 @@ export class Enemy extends MovingElement {
     constructor(x, y) {
         super(x, y);
         this.type = 'enemy';
+        this.amount = 1;
         this.movementDirection = -1;
         this.allDirections = ['this.moveUp()', 'this.moveLeft()', 'this.moveRight()', 'this.moveDown()'];
         let startPoint = document.getElementById(`block-${x}:${y}`);
@@ -209,6 +210,7 @@ export class Enemy extends MovingElement {
     death(){
         let spot = document.getElementById(`block-${this.x}:${this.y}`);
         spot.classList.remove("enemy");
+        this.amount--;
         console.log("enemy died");
     }
 }

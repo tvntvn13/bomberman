@@ -13,15 +13,15 @@ let time = 200;
 export let rafID = requestAnimationFrame(update)
 
 // comment out this part to get rid of the loading bar !!!
-// loadingBar();
-// setTimeout(() => {
+loadingBar();
+setTimeout(() => {
     //this part needs to stay.
    document.getElementById("loadingScreen").remove();
-// },3200);
+},3200);
 // ^^^ loading bar shit above ^^^
 
 
-score();
+
 timer(time);
 drawMap();
 export let player = new Player(sp[0], sp[1]);
@@ -32,6 +32,7 @@ enemyStartPoint.classList.add('enemy');
 let startPoint = document.getElementById(`block-${player.x}:${player.y}`);
 startPoint.classList.add('player');
 let pauseScreen = document.getElementById("pauseScreen");
+score(player.score);
 update();
 //requestAnimationFrame(update)
 
@@ -72,10 +73,15 @@ function update(timestamp) {
     lives();
   }
   if (enemyPosition.classList.contains("explosion")) {
+    enemy.amount--;
+    player.score += 100;
+    score(player.score);
     enemy.death();
   }
   if (playerPosition.classList.contains("goal")) {
     pause = true;
+    player.score += time * 100;
+    score(player.score)
     winner();
     return;
   }
@@ -84,7 +90,7 @@ function update(timestamp) {
     startTime = timestamp;
   }
   const elapsed = timestamp - startTime;
-  if (elapsed > 300) {
+  if (elapsed > 300 && enemy.amount > 0) {
     startTime = timestamp;
     enemy.move();
   }

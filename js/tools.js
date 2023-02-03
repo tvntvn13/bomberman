@@ -28,10 +28,9 @@ export function setStartpoint() {
   return [x, y];
 }
 
-export function score() {
+export function score(amount) {
   let scoreDiv = document.getElementById("score");
-  let scoreAmount = 0;
-  scoreDiv.textContent = scoreAmount.toString().padStart(6, "0");
+  scoreDiv.textContent = amount.toString().padStart(6, "0");
 }
 
 

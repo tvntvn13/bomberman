@@ -67,4 +67,4 @@ const server = http.createServer((req, res) => {
   }
 });
 
-server.listen(port, () => console.log(`server running on port ${port}...`));
+server.listen(port, () => console.log(`server running on port ${port}...\n\n=> http://localhost:8000/`));
