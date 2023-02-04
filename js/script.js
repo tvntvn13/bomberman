@@ -14,11 +14,11 @@ let time = 200;
 export let rafID = requestAnimationFrame(update)
 
 // comment out this part to get rid of the loading bar !!!
-loadingBar();
-setTimeout(() => {
+// loadingBar();
+// setTimeout(() => {
     //this part needs to stay.
    document.getElementById("loadingScreen").remove();
-},3200);
+// },3200);
 
 // ^^^ loading bar shit above ^^^
 
@@ -26,7 +26,7 @@ setTimeout(() => {
 
 timer(time);
 drawMap();
-sfx.stageIntro.play();
+// sfx.stageIntro.play();
 export let player = new Player(sp[0], sp[1]);
 lives();
 let enemy = new Enemy(5,5);

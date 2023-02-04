@@ -113,33 +113,63 @@ body{
 }
 
 .player {
-    color: transparent;
+    /* color: transparent;
     background-color: rgb(120, 0, 120);
-    border-radius: 50%;
+    border-radius: 50%; */
+
+    background-image: url('/img/bombBasic2.png');
+    background-position: 0 93px;
+}
+
+@keyframes moveUp {
+    from{ background-position: 0 0; }
+    to{ background-position: 130px 0; }
+}
+
+@keyframes moveRight {
+    from{ background-position: 0 141px; }
+    to{ background-position: 130px 141px; }
+}
+
+@keyframes moveDown {
+    from{ background-position: 0 93px; }
+    to{ background-position: 130px 93px; }
+}
+
+@keyframes moveLeft {
+    from{ background-position: 0 43px; }
+    to{ background-position: 130px 43px; }
 }
 
 .player.moveRight {
-    animation-name: moveRight;
+    animation: moveRight 500ms steps(3) infinite;
+    /* animation-name: moveRight;
     animation-duration: 100ms;
-    animation-timing-function: ease-out;
+    animation-timing-function: ease-out; */
 }
 
 .player.moveLeft {
-    animation-name: moveLeft;
+    animation: moveLeft 500ms steps(3) infinite;
+    /* animation-name: moveLeft;
     animation-duration: 100ms;
-    animation-timing-function: ease-out;
+    animation-timing-function: ease-out; */
 }
 
 .player.moveUp {
-    animation-name: moveUp;
+    animation: moveUp 500ms steps(3) infinite;
+    /* animation-name: moveUp;
+    animation-duration: 500ms;
+    animation-timing-function: steps(3); */
+    /* animation-name: moveUp;
     animation-duration: 100ms;
-    animation-timing-function: ease-out;
+    animation-timing-function: ease-out; */
 }
 
 .player.moveDown{
-    animation-name: moveDown;
+    animation: moveDown 500ms steps(3) infinite;
+    /* animation-name: moveDown;
     animation-duration: 100ms;
-    animation-timing-function: ease-out;
+    animation-timing-function: ease-out; */
 } 
 
 .enemy {
@@ -173,7 +203,7 @@ body{
     animation-timing-function: ease-out;
 } */
 
-@keyframes moveRight {
+/* @keyframes moveRight {
     from{transform: translateX(-50%); opacity: 100%;}
     to{transform: translateX(50%); opacity: 100%;}
 }
@@ -191,24 +221,26 @@ body{
 @keyframes moveDown {
     from{transform: translateY(-50%); opacity: 100%;}
     to{transform: translateY(50%); opacity: 100%;}
-}
+} */
 
 .bomb {
     color: transparent;
-    background-color: black;
-    border-radius: 50%;
     overflow: hidden;
+    /* background-color: black;
+    border-radius: 50%; */
+    background-image: url("/img/bomb12.png");
+    background-size: cover;
     animation-name: bombTimer;
     animation-duration: 3s;
     animation-timing-function: ease-in-out;
 }
 
 @keyframes bombTimer {
-    0% {transform: scale(105%);}
-    25%{transform: scale(100%);}
-    50%{transform: scale(110%);}
-    75%{transform: scale(100%);}
-    100%{transform: scale(115%);}
+    0% {transform: scale(85%);}
+    25%{transform: scale(90%);}
+    50%{transform: scale(85%);}
+    75%{transform: scale(90%);}
+    100%{transform: scale(100%);}
 }
 
 .wrapper {
