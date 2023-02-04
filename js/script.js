@@ -30,8 +30,8 @@ sfx.stageIntro.play();
 export let player = new Player(sp[0], sp[1]);
 lives();
 let enemy = new Enemy(5,5);
-let enemyStartPoint = document.getElementById(`block-${enemy.x}:${enemy.y}`);
-enemyStartPoint.classList.add('enemy');
+// let enemyStartPoint = document.getElementById(`block-${enemy.x}:${enemy.y}`);
+// enemyStartPoint.classList.add('enemy');
 let startPoint = document.getElementById(`block-${player.x}:${player.y}`);
 startPoint.classList.add('player');
 let pauseScreen = document.getElementById("pauseScreen");
@@ -77,8 +77,7 @@ function update(timestamp) {
     lives();
   }
   if (enemyPosition.classList.contains("explosion")) {
-    enemy.amount--;
-    player.score += Math.floor(100/60);
+    player.score += 100;
     score(player.score);
     enemy.death();
   }
@@ -96,7 +95,7 @@ function update(timestamp) {
     startTime = timestamp;
   }
   const elapsed = timestamp - startTime;
-  if (elapsed > 300 && enemy.amount > 0) {
+  if (elapsed > 300) {
     startTime = timestamp;
     enemy.move();
   }
