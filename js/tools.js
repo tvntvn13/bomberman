@@ -1,38 +1,25 @@
-import { template } from "./field.js";
-import { player, rafID, pause } from "./script.js";
+import { player, rafID } from "./script.js";
 
 
 // set startpoint for player
 export function setStartpoint() {
-  let x;
-  let y;
   let randNum = Math.floor(Math.random() * 4);
   switch (randNum) {
     case 0:
-      x = 1;
-      y = 1;
-      break;
+      return [1, 1];
     case 1:
-      x = 13;
-      y = 1;
-      break;
+      return [13, 1];
     case 2:
-      x = 1;
-      y = 11;
-      break;
+      return [1, 11]
     case 3:
-      x = 13;
-      y = 11;
-      break;
+      return [13, 11]
   }
-  return [x, y];
 }
 
 export function score(amount) {
   let scoreDiv = document.getElementById("score");
   scoreDiv.textContent = amount.toString().padStart(6, "0");
 }
-
 
 export function timer(time) {
   let timerDiv = document.getElementById("timer");
@@ -61,26 +48,23 @@ export function loadingBar() {
         i = 0;
       } else {
         width++;
-        elem.style.width = width + "%";
+        elem.style.width = `${width}%`;
       }
     }
   }
 }
 
-export function gameOver(){
+export function gameOver() {
   let gameOverScreen = document.getElementById("gameOverScreen");
   gameOverScreen.style.display = "block";
   document.getElementById("wrapper").style.display = "none";
   cancelAnimationFrame(rafID);
-  document.body.addEventListener("keydown", (e) =>{
+  document.body.addEventListener("keydown", (e) => {
     if (e.key === " " || e.key === "Enter") window.location.reload();
   });
-
 }
 
-export function winner(){
-  // let winScreen = document.createElement("div");
-  // winScreen.classList.add("winScreen");
+export function winner() {
   let congrats = document.createElement("h1");
   let win = document.createElement("p");
   win.textContent = "you cleared the level!";
@@ -88,15 +72,11 @@ export function winner(){
   congrats.classList.add("congratulations");
   congrats.textContent = "CONGRATULATIONS!!!";
   congrats.append(win);
-  // winScreen.append(congrats);
-  let info = document.getElementById("info");
-  info.append(congrats);
+  document.getElementById("info").append(congrats);
   cancelAnimationFrame(rafID);
   document.body.addEventListener("keydown", (e) => {
     if (e.key === " " || e.key === "Enter") {
       congrats.style.display = "none";
     }
   });
-
-
 }
