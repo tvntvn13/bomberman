@@ -68,7 +68,7 @@ document.body.addEventListener("keydown", (e) => {
 function update(timestamp) {
   let playerPosition = document.getElementById(`block-${player.x}:${player.y}`);
   let enemyPosition = document.getElementById(`block-${enemy.x}:${enemy.y}`);
-  if (playerPosition.classList.contains("enemy") || playerPosition.classList.contains("explosion")) {
+  if (!player.invincible && (playerPosition.classList.contains("enemy") || playerPosition.classList.contains("explosion"))) {
     player.death();
     lives();
   }

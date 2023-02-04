@@ -114,6 +114,7 @@ export class Player extends MovingElement {
         this.lives = 3;
         this.type = 'player';
         this.score = 0;
+        this.invincible = false;
         let startPoint = document.getElementById(`block-${x}:${y}`);
         startPoint.classList.add(this.type);
     }
@@ -147,7 +148,11 @@ export class Player extends MovingElement {
         this.x = respawn[0]
         this.y = respawn[1]
         document.getElementById(`block-${this.x}:${this.y}`).classList.add("player");
-        player.lives--;
+        this.lives--;
+        this.invincible = true;
+        setTimeout(() => {
+            this.invincible = false;
+        }, 2000);
         console.log("you died!");
     }
 }
