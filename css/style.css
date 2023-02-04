@@ -123,22 +123,22 @@ body{
 
 @keyframes moveUp {
     from{ background-position: 0 0; }
-    to{ background-position: 130px 0; }
+    to{ background-position: 122px 0; }
 }
 
 @keyframes moveRight {
     from{ background-position: 0 141px; }
-    to{ background-position: 130px 141px; }
+    to{ background-position: 122px 141px; }
 }
 
 @keyframes moveDown {
     from{ background-position: 0 93px; }
-    to{ background-position: 130px 93px; }
+    to{ background-position: 122px 93px; }
 }
 
 @keyframes moveLeft {
     from{ background-position: 0 43px; }
-    to{ background-position: 130px 43px; }
+    to{ background-position: 122px 43px; }
 }
 
 .player.moveRight {
