@@ -78,13 +78,13 @@ function update(timestamp) {
   }
   if (enemyPosition.classList.contains("explosion")) {
     enemy.amount--;
-    player.score += 100;
+    player.score += Math.floor(100/60);
     score(player.score);
     enemy.death();
   }
   if (playerPosition.classList.contains("goal")) {
     pause = true;
-    player.score += time * 100;
+    player.score += Math.floor((time * 100)/60);
     score(player.score)
     sfx.stageClear.play();
     winner();
