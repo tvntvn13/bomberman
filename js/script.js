@@ -1,4 +1,5 @@
 import { drawMap } from "./field.js";
+import { sfx } from "./soundFx.js";
 import { setStartpoint, loadingBar, score, timer, lives, gameOver, winner } from "./tools.js";
 import { Enemy, Player } from "./classes.js";
 
@@ -18,12 +19,14 @@ setTimeout(() => {
     //this part needs to stay.
    document.getElementById("loadingScreen").remove();
 },3200);
+
 // ^^^ loading bar shit above ^^^
 
 
 
 timer(time);
 drawMap();
+sfx.stageIntro.play();
 export let player = new Player(sp[0], sp[1]);
 lives();
 let enemy = new Enemy(5,5);
@@ -69,6 +72,7 @@ function update(timestamp) {
   let playerPosition = document.getElementById(`block-${player.x}:${player.y}`);
   let enemyPosition = document.getElementById(`block-${enemy.x}:${enemy.y}`);
   if (playerPosition.classList.contains("enemy") || playerPosition.classList.contains("explosion")) {
+    sfx.playerDies.play();
     player.death();
     lives();
   }
@@ -82,7 +86,9 @@ function update(timestamp) {
     pause = true;
     player.score += time * 100;
     score(player.score)
+    sfx.stageClear.play();
     winner();
+    
     return;
   }
   
@@ -100,7 +106,11 @@ function update(timestamp) {
   }
   if (timestamp - startTime2 > 70) {
     startTime2 = timestamp;
-    player.movement(keyPressed);
+    if (keyPressed) {
+      sfx.walking2.play();  
+      player.movement(keyPressed);
+      sfx.walking.play();
+    }
   }
   if (startTime3 === undefined) {
     startTime3 = timestamp;
@@ -109,6 +119,7 @@ function update(timestamp) {
     startTime3 = timestamp;
     if (time === 0) {
       pause = true;
+      sfx.timeUpFull.play();
       gameOver();
     }
     timer(time--);
@@ -122,7 +133,10 @@ function update(timestamp) {
 }
 
 document.addEventListener("keypress", (e) => {
-  if (e.key === " " && !pause) player.placeBomb();
+  if (e.key === " " && !pause) {
+    sfx.placeBomb.play(); 
+    player.placeBomb();
+  }
 })
 
 

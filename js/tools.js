@@ -1,4 +1,5 @@
 import { player, rafID } from "./script.js";
+import { sfx } from "./soundFx.js";
 
 
 // set startpoint for player
@@ -56,6 +57,7 @@ export function loadingBar() {
 
 export function gameOver() {
   let gameOverScreen = document.getElementById("gameOverScreen");
+  sfx.timeUpFull.play();
   gameOverScreen.style.display = "block";
   document.getElementById("wrapper").style.display = "none";
   cancelAnimationFrame(rafID);

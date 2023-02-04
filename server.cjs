@@ -25,6 +25,9 @@ const server = http.createServer((req, res) => {
     case '.png':
       contentType = 'image/png';
       break;
+    case '.wav':
+      contentType = "audio/x-wav";
+      break;
     case '.txt':
       contentType = 'text/plain';
       break;
@@ -48,7 +51,7 @@ const server = http.createServer((req, res) => {
   const serveFile = async (filePath, contentType, response) => {
     try {
       const data = await fsPromises.readFile(filePath, 'utf8');
-      response.writeHead(200, { 'Content-Type': contentType });
+      response.writeHead(200, { 'Content-Type': contentType,});
       response.end(data);
     } catch (err) {
       console.log(err);
