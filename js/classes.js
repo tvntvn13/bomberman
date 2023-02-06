@@ -16,6 +16,9 @@ export class MovingElement {
         let currentSpot = document.getElementById(`block-${x}:${y}`);
         let nextSpot = document.getElementById(`block-${x}:${nextSpotY}`);
         if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
+            if (this.type === 'enemy' && nextSpot.classList.contains('enemy')) {
+                return false;
+            }
             // nextSpot.classList.toggle('empty-field');
             nextSpot.classList.toggle(this.type);
             nextSpot.classList.add("moveUp")
@@ -35,6 +38,9 @@ export class MovingElement {
         let currentSpot = document.getElementById(`block-${x}:${y}`);
         let nextSpot = document.getElementById(`block-${x}:${nextSpotY}`);
         if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
+            if (this.type === 'enemy' && nextSpot.classList.contains('enemy')) {
+                return false;
+            }
             // nextSpot.classList.toggle('empty-field');
             nextSpot.classList.toggle(this.type);
             nextSpot.classList.add('moveDown');
@@ -54,6 +60,9 @@ export class MovingElement {
         let currentSpot = document.getElementById(`block-${x}:${y}`);
         let nextSpot = document.getElementById(`block-${nextSpotX}:${y}`);
         if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
+            if (this.type === 'enemy' && nextSpot.classList.contains('enemy')) {
+                return false;
+            }
             // nextSpot.classList.toggle('empty-field');
             nextSpot.classList.toggle(this.type);
             nextSpot.classList.add('moveLeft');
@@ -73,6 +82,9 @@ export class MovingElement {
         let currentSpot = document.getElementById(`block-${x}:${y}`);
         let nextSpot = document.getElementById(`block-${nextSpotX}:${y}`);
         if (nextSpot.classList.contains('empty-field') && !nextSpot.classList.contains('bomb')) {
+            if (this.type === 'enemy' && nextSpot.classList.contains('enemy')) {
+                return false;
+            }
             // nextSpot.classList.toggle('empty-field');
             nextSpot.classList.toggle(this.type);
             nextSpot.classList.add('moveRight');
@@ -144,7 +156,7 @@ export class Player extends MovingElement {
     }
     death() {
         let spot = document.getElementById(`block-${this.x}:${this.y}`);
-        spot.classList.remove("moveRight", "moveLeft","moveUp","moveDown","player");
+        spot.classList.remove("moveRight", "moveLeft", "moveUp", "moveDown", "player");
         let respawn = setStartpoint();
         this.x = respawn[0]
         this.y = respawn[1]
@@ -158,65 +170,94 @@ export class Player extends MovingElement {
     }
 }
 
+export let allEnemies = [];
 export class Enemy extends MovingElement {
     constructor(x, y) {
         super(x, y);
         this.type = 'enemy';
-        this.amount = 1;
         this.movementDirection = -1;
-        this.allDirections = ['this.moveUp()', 'this.moveLeft()', 'this.moveRight()', 'this.moveDown()'];
+        this.allDirections = ['this.moveUp()', 'this.moveDown()', 'this.moveLeft()', 'this.moveRight()', 'this.moveDown()', 'this.moveUp()', 'this.moveRight()', 'this.moveLeft()'];
         let startPoint = document.getElementById(`block-${x}:${y}`);
         startPoint.classList.add(this.type);
+        allEnemies.push(this);
+        this.alive = true;
     }
     moveUp() {
-        super.moveUp();
+        if (super.moveUp()) {
+            delete allEnemies[`${this.x}:${this.y}`];
+            allEnemies[`${this.x}:${this.y-1}`] = this;
+            return true;
+        } else {
+            return false;
+        };
     }
     moveDown() {
-        super.moveDown();
+        if (super.moveDown()) {
+            delete allEnemies[`${this.x}:${this.y}`];
+            allEnemies[`${this.x}:${this.y+1}`] = this;
+            return true;
+        } else {
+            return false;
+        };
     }
     moveLeft() {
-        super.moveLeft();
+        if (super.moveLeft()) {
+            delete allEnemies[`${this.x}:${this.y}`];
+            allEnemies[`${this.x-1}:${this.y}`] = this;
+            return true;
+        } else {
+            return false;
+        };
     }
     moveRight() {
-        super.moveRight();
+        if (super.moveRight()) {
+            delete allEnemies[`${this.x}:${this.y}`];
+            allEnemies[`${this.x+1}:${this.y}`] = this;
+            return true;
+        } else {
+            return false;
+        };
     }
     move() {
+        if (!this.alive) {
+            return;
+        }
         if (this.movementDirection === -1) {
-            let index = Math.floor(Math.random() * this.allDirections.length);
-            if (eval(this.allDirections[index])) {
-                this.movementDirection = index;
+            this.movementDirection = Math.floor(Math.random() * this.allDirections.length);
+            if (eval(this.allDirections[this.movementDirection])) {
+                this.movementDirection = this.movementDirection;
                 return;
             } else {
-                let originalIndex = index;
-                while (!eval(this.allDirections[index])) {
-                    index = (index + 1) % this.allDirections.length;
-                    if (index === originalIndex) {
+                let originalIndex = this.movementDirection;
+                while (!eval(this.allDirections[this.movementDirection])) {
+                    this.movementDirection = (this.movementDirection + 1) % this.allDirections.length;
+                    if (this.movementDirection === originalIndex) {
                         return;
                     }
                 }
-                this.movementDirection = index;
+                this.movementDirection = this.movementDirection;
                 return;
             }
         } else {
             if (eval(this.allDirections[this.movementDirection])) {
                 return;
             } else {
-                let originalIndex = index;
-                while (!eval(this.allDirections[index])) {
-                    index = (index + 1) % this.allDirections.length;
-                    if (index === originalIndex) {
-                        return;
+                let originalIndex = this.movementDirection;
+                while (!eval(this.allDirections[this.movementDirection])) {
+                    this.movementDirection = (this.movementDirection + 1) % this.allDirections.length;
+                    if (this.movementDirection === originalIndex) {
+                        break;
                     }
                 }
-                this.movementDirection = index;
                 return;
             }
         }
     }
-    death(){
+    death() {
+        this.alive = false;
         let spot = document.getElementById(`block-${this.x}:${this.y}`);
         spot.classList.remove("enemy");
-        this.amount--;
+        // delete allEnemies[`${this.x}:${this.y}`];
         console.log("enemy died");
     }
 }
@@ -251,7 +292,7 @@ export class Bomb {
             }
         }
         // checking downwards
-        for (let i = this.y+1; i < template.length - 1 && i <= this.y + 3; i++) {
+        for (let i = this.y + 1; i < template.length - 1 && i <= this.y + 3; i++) {
             let currentBlock = document.getElementById(`block-${this.x}:${i}`);
             if (currentBlock.classList.contains('solid-wall')) {
                 break;
@@ -263,7 +304,7 @@ export class Bomb {
             }
         }
         // checking to the left
-        for (let i = this.x-1; i > 0 && i >= this.x - 3; i--) {
+        for (let i = this.x - 1; i > 0 && i >= this.x - 3; i--) {
             let currentBlock = document.getElementById(`block-${i}:${this.y}`);
             if (currentBlock.classList.contains('solid-wall')) {
                 break;
@@ -275,7 +316,7 @@ export class Bomb {
             }
         }
         // checking to the right
-        for (let i = this.x+1; i < template[this.y].length - 1 && i <= this.x + 3; i++) {
+        for (let i = this.x + 1; i < template[this.y].length - 1 && i <= this.x + 3; i++) {
             let currentBlock = document.getElementById(`block-${i}:${this.y}`);
             if (currentBlock.classList.contains('solid-wall')) {
                 break;
