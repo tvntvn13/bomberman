@@ -224,11 +224,11 @@ body{
 } */
 
 .bomb {
-    color: transparent;
+    /* color: transparent; */
     overflow: hidden;
-    /* background-color: black;
-    border-radius: 50%; */
-    background-image: url("/img/bomb12.png");
+    background-color: black;
+    border-radius: 50%;
+    /* background-image: url("/img/bomb12.png"); */
     background-size: cover;
     animation-name: bombTimer;
     animation-duration: 3s;
