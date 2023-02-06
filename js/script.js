@@ -1,8 +1,7 @@
 import { drawMap } from "./field.js";
 import { sfx } from "./soundFx.js";
 import { setStartpoint, loadingBar, score, timer, lives, gameOver, winner } from "./tools.js";
-import { Enemy, Player } from "./classes.js";
-
+import { Enemy, Player, allEnemies } from "./classes.js";
 
 export let pause = false;
 let startTime;
@@ -29,9 +28,11 @@ drawMap();
 // sfx.stageIntro.play();
 export let player = new Player(sp[0], sp[1]);
 lives();
-let enemy = new Enemy(5,5);
-let enemyStartPoint = document.getElementById(`block-${enemy.x}:${enemy.y}`);
-enemyStartPoint.classList.add('enemy');
+let enemy1 = new Enemy(5, 5);
+let enemy2 = new Enemy(8, 5);
+// let enemy2 = new Enemy(8, 5);
+// let enemyStartPoint = document.getElementById(`block-${enemy.x}:${enemy.y}`);
+// enemyStartPoint.classList.add('enemy');
 let startPoint = document.getElementById(`block-${player.x}:${player.y}`);
 startPoint.classList.add('player');
 let pauseScreen = document.getElementById("pauseScreen");
@@ -70,35 +71,44 @@ document.body.addEventListener("keydown", (e) => {
 
 function update(timestamp) {
   let playerPosition = document.getElementById(`block-${player.x}:${player.y}`);
-  let enemyPosition = document.getElementById(`block-${enemy.x}:${enemy.y}`);
   if (!player.invincible && (playerPosition.classList.contains("enemy") || playerPosition.classList.contains("explosion"))) {
     sfx.playerDies.play();
     player.death();
     lives();
   }
-  if (enemyPosition.classList.contains("explosion")) {
-    enemy.amount--;
-    player.score += 100;
-    score(player.score);
-    enemy.death();
+  for (let enemy of allEnemies) {
+    if (enemy.alive) {
+      let enemyPosition = document.getElementById(`block-${enemy.x}:${enemy.y}`);
+
+      if (enemyPosition.classList.contains("explosion")) {
+        player.score += 100;
+        score(player.score);
+        enemy.death();
+      }
+    }
   }
   if (playerPosition.classList.contains("goal")) {
     pause = true;
-    player.score += time * 100;
+    player.score += Math.floor((time * 100) / 60);
     score(player.score)
     sfx.stageClear.play();
     winner();
-    
+
     return;
   }
-  
+
   if (startTime === undefined) {
     startTime = timestamp;
   }
   const elapsed = timestamp - startTime;
-  if (elapsed > 300 && enemy.amount > 0) {
+  if (elapsed > 500) {
     startTime = timestamp;
-    enemy.move();
+    // NEED TO FIX THIS!
+    console.log(allEnemies);
+    for (let enemy of allEnemies) {
+      enemy.move();
+    }
+    // enemy.move();
   }
 
   if (startTime2 === undefined) {
@@ -107,7 +117,7 @@ function update(timestamp) {
   if (timestamp - startTime2 > 70) {
     startTime2 = timestamp;
     if (keyPressed) {
-      sfx.walking2.play();  
+      sfx.walking2.play();
       player.movement(keyPressed);
       sfx.walking.play();
     }
@@ -124,7 +134,7 @@ function update(timestamp) {
     }
     timer(time--);
   }
-  
+
   if (!pause) {
     requestAnimationFrame(update)
   } else {
@@ -134,7 +144,7 @@ function update(timestamp) {
 
 document.addEventListener("keypress", (e) => {
   if (e.key === " " && !pause) {
-    sfx.placeBomb.play(); 
+    sfx.placeBomb.play();
     player.placeBomb();
   }
 })
@@ -144,23 +154,23 @@ document.addEventListener("keypress", (e) => {
 let continueButton = document.getElementById("continueButton");
 let restartButton = document.getElementById("restartButton");
 continueButton.focus();
-continueButton.addEventListener("keypress", (e)=>{
+continueButton.addEventListener("keypress", (e) => {
   if (e.key === "ArrowRight") {
     document.getElementById("restartButton").focus();
   }
   if (e.key === "Enter" || e.key === " ") {
     continueButton.click();
   }
-}); 
+});
 
-restartButton.addEventListener("keypress", (e)=>{
+restartButton.addEventListener("keypress", (e) => {
   if (e.key === "ArrowLeft") {
     continueButton.focus();
   }
   if (e.key === "Enter" || e.key === " ") {
     restart();
   }
-}); 
+});
 
 function restart() {
   window.location.reload();
@@ -191,7 +201,7 @@ function togglePause() {
     pause = true;
   }
   pauseScreen.style.display = "block";
-  
+
   // requestAnimationFrame(update);
 }
 
