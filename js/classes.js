@@ -170,7 +170,7 @@ export class Player extends MovingElement {
     }
 }
 
-let allEnemies = {};
+export let allEnemies = [];
 export class Enemy extends MovingElement {
     constructor(x, y) {
         super(x, y);
@@ -179,7 +179,7 @@ export class Enemy extends MovingElement {
         this.allDirections = ['this.moveUp()', 'this.moveDown()', 'this.moveLeft()', 'this.moveRight()', 'this.moveDown()', 'this.moveUp()', 'this.moveRight()', 'this.moveLeft()'];
         let startPoint = document.getElementById(`block-${x}:${y}`);
         startPoint.classList.add(this.type);
-        allEnemies[`${this.x}:${this.y}`] = this;
+        allEnemies.push(this);
         this.alive = true;
     }
     moveUp() {
@@ -257,7 +257,7 @@ export class Enemy extends MovingElement {
         this.alive = false;
         let spot = document.getElementById(`block-${this.x}:${this.y}`);
         spot.classList.remove("enemy");
-        delete allEnemies[`${this.x}:${this.y}`];
+        // delete allEnemies[`${this.x}:${this.y}`];
         console.log("enemy died");
     }
 }
