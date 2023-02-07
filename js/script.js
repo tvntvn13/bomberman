@@ -1,6 +1,6 @@
 import { drawMap } from "./field.js";
 import { sfx } from "./soundFx.js";
-import { setStartpoint, loadingBar, score, timer, lives, gameOver, winner } from "./tools.js";
+import { setStartpoint, loadingBar, score, timer, lives, gameOver, winner, createEnemies } from "./tools.js";
 import { Enemy, Player, allEnemies } from "./classes.js";
 
 export let pause = false;
@@ -28,8 +28,8 @@ drawMap();
 // sfx.stageIntro.play();
 export let player = new Player(sp[0], sp[1]);
 lives();
-let enemy1 = new Enemy(5, 5);
-let enemy2 = new Enemy(8, 5);
+createEnemies(8);
+// let enemy2 = new Enemy(8, 5);
 // let enemy2 = new Enemy(8, 5);
 // let enemyStartPoint = document.getElementById(`block-${enemy.x}:${enemy.y}`);
 // enemyStartPoint.classList.add('enemy');

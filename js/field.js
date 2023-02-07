@@ -45,6 +45,8 @@ export function drawMap(templ=template) {
                 mapBlock.classList.add("explosion");
             } else if (templ[i][j].includes("W")) {
                 mapBlock.classList.add("softWall");
+            } else if (templ[i][j].includes("E")) {
+                mapBlock.classList.add("enemy");
             } else if (templ[i][j] === "G") {
                 mapBlock.classList.add("softWall","goal");
             }

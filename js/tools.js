@@ -1,5 +1,7 @@
+import { map } from "./maps.js";
 import { player, rafID } from "./script.js";
 import { sfx } from "./soundFx.js";
+import { Enemy } from "./classes.js";
 
 
 // set startpoint for player
@@ -15,6 +17,37 @@ export function setStartpoint() {
     case 3:
       return [13, 11]
   }
+}
+
+function enemyStartpoint(enemies) {
+  if (enemies < 1) return
+  let sp = []
+  let set = []
+
+  while (enemies > 0) {
+    let rX = Math.ceil((Math.random() * (map.length - 4)) + 3);
+    let rY = Math.ceil((Math.random() * (map[0].length - 4)) + 3);
+    if (map[rX][rY] === undefined || map[rX][rY] === '') {
+      map[rX][rY] = 'E';
+      enemies--
+      sp.push(rY,rX)
+      set.push(sp)
+      sp = [];
+    } else {
+      continue
+    }
+  }
+  return set
+}
+
+export function createEnemies(num) {
+  let startingPoints = enemyStartpoint(num);
+  // console.log(startingPoints)
+  let enemies = new Array(num)
+  for (let i = 0; i < num; i++) {
+    enemies[i] = new Enemy(startingPoints[i][0],startingPoints[i][1])
+  }
+  return enemies;
 }
 
 export function score(amount) {

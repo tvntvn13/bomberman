@@ -16,24 +16,3 @@ export let map = [
   ['▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉']
 ];
 
-// import {template} from "./field.js";
-
-// export function generateLevel(template) {
-//   map = [];
-
-//   for (let row = 0; row < numRows; row++) {
-//     cells[row] = [];
-
-//     for (let col = 0; col < numCols; col++) {
-
-//       // 90% chance cells will contain a soft wall
-//       if (!template[row][col] && Math.random() < 0.90) {
-//         cells[row][col] = "W";
-//       }
-//       else if (template[row][col] === '▉') {
-//         cells[row][col] = '▉';
-//       }
-//     }
-//   }
-//   return map;
-// }
