@@ -42,12 +42,10 @@ function enemyStartpoint(enemies) {
 
 export function createEnemies(num) {
   let startingPoints = enemyStartpoint(num);
-  // console.log(startingPoints)
   let enemies = new Array(num)
   for (let i = 0; i < num; i++) {
     enemies[i] = new Enemy(startingPoints[i][0],startingPoints[i][1])
   }
-  return enemies;
 }
 
 export function score(amount) {

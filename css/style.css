@@ -91,15 +91,19 @@ body{
 }
 
 .solid-wall {
-    background-color: silver;
-    border: 2px solid white;
-}
+    /* background-color: silver;
+    border: 2px solid white; */
+    background-image: url('/img/solidWallBM.png');
+    background-size: cover;
+} 
 
 .softWall {
-    background-color: brown;
+    /* background-color: brown;
     border: 4px solid rgb(108, 32, 32);
     color: brown;
-    z-index: 100;
+    z-index: 100; */
+    background-image: url('/img/softWallBM.png');
+    background-size: cover;
 }
 
 .empty-field {
@@ -118,45 +122,51 @@ body{
     border-radius: 50%; */
 
     background-image: url('/img/bombBasic2.png');
-    background-position: 0 93px;
+    background-position: 0px 90px ;
+    background-position-x: 4px;
+
 }
 
 @keyframes moveUp {
-    from{ background-position: 0 0; }
-    to{ background-position: 122px 0; }
+    0%{ background-position: 0px 1px; background-position-x: center;}
+    /* 50% {background-position: 87px 0;} */
+    100%{ background-position: 122px 1px; background-position-x: center;}
 }
 
 @keyframes moveRight {
-    from{ background-position: 0 141px; }
-    to{ background-position: 122px 141px; }
+    0%{ background-position: 0px 141px; background-position-x: center;}
+    /* 50% {background-position: 87px 141px;} */
+    100%{ background-position: 125px 141px; background-position-x: center;}
 }
 
 @keyframes moveDown {
-    from{ background-position: 0 93px; }
-    to{ background-position: 122px 93px; }
+    0%{ background-position: 0px 93px; background-position-x: center;}
+    /* 50%{background-position: 87px 93px;} */
+    100%{ background-position: 122px 93px; background-position-x: center;}
 }
 
 @keyframes moveLeft {
-    from{ background-position: 0 43px; }
-    to{ background-position: 122px 43px; }
+    0%{ background-position: 0px 46px; background-position-x: center; background-position-y: 43px;}
+    /* 50%{background-position: 87px 43px;} */
+    100%{ background-position: 125px 46px; background-position-x: center; background-position-y: 43px;}
 }
 
 .player.moveRight {
-    animation: moveRight 500ms steps(3) infinite;
+    animation: moveRight 200ms steps(3);
     /* animation-name: moveRight;
     animation-duration: 100ms;
     animation-timing-function: ease-out; */
 }
 
 .player.moveLeft {
-    animation: moveLeft 500ms steps(3) infinite;
+    animation: moveLeft 200ms steps(3);
     /* animation-name: moveLeft;
     animation-duration: 100ms;
     animation-timing-function: ease-out; */
 }
 
 .player.moveUp {
-    animation: moveUp 500ms steps(3) infinite;
+    animation: moveUp 200ms steps(3);
     /* animation-name: moveUp;
     animation-duration: 500ms;
     animation-timing-function: steps(3); */
@@ -166,17 +176,27 @@ body{
 }
 
 .player.moveDown{
-    animation: moveDown 500ms steps(3) infinite;
+    animation: moveDown 200ms steps(3);
     /* animation-name: moveDown;
     animation-duration: 100ms;
     animation-timing-function: ease-out; */
 } 
 
 .enemy {
-    color: transparent;
+    /* color: transparent;
     background-color: rgb(191, 158, 9);
     border-radius: 50%;
-    overflow: hidden;
+    overflow: hidden; */
+    animation: enemyMove 400ms steps(4);
+    background-image: url('/img/enemyBM2.png');
+    background-position: 7px 0px;
+    
+
+}
+
+@keyframes enemyMove {
+    from{background-position: 7px,0px;}
+    to{background-position: 170px,0px;}
 }
 
 /* .enemy.moveRight {
@@ -225,12 +245,12 @@ body{
 
 .bomb {
     /* color: transparent; */
-    overflow: hidden;
+    /* overflow: hidden;
     background-color: black;
-    border-radius: 50%;
-    /* background-image: url("/img/bomb12.png"); */
-    background-size: cover;
+    border-radius: 50%; */
+    background-image: url("/img/bombBM.png");
     animation-name: bombTimer;
+    background-size: contain;
     animation-duration: 3s;
     animation-timing-function: ease-in-out;
 }
@@ -260,8 +280,10 @@ body{
 }
 
 .explosion {
-    background-color: rgb(255, 0, 0);
-    color: rgb(255, 0, 0);
+    /* background-color: rgb(255, 0, 0);
+    color: rgb(255, 0, 0); */
+    background-image: url('/img/explosionBM.png');
+    background-size: contain;
 }
 
 .pauseScreen {

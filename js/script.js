@@ -104,7 +104,7 @@ function update(timestamp) {
   if (elapsed > 500) {
     startTime = timestamp;
     // NEED TO FIX THIS!
-    console.log(allEnemies);
+    // console.log(allEnemies);
     for (let enemy of allEnemies) {
       enemy.move();
     }

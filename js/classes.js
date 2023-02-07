@@ -166,7 +166,7 @@ export class Player extends MovingElement {
         setTimeout(() => {
             this.invincible = false;
         }, 2000);
-        console.log("you died!");
+        // console.log("you died!");
     }
 }
 
@@ -258,7 +258,7 @@ export class Enemy extends MovingElement {
         let spot = document.getElementById(`block-${this.x}:${this.y}`);
         spot.classList.remove("enemy");
         // delete allEnemies[`${this.x}:${this.y}`];
-        console.log("enemy died");
+        // console.log("enemy died");
     }
 }
 
