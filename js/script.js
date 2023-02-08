@@ -114,7 +114,7 @@ function update(timestamp) {
   if (startTime2 === undefined) {
     startTime2 = timestamp;
   }
-  if (timestamp - startTime2 > 70) {
+  if (timestamp - startTime2 > 100) {
     startTime2 = timestamp;
     if (keyPressed) {
       sfx.walking2.play();
