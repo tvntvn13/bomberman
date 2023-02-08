@@ -1,5 +1,5 @@
 import { map } from "./maps.js";
-import { player, rafID } from "./script.js";
+import { player, rafID, pause } from "./script.js";
 import { sfx } from "./soundFx.js";
 import { Enemy } from "./classes.js";
 
@@ -61,6 +61,7 @@ export function timer(time) {
 export function lives() {
   if (player.lives < 1) {
     gameOver();
+    pause = true;
   } else {
     let livesDiv = document.getElementById("lives");
     livesDiv.textContent = "♥ ".repeat(player.lives);
