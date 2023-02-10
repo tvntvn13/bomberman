@@ -1,5 +1,5 @@
 import { map } from "./maps.js";
-import { player, rafID, pause } from "./script.js";
+import { player, rafID, pause, continueGame} from "./script.js";
 import { sfx } from "./soundFx.js";
 import { Enemy } from "./classes.js";
 
@@ -116,6 +116,24 @@ export function winner() {
 }
 
 export function startScreen(){
+  let startWrap = document.getElementById('startWrap')
   let startDiv = document.createElement('div')
-  
+  let title = document.createElement('h1');
+  let startButton = document.createElement('button')
+  title.classList.add("startTitle");
+  title.textContent="BOMBMAN JS"
+  startButton.textContent="NEW GAME"
+  startButton.classList.add('startButton')
+  startDiv.classList.add('startScreen')
+  startDiv.append(startButton)
+  startWrap.append(title,startDiv)
+  startButton.addEventListener('click', removeStart);   
+}
+
+function removeStart(){
+  let startScreen = document.getElementById('startWrap')
+  //startScreen.style.display="none";
+  startScreen.remove();
+  continueGame(1);
+  //requestAnimationFrame(update)
 }

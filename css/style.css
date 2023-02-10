@@ -403,3 +403,65 @@ body{
     text-align: center;
 }
 
+.startWrap {
+    background-image: url("/img/posterBM.jpeg");
+    image-resolution: 10dpi;
+    image-rendering: pixelated;
+    background-position: center;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    position: absolute;
+    z-index: 900;
+    background-repeat: no-repeat;
+    background-color: black;
+}
+.startScreen {
+    position: relative;
+    width: 65%;
+    height: 65%;
+    background-image: url("/img/coverBM2.png");
+    image-rendering: pixelated;
+    background-size: cover;
+    filter:saturate(150%);
+    left: 50%;
+    top: 10%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    box-shadow: 0 0 5px 9px rgba(208, 3, 3, 0.754);
+
+    
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 1000;
+}
+
+.startTitle {
+    margin-top: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 80px;
+    font-weight: 900;
+}
+
+
+.startButton {
+    position: unset;
+    width: 30%;
+    height: 15%;
+    margin-left: 35%;
+    margin-top: 60%;
+    background-color: black;
+    border: 3px solid rgb(255, 0, 0);
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 900;
+    color: rgb(255, 0, 0)
+}
+
+.startButton:hover {
+    transform: scale(120%);
+    /* transform: translateX(-50%); */
+    box-shadow: 0 0 2px 2px rgb(70, 0, 50);
+}
+

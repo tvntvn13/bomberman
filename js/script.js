@@ -1,9 +1,11 @@
 import { drawMap } from "./field.js";
 import { sfx } from "./soundFx.js";
-import { setStartpoint, loadingBar, score, timer, lives, gameOver, winner, createEnemies } from "./tools.js";
+import { setStartpoint, loadingBar, score, timer, lives, gameOver, winner, createEnemies, startScreen } from "./tools.js";
 import { Enemy, Player, allEnemies } from "./classes.js";
 
-export let pause = false;
+export let pause = true;
+startScreen();
+
 let startTime;
 let startTime2;
 let startTime3;
@@ -69,7 +71,7 @@ document.body.addEventListener("keydown", (e) => {
 });
 
 
-function update(timestamp) {
+export function update(timestamp) {
   let playerPosition = document.getElementById(`block-${player.x}:${player.y}`);
   if (!player.invincible && (playerPosition.classList.contains("enemy") || playerPosition.classList.contains("explosion"))) {
     sfx.playerDies.play();
@@ -193,9 +195,11 @@ function restart() {
 
 
 
-function continueGame() {
-  let pauseDiv = document.getElementById("pauseScreen");
-  document.body.removeChild(pauseDiv);
+export function continueGame(status=0) {
+  if (status == 0) {
+    let pauseDiv = document.getElementById("pauseScreen");
+    document.body.removeChild(pauseDiv);
+  }
   pause = false;
   requestAnimationFrame(update);
 }
