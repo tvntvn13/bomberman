@@ -114,3 +114,8 @@ export function winner() {
     }
   });
 }
+
+export function startScreen(){
+  let startDiv = document.createElement('div')
+  
+}

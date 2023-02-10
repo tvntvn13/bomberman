@@ -138,7 +138,7 @@ body{
         background-position-x: center;
         transform: translateY(50%);
     }
-    /* 50% {background-position: 87px 0;} */
+    50% {background-position: 87px 0; background-position-x: center;}
     100%{ background-position: 122px 1px;
         background-position-x: center;
         transform: translateY(-50%);
@@ -150,7 +150,7 @@ body{
         background-position-x: center;
         transform: translateX(-50%);
     }
-    /* 50% {background-position: 87px 141px;} */
+    50% {background-position: 87px 141px; background-position-x: center;}
     100%{ background-position: 125px 141px;
         background-position-x: center;
         transform: translateX(50%);
@@ -162,7 +162,7 @@ body{
         background-position-x: center;
         transform: translateY(-50%);
     }
-    /* 50%{background-position: 87px 93px;} */
+    50%{background-position: 87px 93px; background-position-x: center;}
     100%{ background-position: 122px 93px;
         background-position-x: center;
         transform: translateY(50%);
@@ -175,7 +175,7 @@ body{
         background-position-y: 43px;
         transform: translateX(50%);
     }
-    /* 50%{background-position: 87px 43px;} */
+    50%{background-position: 87px 43px; background-position-x: center;}
     100%{ background-position: 125px 46px;
         background-position-x: center;
         background-position-y: 43px;
@@ -184,7 +184,7 @@ body{
 }
 
 .player.moveRight {
-    animation: moveRight 100ms steps(3);
+    animation: moveRight 200ms steps(3);
     /* animation-name: moveRight;
     animation-duration: 100ms;
     animation-timing-function: ease-out; */
