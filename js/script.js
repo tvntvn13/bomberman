@@ -193,7 +193,7 @@ function restart() {
 
 
 
-export function continueGame() {
+function continueGame() {
   let pauseDiv = document.getElementById("pauseScreen");
   document.body.removeChild(pauseDiv);
   pause = false;
