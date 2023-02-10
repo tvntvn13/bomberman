@@ -185,7 +185,7 @@ export class Enemy extends MovingElement {
     moveUp() {
         if (super.moveUp()) {
             delete allEnemies[`${this.x}:${this.y}`];
-            allEnemies[`${this.x}:${this.y-1}`] = this;
+            // allEnemies[`${this.x}:${this.y-1}`] = this;
             return true;
         } else {
             return false;
@@ -194,7 +194,7 @@ export class Enemy extends MovingElement {
     moveDown() {
         if (super.moveDown()) {
             delete allEnemies[`${this.x}:${this.y}`];
-            allEnemies[`${this.x}:${this.y+1}`] = this;
+            // allEnemies[`${this.x}:${this.y+1}`] = this;
             return true;
         } else {
             return false;
@@ -203,7 +203,7 @@ export class Enemy extends MovingElement {
     moveLeft() {
         if (super.moveLeft()) {
             delete allEnemies[`${this.x}:${this.y}`];
-            allEnemies[`${this.x-1}:${this.y}`] = this;
+            // allEnemies[`${this.x-1}:${this.y}`] = this;
             return true;
         } else {
             return false;
@@ -212,7 +212,7 @@ export class Enemy extends MovingElement {
     moveRight() {
         if (super.moveRight()) {
             delete allEnemies[`${this.x}:${this.y}`];
-            allEnemies[`${this.x+1}:${this.y}`] = this;
+            // allEnemies[`${this.x+1}:${this.y}`] = this;
             return true;
         } else {
             return false;

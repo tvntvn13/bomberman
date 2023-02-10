@@ -194,17 +194,34 @@ function restart() {
 
 
 function togglePause() {
-  cancelAnimationFrame(rafID);
-  if (pause) {
-    pause = false;
-  } else {
-    pause = true;
-  }
-  pauseScreen.style.display = "block";
+  let pauseDiv = document.createElement("div");
+  pauseDiv.className = "pauseScreen";
+  pauseDiv.id = "pauseScreen";
+  let text = document.createElement("h1");
+  text.innerHTML = "Game Paused";
+  pauseDiv.append(text);
+  let continueButton = document.createElement("button");
+  continueButton.onclick = "continueGame()";
+  continueButton.className = "pauseButton";
+  continueButton.id = "continueButton";
+  continueButton.innerHTML = "Continue";
+  pauseDiv.style.display = "block";
+  pauseDiv.append(continueButton);
+  document.body.prepend(pauseDiv);
+  // cancelAnimationFrame(rafID);
+  // if (pause) {
+  //   pause = false;
+  // } else {
+  //   pause = true;
+  // }
+  pause = true;
 
   // requestAnimationFrame(update);
 }
 
-
-
-
+export function continueGame() {
+  // let pauseDiv = document.getElementById("pauseScreen");
+  // document.body.removeChild(pauseDiv);
+  pause = false;
+  requestAnimationFrame(update);
+}
