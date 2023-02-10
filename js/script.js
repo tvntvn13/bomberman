@@ -151,26 +151,26 @@ document.addEventListener("keypress", (e) => {
 
 
 
-let continueButton = document.getElementById("continueButton");
-let restartButton = document.getElementById("restartButton");
-continueButton.focus();
-continueButton.addEventListener("keypress", (e) => {
-  if (e.key === "ArrowRight") {
-    document.getElementById("restartButton").focus();
-  }
-  if (e.key === "Enter" || e.key === " ") {
-    continueButton.click();
-  }
-});
+// let continueButton = document.getElementById("continueButton");
+// let restartButton = document.getElementById("restartButton");
+// continueButton.focus();
+// continueButton.addEventListener("keypress", (e) => {
+//   if (e.key === "ArrowRight") {
+//     document.getElementById("restartButton").focus();
+//   }
+//   if (e.key === "Enter" || e.key === " ") {
+//     continueButton.click();
+//   }
+// });
 
-restartButton.addEventListener("keypress", (e) => {
-  if (e.key === "ArrowLeft") {
-    continueButton.focus();
-  }
-  if (e.key === "Enter" || e.key === " ") {
-    restart();
-  }
-});
+// restartButton.addEventListener("keypress", (e) => {
+//   if (e.key === "ArrowLeft") {
+//     continueButton.focus();
+//   }
+//   if (e.key === "Enter" || e.key === " ") {
+//     restart();
+//   }
+// });
 
 function restart() {
   window.location.reload();
@@ -193,18 +193,44 @@ function restart() {
 
 
 
+function continueGame() {
+  let pauseDiv = document.getElementById("pauseScreen");
+  document.body.removeChild(pauseDiv);
+  pause = false;
+  requestAnimationFrame(update);
+}
+
 function togglePause() {
-  cancelAnimationFrame(rafID);
-  if (pause) {
-    pause = false;
-  } else {
-    pause = true;
-  }
-  pauseScreen.style.display = "block";
+  let pauseDiv = document.createElement("div");
+  pauseDiv.className = "pauseScreen";
+  pauseDiv.id = "pauseScreen";
+  let text = document.createElement("h1");
+  text.innerHTML = "Game Paused";
+  pauseDiv.append(text);
+  let continueButton = document.createElement("button");
+  // continueButton.onclick = function(){continueGame};
+  continueButton.className = "pauseButton";
+  continueButton.id = "continueButton";
+  continueButton.innerHTML = "Continue";
+  continueButton.addEventListener("click", continueGame);
+  pauseDiv.style.display = "block";
+  pauseDiv.append(continueButton);
+  let restartButton = document.createElement("button");
+  restartButton.className = "pauseButton";
+  restartButton.id = "restartButton";
+  restartButton.innerHTML = "Restart";
+  restartButton.addEventListener("click", restart)
+  pauseDiv.append(restartButton);
+  document.body.prepend(pauseDiv);
+  // cancelAnimationFrame(rafID);
+  // if (pause) {
+  //   pause = false;
+  // } else {
+  //   pause = true;
+  // }
+  pause = true;
+  // let cont = document.getElementById("continueButton");
 
   // requestAnimationFrame(update);
 }
-
-
-
 
