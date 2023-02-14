@@ -74,7 +74,7 @@ document.body.addEventListener("keydown", (e) => {
 export function update(timestamp) {
   let playerPosition = document.getElementById(`block-${player.x}:${player.y}`);
   if (!player.invincible && (playerPosition.classList.contains("enemy") || playerPosition.classList.contains("explosion"))) {
-    sfx.playerDies.play();
+    // sfx.playerDies.play();
     player.death();
     lives();
   }
@@ -93,7 +93,7 @@ export function update(timestamp) {
     pause = true;
     player.score += Math.floor((time * 100) / 60);
     score(player.score)
-    sfx.stageClear.play();
+    // sfx.stageClear.play();
     winner();
 
     return;
@@ -119,9 +119,9 @@ export function update(timestamp) {
   if (timestamp - startTime2 > 100) {
     startTime2 = timestamp;
     if (keyPressed) {
-      sfx.walking2.play();
+      // sfx.walking2.play();
       player.movement(keyPressed);
-      sfx.walking.play();
+      // sfx.walking.play();
     }
   }
   if (startTime3 === undefined) {
@@ -131,7 +131,7 @@ export function update(timestamp) {
     startTime3 = timestamp;
     if (time === 0) {
       pause = true;
-      sfx.timeUpFull.play();
+      // sfx.timeUpFull.play();
       gameOver();
     }
     timer(time--);
@@ -146,7 +146,7 @@ export function update(timestamp) {
 
 document.addEventListener("keypress", (e) => {
   if (e.key === " " && !pause) {
-    sfx.placeBomb.play();
+    // sfx.placeBomb.play();
     player.placeBomb();
   }
 })

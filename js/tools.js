@@ -119,14 +119,17 @@ export function startScreen(){
   let startWrap = document.getElementById('startWrap')
   let startDiv = document.createElement('div')
   let title = document.createElement('h1');
+  let title2 = document.createElement('h1')
   let startButton = document.createElement('button')
   title.classList.add("startTitle");
+  title2.classList.add("startTitle2")
   title.textContent="BOMBMAN JS"
+  title2.textContent="BOMBMAN JS"
   startButton.textContent="NEW GAME"
   startButton.classList.add('startButton')
   startDiv.classList.add('startScreen')
   startDiv.append(startButton)
-  startWrap.append(title,startDiv)
+  startWrap.append(title,title2,startDiv)
   startButton.addEventListener('click', removeStart);   
 }
 
