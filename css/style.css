@@ -28,7 +28,7 @@ body{
     width: 1%;
     height: 30px;
     background-color: green;
-    color: white;
+    color: black;
     overflow: hidden;
     text-align: center;
     /* font-family: Arial, Helvetica, sans-serif; */
@@ -418,7 +418,8 @@ body{
     position: absolute;
     z-index: 900;
     background-repeat: no-repeat;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.7);
+    background-blend-mode: multiply;
 }
 .startScreen {
     position: relative;
