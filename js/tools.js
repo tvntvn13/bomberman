@@ -60,6 +60,7 @@ export function createEnemies(num) {
   }
   let sampled = [];
   while (sampled.length < num) {
+    // randomly shuffle the startingPoints array, and take the first element, then take it out from startingPoints
     startingPoints = startingPoints.sort(() => Math.random() - 0.5);
     sampled.push(startingPoints[0]);
     startingPoints = startingPoints.slice(1);
