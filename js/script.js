@@ -5,13 +5,14 @@ import { Enemy, Player, allEnemies } from "./classes.js";
 
 export let pause = true;
 startScreen();
-
+const ENEMY_NUM = 8;
 let startTime;
 let startTime2;
 let startTime3;
 let sp = setStartpoint();
 let keyPressed = null;
 let time = 200;
+let aliveEnemies;
 export let rafID = requestAnimationFrame(update)
 
 // comment out this part to get rid of the loading bar !!!
@@ -30,7 +31,7 @@ drawMap();
 // sfx.stageIntro.play();
 export let player = new Player(sp[0], sp[1]);
 lives();
-let enemies = createEnemies(2);
+createEnemies(ENEMY_NUM);
 // let enemy2 = new Enemy(8, 5);
 // let enemy2 = new Enemy(8, 5);
 // let enemyStartPoint = document.getElementById(`block-${enemy.x}:${enemy.y}`);
@@ -38,7 +39,7 @@ let enemies = createEnemies(2);
 let startPoint = document.getElementById(`block-${player.x}:${player.y}`);
 startPoint.classList.add('player');
 let pauseScreen = document.getElementById("pauseScreen");
-score(player.score);
+score(player.getScore);
 update();
 //requestAnimationFrame(update)
 
@@ -78,21 +79,25 @@ export function update(timestamp) {
     player.death();
     lives();
   }
+  aliveEnemies = 0;
   for (let enemy of allEnemies) {
     if (enemy.alive) {
+      aliveEnemies++
       let enemyPosition = document.getElementById(`block-${enemy.x}:${enemy.y}`);
 
       if (enemyPosition.classList.contains("explosion")) {
-        player.score += 100;
-        score(player.score);
+        // player.score += 100;
+        player.addScore(100);
+        score(player.getScore);
         enemy.death();
+        console.log(player.getScore);
       }
     }
   }
-  if (playerPosition.classList.contains("goal")) {
+  if (playerPosition.classList.contains("goal") && aliveEnemies === 0) {
     pause = true;
-   // player.score += Math.floor((time * 100) / 60);
-    //score(player.score)
+    player.score += Math.floor((time * 100) / 60);
+    score(player.getScore)
     // sfx.stageClear.play();
     winner();
 
@@ -105,12 +110,9 @@ export function update(timestamp) {
   const elapsed = timestamp - startTime;
   if (elapsed > 500) {
     startTime = timestamp;
-    // NEED TO FIX THIS!
-    // console.log(allEnemies);
     for (let enemy of allEnemies) {
       enemy.move();
     }
-    // enemy.move();
   }
 
   if (startTime2 === undefined) {

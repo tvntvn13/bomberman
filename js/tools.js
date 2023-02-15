@@ -21,30 +21,52 @@ export function setStartpoint() {
 
 function enemyStartpoint(enemies) {
   if (enemies < 1) return
-  let sp = []
-  let set = []
-
-  while (enemies > 0) {
-    let rX = Math.ceil((Math.random() * (map.length - 4)) + 3);
-    let rY = Math.ceil((Math.random() * (map[0].length - 4)) + 3);
-    if (map[rX][rY] === undefined || map[rX][rY] === '') {
-      map[rX][rY] = 'E';
-      enemies--
-      sp.push(rY,rX)
-      set.push(sp)
-      sp = [];
-    } else {
-      continue
+  // let sp = []
+  // let set = []
+  let emptyFields = [];
+  for (let i = 0; i < map.length; i++) {
+    for (let j = 0; j < map[0].length; j++) {
+      let currBlock = document.getElementById(`block-${j}:${i}`);
+      if (currBlock.classList.contains("empty-field") && !currBlock.classList.contains("starting-point")) {
+        emptyFields.push([j, i]);
+      }
     }
   }
-  return set
+  // while (enemies > 0) {
+  //   let rY = Math.ceil((Math.random() * (map.length - 4)) + 3);
+  //   let rX = Math.ceil((Math.random() * (map[0].length - 4)) + 3);
+  //   let currBlock = document.getElementById(`block-${rX}:${rY}`)
+  //   if (currBlock.classList.contains("empty-field") && !currBlock.classList.contains("starting-point") && !currBlock.classList.contains("enemy")) {
+  //     enemies--
+  //     set.push([rX, rY]);
+  //   }
+  //   // if (map[rX][rY] === undefined || map[rX][rY] === '') {
+  //   //   map[rX][rY] = 'E';
+  //   //   enemies--
+  //   //   sp.push(rY,rX)
+  //   //   set.push(sp)
+  //   //   sp = [];
+  //   // } else {
+  //   //   continue
+  //   // }
+  // }
+  return emptyFields;
 }
 
 export function createEnemies(num) {
   let startingPoints = enemyStartpoint(num);
-  let enemies = new Array(num)
-  for (let i = 0; i < num; i++) {
-    enemies[i] = new Enemy(startingPoints[i][0],startingPoints[i][1])
+  if (num > startingPoints.length) {
+    return new Error("enemy number too high");
+  }
+  let sampled = [];
+  while (sampled.length < num) {
+    // randomly shuffle the startingPoints array, and take the first element, then take it out from startingPoints
+    startingPoints = startingPoints.sort(() => Math.random() - 0.5);
+    sampled.push(startingPoints[0]);
+    startingPoints = startingPoints.slice(1);
+  }
+  for (let elem of sampled) {
+    let enemy = new Enemy(elem[0], elem[1]);
   }
   return enemies
 }
