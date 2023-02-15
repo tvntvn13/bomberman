@@ -55,9 +55,7 @@ function enemyStartpoint(enemies) {
 
 export function createEnemies(num) {
   let startingPoints = enemyStartpoint(num);
-  if (num > startingPoints.length) {
-    return new Error("enemy number too high");
-  }
+  console.log('this', startingPoints.length);
   let sampled = [];
   while (sampled.length < num) {
     // randomly shuffle the startingPoints array, and take the first element, then take it out from startingPoints
