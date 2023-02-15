@@ -154,6 +154,12 @@ export class Player extends MovingElement {
             this.bombs++;
         }
     }
+    get getScore() {
+        return this.score;
+    }
+    addScore(num) {
+        this.score += num;
+    }
     death() {
         let spot = document.getElementById(`block-${this.x}:${this.y}`);
         spot.classList.remove("moveRight", "moveLeft", "moveUp", "moveDown", "player");

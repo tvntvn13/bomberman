@@ -12,6 +12,7 @@ let startTime3;
 let sp = setStartpoint();
 let keyPressed = null;
 let time = 200;
+let aliveEnemies;
 export let rafID = requestAnimationFrame(update)
 
 // comment out this part to get rid of the loading bar !!!
@@ -38,7 +39,7 @@ createEnemies(8);
 let startPoint = document.getElementById(`block-${player.x}:${player.y}`);
 startPoint.classList.add('player');
 let pauseScreen = document.getElementById("pauseScreen");
-score(player.score);
+score(player.getScore);
 update();
 //requestAnimationFrame(update)
 
@@ -78,21 +79,25 @@ export function update(timestamp) {
     player.death();
     lives();
   }
+  aliveEnemies = 0;
   for (let enemy of allEnemies) {
     if (enemy.alive) {
+      aliveEnemies++
       let enemyPosition = document.getElementById(`block-${enemy.x}:${enemy.y}`);
 
       if (enemyPosition.classList.contains("explosion")) {
-        player.score += 100;
-        score(player.score);
+        // player.score += 100;
+        player.addScore(100);
+        score(player.getScore);
         enemy.death();
+        console.log(player.getScore);
       }
     }
   }
-  if (playerPosition.classList.contains("goal")) {
+  if (playerPosition.classList.contains("goal") && aliveEnemies === 0) {
     pause = true;
     player.score += Math.floor((time * 100) / 60);
-    score(player.score)
+    score(player.getScore)
     // sfx.stageClear.play();
     winner();
 
@@ -105,12 +110,9 @@ export function update(timestamp) {
   const elapsed = timestamp - startTime;
   if (elapsed > 500) {
     startTime = timestamp;
-    // NEED TO FIX THIS!
-    // console.log(allEnemies);
     for (let enemy of allEnemies) {
       enemy.move();
     }
-    // enemy.move();
   }
 
   if (startTime2 === undefined) {
