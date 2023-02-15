@@ -145,7 +145,9 @@ export function winner() {
 }
 
 export function startScreen(){
-  let startWrap = document.getElementById('startWrap')
+  let startWrap = document.createElement('div')
+  startWrap.id='startWrap'
+  startWrap.classList.add('startWrap')
   let startDiv = document.createElement('div')
   // let title = document.createElement('h1');
   let title2 = document.createElement('h1')
@@ -163,6 +165,8 @@ export function startScreen(){
   startDiv.classList.add('startScreen')
   startDiv.append(startButton,infoButton)
   startWrap.append(title2,startDiv)
+  document.body.prepend(startWrap)
+  infoButton.addEventListener('click', help)
   startButton.addEventListener('click', removeStart);   
 }
 
@@ -172,4 +176,44 @@ function removeStart(){
   startScreen.remove();
   continueGame(1);
   //requestAnimationFrame(update)
+}
+
+let infoText = `You are the BOMB MAN.
+
+Your objective is to demolish all enemies and locate the exit.
+To exterminate the enemies you must use your bombs.
+To find the exit you must use your bombs.
+You have unlimited supply of bombs - but you can only place three bombs at the same time.
+
+MOVE:       arrowkeys
+BOMB:       space
+PAUSE:      escape
+
+These are the basics. Now you are ready to bomb.
+Good luck!`
+
+function help(){
+  document.getElementById('startWrap').remove()
+  let helpWrap = document.createElement('div')
+  helpWrap.classList.add('helpWrap')
+  helpWrap.id = 'helpWrap'
+  let helpScreen = document.createElement('div')
+  let backButton = document.createElement('button')
+  let helpText = document.createElement('p')
+  helpText.textContent = infoText
+  helpText.id = 'helpText'
+  backButton.classList.add('startButton')
+  backButton.id = 'backButton'
+  backButton.textContent = 'BACK'
+  helpScreen.classList.add('help')
+  helpScreen.id = 'helpScreen'
+  backButton.addEventListener('click',goBack)
+  helpScreen.append(helpText,backButton)
+  helpWrap.append(helpScreen)
+  document.body.prepend(helpWrap)
+}
+
+function goBack(){
+  document.getElementById('helpWrap').remove()
+  startScreen()
 }
