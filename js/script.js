@@ -5,7 +5,7 @@ import { Enemy, Player, allEnemies } from "./classes.js";
 
 export let pause = true;
 startScreen();
-
+const ENEMY_NUM = 8;
 let startTime;
 let startTime2;
 let startTime3;
@@ -31,7 +31,7 @@ drawMap();
 // sfx.stageIntro.play();
 export let player = new Player(sp[0], sp[1]);
 lives();
-createEnemies(8);
+createEnemies(ENEMY_NUM);
 // let enemy2 = new Enemy(8, 5);
 // let enemy2 = new Enemy(8, 5);
 // let enemyStartPoint = document.getElementById(`block-${enemy.x}:${enemy.y}`);

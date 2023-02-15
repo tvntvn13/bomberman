@@ -17,43 +17,43 @@ import { map } from "./maps.js";
 //     ['▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉']
 // ];
 
-
+const SOFTWALL_CHANCE = 5.5;
 export let template = map;
 
-export function drawMap(templ=template) {
-    let game = document.getElementById('game');
-    let mainMap = document.getElementById('mainMap');
-    // document.querySelectorAll('.grid-container').forEach((e) => e.remove());
-    // mainMap.className = 'grid-container';
-    // mainMap.id = 'mainMap';
-    for (let i = 0; i < templ.length; i++) {
-        for (let j = 0; j < templ[i].length; j++) {
-            let mapBlock = document.createElement('div');
-            mapBlock.className = 'grid-item';
-            mapBlock.id = `block-${j}:${i}`;
-            if (templ[i][j] === '▉') {
-                mapBlock.classList.add('solid-wall');
-            } else if (templ[i][j] === 'x') {
-                mapBlock.classList.add('starting-point');
-            } else if (templ[i][j] === undefined || templ[i][j] === "") {
-                mapBlock.classList.add('empty-field');
-            } else if (templ[i][j] === "P") {
-                mapBlock.classList.add("player");
-            } else if (templ[i][j].includes("B")) {
-                mapBlock.classList.add("bomb");
-            } else if (templ[i][j].includes("X")) {
-                mapBlock.classList.add("explosion");
-            } else if (templ[i][j].includes("W")) {
-                mapBlock.classList.add("softWall");
-            } else if (templ[i][j].includes("E")) {
-                mapBlock.classList.add("enemy");
-            } else if (templ[i][j] === "G") {
-                mapBlock.classList.add("softWall","goal");
-            }
-            // mapBlock.innerHTML = templ[i][j] === undefined ? ' ' : templ[i][j];
-            mainMap.append(mapBlock);
+export function drawMap(templ = template) {
+  let game = document.getElementById("game");
+  let mainMap = document.getElementById("mainMap");
+  // document.querySelectorAll('.grid-container').forEach((e) => e.remove());
+  // mainMap.className = 'grid-container';
+  // mainMap.id = 'mainMap';
+  let softWalls = [];
+  for (let i = 0; i < templ.length; i++) {
+    for (let j = 0; j < templ[i].length; j++) {
+      let mapBlock = document.createElement("div");
+      mapBlock.className = "grid-item";
+      mapBlock.id = `block-${j}:${i}`;
+      if (templ[i][j] === "▉") {
+        mapBlock.classList.add("solid-wall");
+      } else if (templ[i][j] === "x") {
+        mapBlock.classList.add("starting-point", "empty-field");
+      } else if (templ[i][j] === undefined || templ[i][j] === "") {
+        let randomNum = Math.random() * 10;
+        if (randomNum < SOFTWALL_CHANCE) {
+          mapBlock.classList.add("softWall");
+          softWalls.push(mapBlock.id);
+        } else {
+          mapBlock.classList.add("empty-field");
         }
+      } else if (templ[i][j].includes("W")) {
+        mapBlock.classList.add("softWall");
+      }
+      // mapBlock.innerHTML = templ[i][j] === undefined ? ' ' : templ[i][j];
+      mainMap.append(mapBlock);
     }
-    game.append(mainMap);
-    //requestAnimationFrame(drawMap);
+  }
+  let goalIndex = Math.floor(Math.random() * softWalls.length);
+  let goalBlock = document.getElementById(softWalls[goalIndex]);
+  goalBlock.classList.add("goal");
+  game.append(mainMap);
+  //requestAnimationFrame(drawMap);
 }
