@@ -43,14 +43,17 @@ body{
 
 .info {
     height: 3em;
+    margin-left: 5%;
+    margin-right: 5%;
     width: auto;
     color: white;
     /* justify-content: center; */
+    display: flex;
 }
 
 .timer {
     text-align: center;
-    display: inline-block;
+    flex: 33.333%;
     margin-top: 2%;
     /* font-family:Arial, Helvetica, sans-serif; */
     font-weight: 600;
@@ -59,21 +62,27 @@ body{
 
 .lives {
     text-align: left;
-    margin-left: 5%;
+    /* margin-left: 10%; */
     margin-top: 2%;
+    flex: 33.333%;
+}
+
+.livesIcon {
+    background-image: url('/img/heartBM.png');
+    background-size: cover;
+    width: 17px;
+    height: 15px;
+    margin: 3px;
     display: inline-block;
-    width: 25%;
-    font-size: 20px;
-   
 }
 
 .score {
     text-align: right;
-    display: inline-block;
+    flex: 33.333%;
     margin-top: 2%;
     /* font-family:Arial, Helvetica, sans-serif; */
     font-weight: 600;
-    width: 33%;
+    width: 15%;
 }
 
 .grid-container {

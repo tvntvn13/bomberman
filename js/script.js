@@ -1,5 +1,5 @@
 import { drawMap } from "./field.js";
-import { sfx } from "./soundFx.js";
+//import { sfx } from "./soundFx.js";
 import { setStartpoint, loadingBar, score, timer, lives, gameOver, winner, createEnemies, startScreen } from "./tools.js";
 import { Enemy, Player, allEnemies } from "./classes.js";
 

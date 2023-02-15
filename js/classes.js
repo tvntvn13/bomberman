@@ -1,7 +1,7 @@
 import { player } from "./script.js";
 import { template } from "./field.js";
 import { setStartpoint } from "./tools.js";
-import { sfx } from "./soundFx.js";
+// import { sfx } from "./soundFx.js";
 
 export class MovingElement {
     constructor(x, y, type) {
@@ -338,7 +338,7 @@ export class Bomb {
                 chainedBomb.explodeNow();
             }
             bombBlock.classList.remove('bomb', 'softWall');
-            sfx.bombExplode.play();
+            // sfx.bombExplode.play();
             bombBlock.classList.add('explosion');
         }
         this.bombClearOut();

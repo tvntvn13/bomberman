@@ -1,6 +1,6 @@
 import { map } from "./maps.js";
 import { player, rafID, pause, continueGame} from "./script.js";
-import { sfx } from "./soundFx.js";
+// import { sfx } from "./soundFx.js";
 import { Enemy } from "./classes.js";
 
 
@@ -62,10 +62,18 @@ export function timer(time) {
 export function lives() {
   if (player.lives < 1) {
     gameOver();
-    pause = true;
-  } else {
+    // pause = true;
+  } else if (player.lives===3) {
     let livesDiv = document.getElementById("lives");
-    livesDiv.textContent = "♥ ".repeat(player.lives);
+    for(i = 0; i < player.lives; i++){
+      let live = document.createElement("div")
+      live.classList.add("livesIcon")
+      livesDiv.append(live)
+    }
+  } else {
+    let lastOne = document.querySelectorAll('.livesIcon')
+    console.log(lastOne)
+    lastOne[lastOne.length-1].remove()
   }
 }
 
@@ -90,7 +98,7 @@ export function loadingBar() {
 
 export function gameOver() {
   let gameOverScreen = document.getElementById("gameOverScreen");
-  sfx.timeUpFull.play();
+  // sfx.timeUpFull.play();
   gameOverScreen.style.display = "block";
   document.getElementById("wrapper").style.display = "none";
   cancelAnimationFrame(rafID);
