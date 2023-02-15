@@ -102,7 +102,6 @@ export function update(timestamp) {
         player.addScore(100);
         score(player.getScore);
         enemy.death();
-        console.log(player.getScore);
       }
     }
   }
