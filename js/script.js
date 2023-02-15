@@ -15,7 +15,7 @@ import { Enemy, Player, allEnemies } from "./classes.js";
 
 export let pause = true;
 startScreen();
-const ENEMY_NUM = 1;
+const ENEMY_NUM = 4;
 let startTime;
 let startTime2;
 let startTime3;
@@ -102,7 +102,6 @@ export function update(timestamp) {
         player.addScore(100);
         score(player.getScore);
         enemy.death();
-        console.log(player.getScore);
       }
     }
   }

@@ -152,7 +152,8 @@ body{
 
 
 .empty-field.goal {
-    background-color: cyan;
+    background-image: url('/img/goalBM.png');
+    background-size: cover;
     z-index: 1;
 }
 
@@ -358,18 +359,20 @@ body{
 }
 
 .congratulations {
-    font-size: 4em;
+    font-size: 2em;
     font-weight: 800;
     display: block;
     z-index: 1001;
-    color: rgb(255, 0, 179);
+    color :white;
     margin-top: 15%;
-    width: 80%;
+    width: inherit;
     margin-left: auto;
     margin-right: auto;
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.369);
-    text-align: center;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
 }
 
 .winP {
@@ -468,7 +471,7 @@ body{
     white-space: pre-wrap;
     color: white;
     margin-top: 7%;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 0;
     width: 60%;
     margin-left: auto;
@@ -481,6 +484,6 @@ body{
  left: 50%;
  transform: translateX(-50%);
  position: relative;
- margin-top: 7%;
+ margin-top: 5%;
  
 }
