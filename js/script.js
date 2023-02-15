@@ -1,52 +1,60 @@
 import { drawMap } from "./field.js";
-//import { sfx } from "./soundFx.js";
-import { setStartpoint, loadingBar, score, timer, lives, gameOver, winner, createEnemies, startScreen } from "./tools.js";
+// import { sfx } from "./soundFx.js";
+import {
+  setStartpoint,
+  loadingBar,
+  score,
+  timer,
+  lives,
+  gameOver,
+  winner,
+  createEnemies,
+  startScreen,
+} from "./tools.js";
 import { Enemy, Player, allEnemies } from "./classes.js";
 
 export let pause = true;
 startScreen();
-
+const ENEMY_NUM = 8;
 let startTime;
 let startTime2;
 let startTime3;
 let sp = setStartpoint();
 let keyPressed = null;
 let time = 200;
-export let rafID = requestAnimationFrame(update)
+let aliveEnemies;
+export let rafID = requestAnimationFrame(update);
 
 // comment out this part to get rid of the loading bar !!!
 // loadingBar();
 // setTimeout(() => {
-    //this part needs to stay.
-   document.getElementById("loadingScreen").remove();
+//this part needs to stay.
+document.getElementById("loadingScreen").remove();
 // },3200);
 
 // ^^^ loading bar shit above ^^^
-
-
 
 timer(time);
 drawMap();
 // sfx.stageIntro.play();
 export let player = new Player(sp[0], sp[1]);
 lives();
-let enemies = createEnemies(2);
+createEnemies(ENEMY_NUM);
+
 // let enemy2 = new Enemy(8, 5);
 // let enemy2 = new Enemy(8, 5);
 // let enemyStartPoint = document.getElementById(`block-${enemy.x}:${enemy.y}`);
 // enemyStartPoint.classList.add('enemy');
 let startPoint = document.getElementById(`block-${player.x}:${player.y}`);
-startPoint.classList.add('player');
+startPoint.classList.add("player");
 let pauseScreen = document.getElementById("pauseScreen");
-score(player.score);
+score(player.getScore);
 update();
 //requestAnimationFrame(update)
 
-
-
 document.body.addEventListener("keyup", (e) => {
   if (e.key !== " ") keyPressed = null;
-})
+});
 
 document.body.addEventListener("keydown", (e) => {
   if (keyPressed === null) {
@@ -70,29 +78,38 @@ document.body.addEventListener("keydown", (e) => {
   }
 });
 
-
 export function update(timestamp) {
   let playerPosition = document.getElementById(`block-${player.x}:${player.y}`);
-  if (!player.invincible && (playerPosition.classList.contains("enemy") || playerPosition.classList.contains("explosion"))) {
+  if (
+    !player.invincible &&
+    (playerPosition.classList.contains("enemy") ||
+      playerPosition.classList.contains("explosion"))
+  ) {
     // sfx.playerDies.play();
     player.death();
     lives(1);
   }
+  aliveEnemies = 0;
   for (let enemy of allEnemies) {
     if (enemy.alive) {
-      let enemyPosition = document.getElementById(`block-${enemy.x}:${enemy.y}`);
+      aliveEnemies++;
+      let enemyPosition = document.getElementById(
+        `block-${enemy.x}:${enemy.y}`
+      );
 
       if (enemyPosition.classList.contains("explosion")) {
-        player.score += 100;
-        score(player.score);
+        // player.score += 100;
+        player.addScore(100);
+        score(player.getScore);
         enemy.death();
+        console.log(player.getScore);
       }
     }
   }
-  if (playerPosition.classList.contains("goal")) {
+  if (playerPosition.classList.contains("goal") && aliveEnemies === 0) {
     pause = true;
-   // player.score += Math.floor((time * 100) / 60);
-    //score(player.score)
+    player.score += Math.floor((time * 100) / 60);
+    score(player.getScore);
     // sfx.stageClear.play();
     winner();
 
@@ -105,12 +122,9 @@ export function update(timestamp) {
   const elapsed = timestamp - startTime;
   if (elapsed > 500) {
     startTime = timestamp;
-    // NEED TO FIX THIS!
-    // console.log(allEnemies);
     for (let enemy of allEnemies) {
       enemy.move();
     }
-    // enemy.move();
   }
 
   if (startTime2 === undefined) {
@@ -138,9 +152,9 @@ export function update(timestamp) {
   }
 
   if (!pause) {
-    requestAnimationFrame(update)
+    requestAnimationFrame(update);
   } else {
-    return
+    return;
   }
 }
 
@@ -149,9 +163,7 @@ document.addEventListener("keypress", (e) => {
     // sfx.placeBomb.play();
     player.placeBomb();
   }
-})
-
-
+});
 
 // let continueButton = document.getElementById("continueButton");
 // let restartButton = document.getElementById("restartButton");
@@ -180,9 +192,6 @@ function restart() {
 
 // document.getElementById("restartButton").addEventListener("click",restart())
 
-
-
-
 // let continueButton = document.getElementById("continueButton");
 // continueButton.addEventListener("keypress")
 // let restartButton = document.getElementById("restartButton");
@@ -193,9 +202,7 @@ function restart() {
 //   }
 //});
 
-
-
-export function continueGame(status=0) {
+export function continueGame(status = 0) {
   if (status == 0) {
     let pauseDiv = document.getElementById("pauseScreen");
     document.body.removeChild(pauseDiv);
@@ -223,7 +230,7 @@ function togglePause() {
   restartButton.className = "pauseButton";
   restartButton.id = "restartButton";
   restartButton.innerHTML = "Restart";
-  restartButton.addEventListener("click", restart)
+  restartButton.addEventListener("click", restart);
   pauseDiv.append(restartButton);
   document.body.prepend(pauseDiv);
   // cancelAnimationFrame(rafID);
@@ -237,4 +244,3 @@ function togglePause() {
 
   // requestAnimationFrame(update);
 }
-
