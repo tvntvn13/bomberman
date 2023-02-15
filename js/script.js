@@ -29,7 +29,7 @@ export let rafID = requestAnimationFrame(update);
 // loadingBar();
 // setTimeout(() => {
 //this part needs to stay.
-document.getElementById("loadingScreen").remove();
+// document.getElementById("loadingScreen").remove();
 // },3200);
 
 // ^^^ loading bar shit above ^^^
