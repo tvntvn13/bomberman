@@ -410,7 +410,7 @@ body{
 }
 .startTitle2 {
    margin-top: 7%;
-    color: white;
+   color: white;
    text-align: center;
    cursor: default;
    font-size: 60px;
@@ -446,4 +446,42 @@ body{
     color: green;
     border: 3px solid green;
     outline: none;
+}
+
+.helpWrap {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    position: absolute;
+    z-index: 1004;
+    background-color: rgba(0, 0, 0, 1);
+}
+
+.helpScreen {
+    z-index: 1005;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background-color: black;
+}
+
+#helpText {
+    white-space: pre-wrap;
+    color: white;
+    margin-top: 7%;
+    font-size: 1rem;
+    font-weight: 0;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+    line-height: 23px;
+}
+
+#backButton {
+ left: 50%;
+ transform: translateX(-50%);
+ position: relative;
+ margin-top: 7%;
+ 
 }
