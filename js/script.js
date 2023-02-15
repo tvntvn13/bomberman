@@ -89,7 +89,7 @@ export function update(timestamp) {
       }
     }
   }
-  if (playerPosition.classList.contains("goal")&&enemies.length==0) {
+  if (playerPosition.classList.contains("goal")) {
     pause = true;
     player.score += Math.floor((time * 100) / 60);
     score(player.score)
