@@ -45,11 +45,14 @@ body{
     position: relative;
     width: 100vw;
     display: grid;
+    background-color: black;
 
 }
 
 #game {
     background-color: green;
+    padding-left: 20px;
+    padding-right: 20px;
     /* position: rela; */
     /* top: 15%; */
     /* left: 15%; */
