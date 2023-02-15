@@ -46,6 +46,7 @@ export function createEnemies(num) {
   for (let i = 0; i < num; i++) {
     enemies[i] = new Enemy(startingPoints[i][0],startingPoints[i][1])
   }
+  return enemies
 }
 
 export function score(amount) {

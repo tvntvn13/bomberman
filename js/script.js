@@ -30,7 +30,7 @@ drawMap();
 // sfx.stageIntro.play();
 export let player = new Player(sp[0], sp[1]);
 lives();
-createEnemies(8);
+let enemies = createEnemies(2);
 // let enemy2 = new Enemy(8, 5);
 // let enemy2 = new Enemy(8, 5);
 // let enemyStartPoint = document.getElementById(`block-${enemy.x}:${enemy.y}`);
@@ -89,7 +89,7 @@ export function update(timestamp) {
       }
     }
   }
-  if (playerPosition.classList.contains("goal")) {
+  if (playerPosition.classList.contains("goal")&&enemies.length==0) {
     pause = true;
     player.score += Math.floor((time * 100) / 60);
     score(player.score)
