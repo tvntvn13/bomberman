@@ -15,7 +15,7 @@ import { Enemy, Player, allEnemies } from "./classes.js";
 
 export let pause = true;
 startScreen();
-const ENEMY_NUM = 8;
+const ENEMY_NUM = 1;
 let startTime;
 let startTime2;
 let startTime3;
@@ -105,13 +105,14 @@ export function update(timestamp) {
       }
     }
   }
-  if (playerPosition.classList.contains("goal") && aliveEnemies === 0) {
+  
+  if (playerPosition.classList.contains("goal") && aliveEnemies === 0 ) {
     pause = true;
     player.score += Math.floor((time * 100) / 60);
     score(player.getScore);
     // sfx.stageClear.play();
+    playerPosition.classList.add("winner")
     winner();
-
     return;
   }
 

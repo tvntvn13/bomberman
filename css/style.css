@@ -4,6 +4,10 @@
 
 body{
     background: black;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 .loadingScreen {
@@ -38,16 +42,36 @@ body{
 }
 
 .wrapper {
-    position: absolute;
+    position: relative;
+    width: 100vw;
+    display: grid;
+    background-color: black;
+
+}
+
+#game {
+    background-color: green;
+    padding-left: 20px;
+    padding-right: 20px;
+    /* position: rela; */
+    /* top: 15%; */
+    /* left: 15%; */
+    /* margin-top: -15%;
+    margin-left: -15%; */
+    margin-left: auto;
+    margin-right: auto;
+    /* width: 80vw;
+    height: 80vh; */
+    z-index: 1;
 }
 
 .info {
     height: 3em;
-    margin-left: 5%;
-    margin-right: 5%;
-    width: auto;
+    width: inherit;
     color: white;
     display: flex;
+    /* column-gap: 20px; */
+    
 }
 
 .timer {
@@ -142,9 +166,14 @@ body{
     background-position: 0px 90px ;
     background-position-x: 4px;
     z-index: 5;
- 
+ }
 
-}
+ .player.winner {
+    background-image: url('/img/victoryBM.png');
+    background-position: 2px -3px;
+    /* background-size: contain; */
+    background-position-x: center;
+ }
 
 @keyframes moveUp {
     0%{ background-position: 0px 1px;
@@ -244,61 +273,14 @@ body{
     to{background-position: 173px,0px;}
 }
 
-/* .enemy.moveRight {
-    animation-name: moveRight;
-    animation-duration: 100ms;
-    animation-timing-function: ease-out;
-}
-
-.enemy.moveLeft {
-    animation-name: moveLeft;
-    animation-duration: 100ms;
-    animation-timing-function: ease-out;
-}
-
-.enemy.moveUp {
-    animation-name: moveUp;
-    animation-duration: 100ms;
-    animation-timing-function: ease-out;
-}
-
-.enemy.moveDown{
-    animation-name: moveDown;
-    animation-duration: 100ms;
-    animation-timing-function: ease-out;
-} */
-
-/* @keyframes moveRight {
-    from{transform: translateX(-50%); opacity: 100%;}
-    to{transform: translateX(50%); opacity: 100%;}
-}
-
-@keyframes moveLeft {
-    from{transform: translateX(50%); opacity: 100%;}
-    to{transform: translateX(-50%); opacity: 100%;}
-}
-
-@keyframes moveUp {
-    from{transform: translateY(50%); opacity: 100%;}
-    to{transform: translateY(-50%); opacity: 100%;}
-}
-
-@keyframes moveDown {
-    from{transform: translateY(-50%); opacity: 100%;}
-    to{transform: translateY(50%); opacity: 100%;}
-} */
-
 .bomb {
-    /* color: transparent; */
-    /* overflow: hidden;
-    background-color: black;
-    border-radius: 50%; */
     background-image: url("/img/bombBM.png");
     animation-name: bombTimer;
     background-size: cover;
     background-position: initial;
     animation-duration: 3s;
     animation-timing-function: ease-in-out;
+    z-index: 4;
 }
 
 @keyframes bombTimer {
@@ -309,21 +291,6 @@ body{
     100%{transform: scale(100%);}
 }
 
-.wrapper {
-    position: relative;
-}
-
-#game {
-    background-color: green;
-    position: relative;
-    top: 15%;
-    left: 15%;
-    /* margin-top: -15%;
-    margin-left: -15%; */
-    width: 70%;
-    height: 70%;
-    z-index: 1;
-}
 
 .explosion {
     /* background-color: rgb(255, 0, 0);
@@ -473,4 +440,10 @@ body{
 .startButton:hover {
     color: green;
     border: 3px solid green;
+}
+
+.startButton:focus {
+    color: green;
+    border: 3px solid green;
+    outline: none;
 }
