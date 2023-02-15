@@ -107,7 +107,7 @@ body{
     border: 4px solid rgb(108, 32, 32);
     color: brown;
     z-index: 100; */
-    background-image: url('/img/softWallBM.png');
+    background-image: url('/img/softWallBM3.png');
     background-size: cover;
     background-color: brown;
     background-blend-mode: multiply;

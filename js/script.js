@@ -15,11 +15,11 @@ let time = 200;
 export let rafID = requestAnimationFrame(update)
 
 // comment out this part to get rid of the loading bar !!!
-loadingBar();
-setTimeout(() => {
+// loadingBar();
+// setTimeout(() => {
     //this part needs to stay.
    document.getElementById("loadingScreen").remove();
-},3200);
+// },3200);
 
 // ^^^ loading bar shit above ^^^
 
@@ -91,8 +91,8 @@ export function update(timestamp) {
   }
   if (playerPosition.classList.contains("goal")) {
     pause = true;
-    player.score += Math.floor((time * 100) / 60);
-    score(player.score)
+   // player.score += Math.floor((time * 100) / 60);
+    //score(player.score)
     // sfx.stageClear.play();
     winner();
 

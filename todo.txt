@@ -7,3 +7,15 @@ TODO list for the Bomberman project:
 - function to load all assets/resources
 - start, pause and game over screens
 - set up css classes for grid elements
+
+------UPDATED 15.2.2023-------
+- fix sizing issues for ALL the elements
+- redesign start screen
+- change lives symbol from heart to pixel art heart
+- change goal to have a background image
+- fix player animation effecting the walls
+- fix player disappearing under bomb
+- fix pause screen
+- fix enemies spawning to player startzone
+- (maybe highscores list?)
+-  
