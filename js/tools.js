@@ -132,7 +132,7 @@ export function winner() {
   win.textContent = "you cleared the level!";
   win.classList.add("winP");
   congrats.classList.add("congratulations");
-  congrats.textContent = "CONGRATULATIONS!!!";
+  congrats.textContent = "CONGRATULATIONS";
   congrats.append(win);
   document.getElementById("info").append(congrats);
   cancelAnimationFrame(rafID);
@@ -177,18 +177,20 @@ function removeStart(){
   //requestAnimationFrame(update)
 }
 
-let infoText = `You are the BOMB MAN.
+let infoText = `You are the BOMBMAN.
 
 Your objective is to demolish all enemies and locate the exit.
-To exterminate the enemies you must use your bombs.
-To find the exit you must use your bombs.
-You have unlimited supply of bombs - but you can only place three bombs at the same time.
 
-MOVE:       arrowkeys
-BOMB:       space
-PAUSE:      escape
+To exterminate the enemies, you must use your bombs.
+To find the exit, you must use your bombs.
+You have unlimited supply of bombs, but you can only place three bombs at the time.
+
+MOVE:   arrow keys
+BOMB:   space
+PAUSE:  escape
 
 These are the basics. Now you are ready to bomb.
+
 Good luck!`
 
 function help(){
