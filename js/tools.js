@@ -99,9 +99,22 @@ export function lives() {
 
 let i = 0;
 export function loadingBar() {
+  let loadingScreen = document.createElement('div')
+  let loadingBar = document.createElement('div')
+  let loadingBarFill = document.createElement('div')
+  loadingScreen.classList.add('loadingScreen')
+  loadingScreen.id='loadingScreen'
+  loadingBar.classList.add('loadingBar')
+  loadingBar.id='loadingBar'
+  loadingBarFill.classList.add('loadingBarFill')
+  loadingBarFill.id='loadingBarFill'
+  loadingBarFill.textContent='LOADING...'
+  loadingBar.append(loadingBarFill)
+  loadingScreen.append(loadingBar)
+  document.body.prepend(loadingScreen)
   if (i == 0) {
     i = 1;
-    let elem = document.getElementById("loadingBarFill");
+    let elem = loadingBarFill
     let width = 1;
     let id = setInterval(frame, 30);
     function frame() {
@@ -114,6 +127,7 @@ export function loadingBar() {
       }
     }
   }
+  document.body.prepend(loadingScreen)
 }
 
 export function gameOver() {
@@ -178,7 +192,7 @@ function removeStart(){
   //requestAnimationFrame(update)
 }
 
-let infoText = `You are the BOMB MAN.
+let infoText = `You are the BOMBMAN.
 
 Your objective is to demolish all enemies and locate the exit.
 To exterminate the enemies you must use your bombs.
