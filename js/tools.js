@@ -1,6 +1,6 @@
 import { map } from "./maps.js";
 import { player, rafID, pause, continueGame} from "./script.js";
-import { sfx } from "./soundFx.js";
+// import { sfx } from "./soundFx.js";
 import { Enemy } from "./classes.js";
 
 
@@ -112,7 +112,7 @@ export function loadingBar() {
 
 export function gameOver() {
   let gameOverScreen = document.getElementById("gameOverScreen");
-  sfx.timeUpFull.play();
+  // sfx.timeUpFull.play();
   gameOverScreen.style.display = "block";
   document.getElementById("wrapper").style.display = "none";
   cancelAnimationFrame(rafID);
