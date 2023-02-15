@@ -68,7 +68,7 @@ export function createEnemies(num) {
   for (let elem of sampled) {
     let enemy = new Enemy(elem[0], elem[1]);
   }
-  return enemies
+  // return enemies
 }
 
 export function score(amount) {
