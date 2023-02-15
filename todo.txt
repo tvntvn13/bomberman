@@ -11,7 +11,7 @@ TODO list for the Bomberman project:
 ------UPDATED 15.2.2023-------
 - fix sizing issues for ALL the elements
 - redesign start screen
-- change lives symbol from heart to pixel art heart
+XX change lives symbol from heart to pixel art heart
 - change goal to have a background image
 - fix player animation effecting the walls
 - fix player disappearing under bomb

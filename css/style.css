@@ -47,7 +47,6 @@ body{
     margin-right: 5%;
     width: auto;
     color: white;
-    /* justify-content: center; */
     display: flex;
 }
 
@@ -55,7 +54,6 @@ body{
     text-align: center;
     flex: 33.333%;
     margin-top: 2%;
-    /* font-family:Arial, Helvetica, sans-serif; */
     font-weight: 600;
     width: 33%;
 }
@@ -80,7 +78,6 @@ body{
     text-align: right;
     flex: 33.333%;
     margin-top: 2%;
-    /* font-family:Arial, Helvetica, sans-serif; */
     font-weight: 600;
     width: 15%;
 }
@@ -108,6 +105,7 @@ body{
     border: 2px solid white; */
     background-image: url('/img/solidWallBM.png');
     background-size: cover;
+    z-index: 10;
     
 } 
 
@@ -120,6 +118,7 @@ body{
     background-size: cover;
     background-color: brown;
     background-blend-mode: multiply;
+    z-index: 10;
 
     
 }
@@ -142,6 +141,7 @@ body{
     background-image: url('/img/bombBasic2.png');
     background-position: 0px 90px ;
     background-position-x: 4px;
+    z-index: 5;
  
 
 }
@@ -149,36 +149,36 @@ body{
 @keyframes moveUp {
     0%{ background-position: 0px 1px;
         background-position-x: center;
-        transform: translateY(50%);
+        transform: translateY(25%);
     }
     50% {background-position: 87px 0; background-position-x: center;}
     100%{ background-position: 122px 1px;
         background-position-x: center;
-        transform: translateY(-50%);
+        transform: translateY(-25%);
     }
 }
 
 @keyframes moveRight {
     0%{ background-position: 0px 141px;
         background-position-x: center;
-        transform: translateX(-50%);
+        transform: translateX(-25%);
     }
     50% {background-position: 87px 141px; background-position-x: center;}
     100%{ background-position: 125px 141px;
         background-position-x: center;
-        transform: translateX(50%);
+        transform: translateX(25%);
     }
 }
 
 @keyframes moveDown {
     0%{ background-position: 0px 93px;
         background-position-x: center;
-        transform: translateY(-50%);
+        transform: translateY(-25%);
     }
     50%{background-position: 87px 93px; background-position-x: center;}
     100%{ background-position: 122px 93px;
         background-position-x: center;
-        transform: translateY(50%);
+        transform: translateY(25%);
     }
 }
 
@@ -186,13 +186,13 @@ body{
     0%{ background-position: 0px 46px; 
         background-position-x: center;
         background-position-y: 43px;
-        transform: translateX(50%);
+        transform: translateX(25%);
     }
     50%{background-position: 87px 43px; background-position-x: center;}
     100%{ background-position: 125px 46px;
         background-position-x: center;
         background-position-y: 43px;
-        transform: translateX(-50%);
+        transform: translateX(-25%);
     }
 }
 
@@ -382,12 +382,10 @@ body{
     text-align: center;
     display: none;
     color: white;
-    /* font-family: Arial, Helvetica, sans-serif; */
 }
 
 .gameOverScreenH1 {
     padding-top: 15%;
-    /* font-family: Arial, Helvetica, sans-serif; */
     font-size: 60px;
     font-weight: 800;
     color: green;
@@ -404,7 +402,6 @@ body{
     margin-left: auto;
     margin-right: auto;
     position: fixed;
-    /* font-family: Arial, Helvetica, sans-serif; */
     background-color: rgba(0, 0, 0, 0.369);
     text-align: center;
 }
@@ -417,75 +414,63 @@ body{
 }
 
 .startWrap {
-    background-image: url("/img/posterBM.jpeg");
-    image-resolution: 10dpi;
-    image-rendering: pixelated;
-    background-position: center;
     width: 100vw;
     height: 100vh;
     display: block;
     position: absolute;
-    z-index: 900;
-    background-repeat: no-repeat;
-    background-color: rgba(0, 0, 0, 0.7);
-    background-blend-mode: multiply;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 1);
 }
 .startScreen {
     position: relative;
-    width: 65%;
-    height: 65%;
-    background-image: url("/img/coverBM2.png");
-    image-rendering: pixelated;
-    background-size: cover;
-    filter:saturate(150%);
-    left: 50%;
-    top: 10%;
-    transform: translateX(-50%);
-    border-radius: 50%;
-    box-shadow: 0 0 5px 9px rgba(208, 3, 3, 0.754);
-
-    
-    display: block;
-    /* font-family: Arial, Helvetica, sans-serif; */
+    display: inline-flex;
+    flex-direction: column;
     z-index: 1000;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .startTitle {
     margin-top: 20px;
-    /* font-family: Arial, Helvetica, sans-serif; */
     text-align: center;
+    justify-content: center;
     color: white;
     font-size: 50px;
     font-weight: 900;
-    position: fixed;
+    position: relative;
+    margin-bottom: 0;
 }
 .startTitle2 {
-   color: black; 
+   margin-top: 7%;
+    color: white;
    text-align: center;
+   cursor: default;
    font-size: 60px;
    font-weight: 900;
    position: relative;
-   
+   text-shadow: -4px 3px 1px black, -8px 5px 0px white;
+   /* text-shadow: 2px 2px 1px white;  */
 }
 
 
 .startButton {
-    position: unset;
-    width: 30%;
-    height: 15%;
-    margin-left: 35%;
-    margin-top: 60%;
+    display: block;
+    height: auto;
+    text-align: center;
+    margin: 7px;
+    padding: 20px;
+    left: 50%;
     background-color: black;
-    border: 3px solid rgb(255, 0, 0);
+    border: 3px solid white;
     border-radius: 20px;
     font-size: 20px;
     font-weight: 900;
-    color: rgb(255, 0, 0)
+    color: rgb(255, 255, 255);
+    cursor: pointer;
 }
 
 .startButton:hover {
-    transform: scale(120%);
-    /* transform: translateX(-50%); */
-    box-shadow: 0 0 2px 2px rgb(70, 0, 50);
+    color: green;
+    border: 3px solid green;
 }
-

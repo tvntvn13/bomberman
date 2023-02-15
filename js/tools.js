@@ -127,18 +127,22 @@ export function winner() {
 export function startScreen(){
   let startWrap = document.getElementById('startWrap')
   let startDiv = document.createElement('div')
-  let title = document.createElement('h1');
+  // let title = document.createElement('h1');
   let title2 = document.createElement('h1')
   let startButton = document.createElement('button')
-  title.classList.add("startTitle");
+  let infoButton = document.createElement('button')
+  // title.classList.add("startTitle");
   title2.classList.add("startTitle2")
-  title.textContent="BOMBMAN JS"
+  infoButton.classList.add("startButton")
+  infoButton.id="infoButton";
+  // title.textContent="BOMBMAN JS"
   title2.textContent="BOMBMAN JS"
   startButton.textContent="NEW GAME"
+  infoButton.textContent="HELP"
   startButton.classList.add('startButton')
   startDiv.classList.add('startScreen')
-  startDiv.append(startButton)
-  startWrap.append(title,title2,startDiv)
+  startDiv.append(startButton,infoButton)
+  startWrap.append(title2,startDiv)
   startButton.addEventListener('click', removeStart);   
 }
 

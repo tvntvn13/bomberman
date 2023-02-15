@@ -76,7 +76,7 @@ export function update(timestamp) {
   if (!player.invincible && (playerPosition.classList.contains("enemy") || playerPosition.classList.contains("explosion"))) {
     // sfx.playerDies.play();
     player.death();
-    lives();
+    lives(1);
   }
   for (let enemy of allEnemies) {
     if (enemy.alive) {
