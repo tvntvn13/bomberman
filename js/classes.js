@@ -228,12 +228,15 @@ export class Player extends MovingElement {
     this.y = respawn[1];
     document
       .getElementById(`block-${this.x}:${this.y}`)
-      .classList.add("player");
+      .classList.add("player", "invincible");
     // this.lives--;
     // this.invincible = true;
     setTimeout(() => {
       this.invincible = false;
-    }, 2000);
+      document
+      .getElementById(`block-${this.x}:${this.y}`)
+      .classList.remove("invincible");
+    }, 3000);
   }
 }
 
