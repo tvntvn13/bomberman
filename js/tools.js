@@ -203,7 +203,7 @@ MOVE:   arrow keys
 BOMB:   space
 PAUSE:  escape
 
-These are the basics. Now you are ready to bomb.
+Now you are ready to bomb.
 
 Good luck!`
 

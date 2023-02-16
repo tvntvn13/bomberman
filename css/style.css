@@ -225,22 +225,36 @@ body{
     }
 }
 
+.player.moveDown {
+    display: hidden;
+    animation: playerDeath 600ms steps(1);
+}
+
+@keyframes playerDeath {
+    0%{background-position: 176px -3px; background-image: url('/img/playerDeadBM.png');}
+    25%{background-position: 127px 0px; background-image: url('/img/playerDeadBM.png');} 
+    50%{background-position: 85px 0px; background-image: url('/img/playerDeadBM.png');}
+    75%{background-position: 43px 0px; background-image: url('/img/playerDeadBM.png');}
+    100%{background: transparent;}
+
+}
+
 .player.moveRight {
-    animation: moveRight 200ms steps(3);
+    animation: moveRight 200ms steps(6);
     /* animation-name: moveRight;
     animation-duration: 100ms;
     animation-timing-function: ease-out; */
 }
 
 .player.moveLeft {
-    animation: moveLeft 200ms steps(3);
+    animation: moveLeft 200ms steps(6);
     /* animation-name: moveLeft;
     animation-duration: 100ms;
     animation-timing-function: ease-out; */
 }
 
 .player.moveUp {
-    animation: moveUp 200ms steps(3);
+    animation: moveUp 200ms steps(6);
     /* animation-name: moveUp;
     animation-duration: 500ms;
     animation-timing-function: steps(3); */
@@ -249,12 +263,9 @@ body{
     animation-timing-function: ease-out; */
 }
 
-.player.moveDown{
+/* .player.moveDown{
     animation: moveDown 200ms steps(3);
-    /* animation-name: moveDown;
-    animation-duration: 100ms;
-    animation-timing-function: ease-out; */
-} 
+}  */
 
 .enemy {
     /* color: transparent;

@@ -87,7 +87,9 @@ export function update(timestamp) {
   ) {
     // sfx.playerDies.play();
     player.death();
+    playerPosition.classList.add('dead')
     lives(1);
+    playerPosition.classList.remove('dead')
   }
   aliveEnemies = 0;
   for (let enemy of allEnemies) {
