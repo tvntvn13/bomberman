@@ -202,7 +202,7 @@ function restart() {
 //   }
 //});
 
-export function continueGame(status = 0) {
+export function continueGame() {
   if (status == 0) {
     let pauseDiv = document.getElementById("pauseScreen");
     document.body.removeChild(pauseDiv);
@@ -211,7 +211,10 @@ export function continueGame(status = 0) {
   requestAnimationFrame(update);
 }
 
+let status = 1;
+
 function togglePause() {
+  status = 1;
   let pauseDiv = document.createElement("div");
   pauseDiv.className = "pauseScreen";
   pauseDiv.id = "pauseScreen";
@@ -223,7 +226,10 @@ function togglePause() {
   continueButton.className = "pauseButton";
   continueButton.id = "continueButton";
   continueButton.innerHTML = "Continue";
-  continueButton.addEventListener("click", continueGame);
+  continueButton.addEventListener("click", () => {
+    status = 0;
+    continueGame();
+  });
   pauseDiv.style.display = "block";
   pauseDiv.append(continueButton);
   let restartButton = document.createElement("button");
