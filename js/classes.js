@@ -342,7 +342,7 @@ export class Enemy extends MovingElement {
   }
 }
 
-let bombsPlaced = {};
+export let bombsPlaced = {};
 
 export class Bomb {
   constructor(x, y) {

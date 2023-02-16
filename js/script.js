@@ -13,15 +13,32 @@ import {
 } from "./tools.js";
 import { Enemy, Player, allEnemies } from "./classes.js";
 
+export let currentLevel = 1;
+export function incrementLevel() {
+  currentLevel++;
+}
 export let pause = true;
+
+export function pauseShift() {
+  if (pause) {
+    pause = false;
+  } else {
+    pause = true;
+  }
+}
 startScreen();
-const ENEMY_NUM = 6;
+export const ENEMY_NUM = 4;
 let startTime;
 let startTime2;
 let startTime3;
 let sp = setStartpoint();
 let keyPressed = null;
-let time = 200;
+export let time = 200;
+
+export function resetTime() {
+  time = 200;
+}
+
 let aliveEnemies;
 export let rafID = requestAnimationFrame(update);
 
