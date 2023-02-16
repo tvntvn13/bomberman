@@ -155,6 +155,7 @@ export class MovingElement {
 export class Player extends MovingElement {
   constructor(x, y) {
     super(x, y);
+    this.alive = true;
     this.bombs = 0;
     this.lives = 3;
     this.type = "player";
@@ -164,19 +165,27 @@ export class Player extends MovingElement {
     startPoint.classList.add(this.type);
   }
   moveUp() {
-    super.moveUp();
+    if (this.alive) {
+      super.moveUp();
+    }
   }
   moveDown() {
-    super.moveDown();
+    if (this.alive) {
+      super.moveDown();
+    }
   }
   moveLeft() {
-    super.moveLeft();
+    if (this.alive) {
+      super.moveLeft();
+    }
   }
   moveRight() {
-    super.moveRight();
+    if (this.alive) {
+      super.moveRight();
+    }
   }
   placeBomb() {
-    if (this.bombs < 3) {
+    if (this.bombs < 3 && this.alive) {
       let x = this.x;
       let y = this.y;
       let currentSpot = document.getElementById(`block-${x}:${y}`);
@@ -195,6 +204,7 @@ export class Player extends MovingElement {
     this.score += num;
   }
   death() {
+    this.alive = false;
     let spot = document.getElementById(`block-${this.x}:${this.y}`);
     spot.classList.remove(
       "moveRight",
@@ -207,20 +217,8 @@ export class Player extends MovingElement {
     this.lives--;
     console.log(this.lives);
     setTimeout(() => {
-        this.respawn();
+      this.respawn();
     }, 700);
-    // let respawn = setStartpoint();
-    // this.x = respawn[0];
-    // this.y = respawn[1];
-    // document
-    //   .getElementById(`block-${this.x}:${this.y}`)
-    //   .classList.add("player");
-    // this.lives--;
-    // this.invincible = true;
-    // setTimeout(() => {
-    //   this.invincible = false;
-    // }, 2000);
-    // console.log("you died!");
   }
   respawn() {
     let respawn = setStartpoint();
@@ -229,13 +227,12 @@ export class Player extends MovingElement {
     document
       .getElementById(`block-${this.x}:${this.y}`)
       .classList.add("player", "invincible");
-    // this.lives--;
-    // this.invincible = true;
+    this.alive = true;
     setTimeout(() => {
       this.invincible = false;
       document
-      .getElementById(`block-${this.x}:${this.y}`)
-      .classList.remove("invincible");
+        .getElementById(`block-${this.x}:${this.y}`)
+        .classList.remove("invincible");
     }, 3000);
   }
 }
@@ -354,7 +351,6 @@ export class Bomb {
     this.isTicking = true;
     let bombBlock = document.getElementById(`block-${x}:${y}`);
     bombBlock.classList.add("bomb");
-    this.range = this.explosionPrep();
     this.timerId = this.explodeOnTimer(this.range);
     bombsPlaced[`${x}:${y}`] = this;
   }
@@ -417,6 +413,7 @@ export class Bomb {
     return explFields;
   }
   explodeNow() {
+    this.range = this.explosionPrep();
     for (let [index, elem] of this.range.entries()) {
       let bombBlock = document.getElementById(`block-${elem[1]}:${elem[0]}`);
       if (index !== 0 && bombBlock.classList.contains("bomb")) {
