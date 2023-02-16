@@ -235,6 +235,9 @@ export class Player extends MovingElement {
         .classList.remove("invincible");
     }, 3000);
   }
+  clearAllBombs() {
+    bombsPlaced = {};
+  }
 }
 
 export let allEnemies = [];

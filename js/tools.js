@@ -141,6 +141,14 @@ export function gameOver() {
   });
 }
 
+
+function reloadEvent(e) {
+  if (e.key === "Enter") {
+    // congrats.style.display = "none";
+    document.getElementById("info").querySelector(".congratulations").remove();
+    nextLevel();
+  }
+}
 export function winner() {
   let congrats = document.createElement("h1");
   let win = document.createElement("p");
@@ -151,19 +159,11 @@ export function winner() {
   congrats.append(win);
   document.getElementById("info").append(congrats);
   cancelAnimationFrame(rafID);
-  document.body.addEventListener("keydown", (e) => {
-    if (e.key === " " || e.key === "Enter") {
-      congrats.style.display = "none";
-      nextLevel();
-      // drawMap();
-      // timer(time);
-      // createEnemies(ENEMY_NUM + currentLevel - 1);
-      // player.respawn();
-    }
-  });
+  document.body.addEventListener("keydown", reloadEvent);
 }
 
 export function nextLevel() {
+  document.body.removeEventListener("keydown", reloadEvent);
   let mainMap = document.getElementById("mainMap");
   mainMap.replaceChildren();
   while (allEnemies.length > 0) {
@@ -174,6 +174,7 @@ export function nextLevel() {
   timer(time);
   incrementLevel();
   createEnemies(ENEMY_NUM + currentLevel - 1);
+  console.log(bombsPlaced);
   player.respawn();
   pauseShift();
   update();
