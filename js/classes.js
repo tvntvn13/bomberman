@@ -203,18 +203,37 @@ export class Player extends MovingElement {
       "moveDown",
       "player"
     );
+    this.invincible = true;
+    this.lives--;
+    console.log(this.lives);
+    setTimeout(() => {
+        this.respawn();
+    }, 700);
+    // let respawn = setStartpoint();
+    // this.x = respawn[0];
+    // this.y = respawn[1];
+    // document
+    //   .getElementById(`block-${this.x}:${this.y}`)
+    //   .classList.add("player");
+    // this.lives--;
+    // this.invincible = true;
+    // setTimeout(() => {
+    //   this.invincible = false;
+    // }, 2000);
+    // console.log("you died!");
+  }
+  respawn() {
     let respawn = setStartpoint();
     this.x = respawn[0];
     this.y = respawn[1];
     document
       .getElementById(`block-${this.x}:${this.y}`)
       .classList.add("player");
-    this.lives--;
-    this.invincible = true;
+    // this.lives--;
+    // this.invincible = true;
     setTimeout(() => {
       this.invincible = false;
     }, 2000);
-    // console.log("you died!");
   }
 }
 
