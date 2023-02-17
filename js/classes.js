@@ -160,6 +160,7 @@ export class Player extends MovingElement {
     this.lives = 3;
     this.type = "player";
     this.score = 0;
+    this.level = 1
     this.invincible = false;
     let startPoint = document.getElementById(`block-${x}:${y}`);
     startPoint.classList.add(this.type);

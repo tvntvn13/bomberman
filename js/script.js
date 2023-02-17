@@ -10,6 +10,7 @@ import {
   winner,
   createEnemies,
   startScreen,
+  levelDisplay
 } from "./tools.js";
 import { Enemy, Player, allEnemies } from "./classes.js";
 
@@ -56,6 +57,7 @@ drawMap();
 // sfx.stageIntro.play();
 export let player = new Player(sp[0], sp[1]);
 lives();
+levelDisplay()
 createEnemies(ENEMY_NUM);
 
 // let enemy2 = new Enemy(8, 5);
@@ -89,14 +91,16 @@ document.body.addEventListener("keydown", (e) => {
         keyPressed = "down";
         break;
       case "Escape":
+        if(!pause)
         togglePause();
         break;
     }
   }
 });
 
+
 export function update(timestamp) {
-  let playerPosition = document.getElementById(`block-${player.x}:${player.y}`);
+  let playerPosition = document.getElementById(`block-${player.x}:${player.y}`);  
   if (
     !player.invincible &&
     (playerPosition.classList.contains("enemy") ||
@@ -127,8 +131,8 @@ export function update(timestamp) {
   
   if (playerPosition.classList.contains("goal") && aliveEnemies === 0 ) {
     pause = true;
-    player.score += Math.floor((time * 100) / 60);
-    score(player.getScore);
+    // player.score += Math.floor((time * 100) / 60);
+    // score(player.getScore);
     // sfx.stageClear.play();
     playerPosition.classList.add("winner")
     winner();
@@ -163,9 +167,10 @@ export function update(timestamp) {
   if (timestamp - startTime3 > 1100) {
     startTime3 = timestamp;
     if (time === 0) {
-      pause = true;
+      
       // sfx.timeUpFull.play();
       gameOver();
+      pause=true
     }
     timer(time--);
   }
@@ -184,42 +189,9 @@ document.addEventListener("keypress", (e) => {
   }
 });
 
-// let continueButton = document.getElementById("continueButton");
-// let restartButton = document.getElementById("restartButton");
-// continueButton.focus();
-// continueButton.addEventListener("keypress", (e) => {
-//   if (e.key === "ArrowRight") {
-//     document.getElementById("restartButton").focus();
-//   }
-//   if (e.key === "Enter" || e.key === " ") {
-//     continueButton.click();
-//   }
-// });
-
-// restartButton.addEventListener("keypress", (e) => {
-//   if (e.key === "ArrowLeft") {
-//     continueButton.focus();
-//   }
-//   if (e.key === "Enter" || e.key === " ") {
-//     restart();
-//   }
-// });
-
 function restart() {
   window.location.reload();
 }
-
-// document.getElementById("restartButton").addEventListener("click",restart())
-
-// let continueButton = document.getElementById("continueButton");
-// continueButton.addEventListener("keypress")
-// let restartButton = document.getElementById("restartButton");
-// restartButton.addEventListener("keypress",(e)=>{
-//   if (e.key === "Enter" || e.key === " ") {
-//     e.preventDefault();
-//     window.location.reload();
-//   }
-//});
 
 export function continueGame() {
   if (status == 0) {

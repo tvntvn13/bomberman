@@ -191,6 +191,7 @@ export function nextLevel() {
   console.log(bombsPlaced);
   player.respawn();
   pauseShift();
+  levelDisplay();
   update();
 }
 
@@ -268,4 +269,12 @@ function help() {
 function goBack() {
   document.getElementById("helpWrap").remove();
   startScreen();
+}
+
+export function levelDisplay(level=currentLevel){
+  let levelDiv = document.createElement('div')
+  levelDiv.classList.add('level')
+  levelDiv.id = 'level'
+  levelDiv.textContent = `LEVEL ${currentLevel}`
+  document.getElementById('mainMap').append(levelDiv)
 }

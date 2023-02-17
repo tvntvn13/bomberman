@@ -159,14 +159,26 @@ body {
   background-image: url("/img/bombBasic2.png");
   background-position: 0px 90px;
   background-position-x: 4px;
-  z-index: 5;
+  
+}
+
+.player.bomb {
+    background-image: url("/img/bombBasic2.png"), url("/img/bombBM.png"); ;
+    background-position: 2px 90px, -2px 0;
+    background-size: auto, cover; 
 }
 
 .player.winner {
   background-image: url("/img/victoryBM.png");
   background-position: 2px -3px;
-  /* background-size: contain; */
   background-position-x: center;
+}
+
+.player.invincible.player.moveRight,
+.player.invincible.player.moveLeft,
+.player.invincible.player.moveDown,
+.player.invincible.player.moveUp {
+    animation: blinker 0.9s linear infinite;
 }
 
 .player.invincible {
@@ -250,7 +262,7 @@ body {
 }
 
 .player.moveDown {
-    display: hidden;
+    /* display: hidden; */
     animation: playerDeath 600ms steps(1);
 }
 
@@ -534,4 +546,13 @@ body {
   transform: translateX(-50%);
   position: relative;
   margin-top: 5%;
+}
+
+.level {
+    position: absolute;
+    color: white;
+    display: block;
+    top: 90%;
+    left: 50%;
+    transform: translateX(-50%);
 }
