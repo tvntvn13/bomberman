@@ -13,15 +13,32 @@ import {
 } from "./tools.js";
 import { Enemy, Player, allEnemies } from "./classes.js";
 
+export let currentLevel = 1;
+export function incrementLevel() {
+  currentLevel++;
+}
 export let pause = true;
+
+export function pauseShift() {
+  if (pause) {
+    pause = false;
+  } else {
+    pause = true;
+  }
+}
 startScreen();
-const ENEMY_NUM = 4;
+export const ENEMY_NUM = 4;
 let startTime;
 let startTime2;
 let startTime3;
 let sp = setStartpoint();
 let keyPressed = null;
-let time = 200;
+export let time = 200;
+
+export function resetTime() {
+  time = 200;
+}
+
 let aliveEnemies;
 export let rafID = requestAnimationFrame(update);
 
@@ -204,7 +221,7 @@ function restart() {
 //   }
 //});
 
-export function continueGame(status = 0) {
+export function continueGame() {
   if (status == 0) {
     let pauseDiv = document.getElementById("pauseScreen");
     document.body.removeChild(pauseDiv);
@@ -213,7 +230,10 @@ export function continueGame(status = 0) {
   requestAnimationFrame(update);
 }
 
+let status = 1;
+
 function togglePause() {
+  status = 1;
   let pauseDiv = document.createElement("div");
   pauseDiv.className = "pauseScreen";
   pauseDiv.id = "pauseScreen";
@@ -225,7 +245,10 @@ function togglePause() {
   continueButton.className = "pauseButton";
   continueButton.id = "continueButton";
   continueButton.innerHTML = "Continue";
-  continueButton.addEventListener("click", continueGame);
+  continueButton.addEventListener("click", () => {
+    status = 0;
+    continueGame();
+  });
   pauseDiv.style.display = "block";
   pauseDiv.append(continueButton);
   let restartButton = document.createElement("button");

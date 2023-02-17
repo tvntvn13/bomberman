@@ -1,8 +1,20 @@
 import { map } from "./maps.js";
-import { player, rafID, pause, continueGame} from "./script.js";
+import {
+  player,
+  rafID,
+  pause,
+  continueGame,
+  time,
+  ENEMY_NUM,
+  pauseShift,
+  resetTime,
+  incrementLevel,
+  currentLevel
+} from "./script.js";
 // import { sfx } from "./soundFx.js";
-import { Enemy } from "./classes.js";
-
+import { allEnemies, bombsPlaced, Enemy } from "./classes.js";
+import { drawMap } from "./field.js";
+import { update } from "./script.js";
 
 // set startpoint for player
 export function setStartpoint() {
@@ -13,21 +25,24 @@ export function setStartpoint() {
     case 1:
       return [13, 1];
     case 2:
-      return [1, 11]
+      return [1, 11];
     case 3:
-      return [13, 11]
+      return [13, 11];
   }
 }
 
 function enemyStartpoint(enemies) {
-  if (enemies < 1) return
+  if (enemies < 1) return;
   // let sp = []
   // let set = []
   let emptyFields = [];
   for (let i = 0; i < map.length; i++) {
     for (let j = 0; j < map[0].length; j++) {
       let currBlock = document.getElementById(`block-${j}:${i}`);
-      if (currBlock.classList.contains("empty-field") && !currBlock.classList.contains("starting-point")) {
+      if (
+        currBlock.classList.contains("empty-field") &&
+        !currBlock.classList.contains("starting-point")
+      ) {
         emptyFields.push([j, i]);
       }
     }
@@ -73,7 +88,7 @@ export function score(amount) {
   scoreDiv.textContent = amount.toString().padStart(6, "0");
 }
 
-export function timer(time) {
+export function timer(time = 200) {
   let timerDiv = document.getElementById("timer");
   timerDiv.textContent = time;
 }
@@ -82,17 +97,17 @@ export function lives() {
   if (player.lives < 1) {
     gameOver();
     // pause = true;
-  } else if (player.lives===3) {
+  } else if (player.lives === 3) {
     let livesDiv = document.getElementById("lives");
-    for(i = 0; i < player.lives; i++){
-      let live = document.createElement("div")
-      live.classList.add("livesIcon")
-      livesDiv.append(live)
+    for (i = 0; i < player.lives; i++) {
+      let live = document.createElement("div");
+      live.classList.add("livesIcon");
+      livesDiv.append(live);
     }
   } else {
-    let lastOne = document.querySelectorAll('.livesIcon')
-    console.log(lastOne)
-    lastOne[lastOne.length-1].remove()
+    let lastOne = document.querySelectorAll(".livesIcon");
+    console.log(lastOne);
+    lastOne[lastOne.length - 1].remove();
   }
 }
 
@@ -140,51 +155,73 @@ export function gameOver() {
   });
 }
 
+
+function reloadEvent(e) {
+  if (e.key === "Enter") {
+    // congrats.style.display = "none";
+    document.getElementById("info").querySelector(".congratulations").remove();
+    nextLevel();
+  }
+}
 export function winner() {
   let congrats = document.createElement("h1");
   let win = document.createElement("p");
-  win.textContent = "you cleared the level!";
+  win.textContent = "you cleared the level! press ENTER to proceed to the next level";
   win.classList.add("winP");
   congrats.classList.add("congratulations");
   congrats.textContent = "CONGRATULATIONS";
   congrats.append(win);
   document.getElementById("info").append(congrats);
   cancelAnimationFrame(rafID);
-  document.body.addEventListener("keydown", (e) => {
-    if (e.key === " " || e.key === "Enter") {
-      congrats.style.display = "none";
-    }
-  });
+  document.body.addEventListener("keydown", reloadEvent);
 }
 
-export function startScreen(){
-  let startWrap = document.createElement('div')
-  startWrap.id='startWrap'
-  startWrap.classList.add('startWrap')
-  let startDiv = document.createElement('div')
+export function nextLevel() {
+  document.body.removeEventListener("keydown", reloadEvent);
+  let mainMap = document.getElementById("mainMap");
+  mainMap.replaceChildren();
+  while (allEnemies.length > 0) {
+    allEnemies.pop();
+  }
+  drawMap();
+  resetTime();
+  timer(time);
+  incrementLevel();
+  createEnemies(ENEMY_NUM + currentLevel - 1);
+  console.log(bombsPlaced);
+  player.respawn();
+  pauseShift();
+  update();
+}
+
+export function startScreen() {
+  let startWrap = document.createElement("div");
+  startWrap.id = "startWrap";
+  startWrap.classList.add("startWrap");
+  let startDiv = document.createElement("div");
   // let title = document.createElement('h1');
-  let title2 = document.createElement('h1')
-  let startButton = document.createElement('button')
-  let infoButton = document.createElement('button')
+  let title2 = document.createElement("h1");
+  let startButton = document.createElement("button");
+  let infoButton = document.createElement("button");
   // title.classList.add("startTitle");
-  title2.classList.add("startTitle2")
-  infoButton.classList.add("startButton")
-  infoButton.id="infoButton";
+  title2.classList.add("startTitle2");
+  infoButton.classList.add("startButton");
+  infoButton.id = "infoButton";
   // title.textContent="BOMBMAN JS"
-  title2.textContent="BOMBMAN JS"
-  startButton.textContent="NEW GAME"
-  infoButton.textContent="HELP"
-  startButton.classList.add('startButton')
-  startDiv.classList.add('startScreen')
-  startDiv.append(startButton,infoButton)
-  startWrap.append(title2,startDiv)
-  document.body.prepend(startWrap)
-  infoButton.addEventListener('click', help)
-  startButton.addEventListener('click', removeStart);   
+  title2.textContent = "BOMBMAN JS";
+  startButton.textContent = "NEW GAME";
+  infoButton.textContent = "HELP";
+  startButton.classList.add("startButton");
+  startDiv.classList.add("startScreen");
+  startDiv.append(startButton, infoButton);
+  startWrap.append(title2, startDiv);
+  document.body.prepend(startWrap);
+  infoButton.addEventListener("click", help);
+  startButton.addEventListener("click", removeStart);
 }
 
-function removeStart(){
-  let startScreen = document.getElementById('startWrap')
+function removeStart() {
+  let startScreen = document.getElementById("startWrap");
   //startScreen.style.display="none";
   startScreen.remove();
   continueGame(1);
@@ -205,30 +242,30 @@ PAUSE:  escape
 
 Now you are ready to bomb.
 
-Good luck!`
+Good luck!`;
 
-function help(){
-  document.getElementById('startWrap').remove()
-  let helpWrap = document.createElement('div')
-  helpWrap.classList.add('helpWrap')
-  helpWrap.id = 'helpWrap'
-  let helpScreen = document.createElement('div')
-  let backButton = document.createElement('button')
-  let helpText = document.createElement('p')
-  helpText.textContent = infoText
-  helpText.id = 'helpText'
-  backButton.classList.add('startButton')
-  backButton.id = 'backButton'
-  backButton.textContent = 'BACK'
-  helpScreen.classList.add('help')
-  helpScreen.id = 'helpScreen'
-  backButton.addEventListener('click',goBack)
-  helpScreen.append(helpText,backButton)
-  helpWrap.append(helpScreen)
-  document.body.prepend(helpWrap)
+function help() {
+  document.getElementById("startWrap").remove();
+  let helpWrap = document.createElement("div");
+  helpWrap.classList.add("helpWrap");
+  helpWrap.id = "helpWrap";
+  let helpScreen = document.createElement("div");
+  let backButton = document.createElement("button");
+  let helpText = document.createElement("p");
+  helpText.textContent = infoText;
+  helpText.id = "helpText";
+  backButton.classList.add("startButton");
+  backButton.id = "backButton";
+  backButton.textContent = "BACK";
+  helpScreen.classList.add("help");
+  helpScreen.id = "helpScreen";
+  backButton.addEventListener("click", goBack);
+  helpScreen.append(helpText, backButton);
+  helpWrap.append(helpScreen);
+  document.body.prepend(helpWrap);
 }
 
-function goBack(){
-  document.getElementById('helpWrap').remove()
-  startScreen()
+function goBack() {
+  document.getElementById("helpWrap").remove();
+  startScreen();
 }
