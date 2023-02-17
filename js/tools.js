@@ -164,7 +164,8 @@ function reloadEvent(e) {
     nextLevel();
   }
 }
-export function winner() {
+export function winner(end) {
+  if (currentLevel < 10) {
   let congrats = document.createElement("h1");
   let win = document.createElement("p");
   win.textContent = `you cleared level ${currentLevel}! press ENTER to proceed to level ${currentLevel + 1}`;
@@ -175,6 +176,9 @@ export function winner() {
   document.getElementById("info").append(congrats);
   cancelAnimationFrame(rafID);
   document.body.addEventListener("keydown", reloadEvent);
+  } else {
+    gameEnd()
+  }
 }
 
 export function nextLevel() {
@@ -278,4 +282,28 @@ export function levelDisplay(level=currentLevel){
   levelDiv.id = 'level'
   levelDiv.textContent = `LEVEL ${currentLevel}`
   document.getElementById('mainMap').append(levelDiv)
+}
+
+export function gameEnd(){
+  document.getElementById('wrapper').remove()
+  document.getElementById('gameOverScreen').remove()
+  let endDiv = document.createElement('div')
+  endDiv.classList.add('endDiv')
+  endDiv.id = 'endDiv'
+  let endH2 = document.createElement('h2')
+  endH2.classList.add('endH2')
+  endH2.textContent = 'CONGRATULATIONS!'
+  let endP = document.createElement('p')
+  endP.classList.add('endP')
+  endP.textContent = `YOU HAVE COMPLETED ALL THE LEVELS
+
+  YOU TRULY DESERVE THE TITLE:`
+  let ultimate = document.createElement('h4')
+  ultimate.classList.add('ultimate')
+  ultimate.textContent = 'U L T I M A T E B O M B M A N'
+  endDiv.append(endH2,endP,ultimate)
+  document.body.prepend(endDiv)
+  setTimeout(()=>{
+    document.addEventListener('keydown',window.location.reload())
+  },5000)
 }
