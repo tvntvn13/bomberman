@@ -182,14 +182,6 @@ body {
     background-size: auto, cover; 
 }
 
-
-.player.invincible.player.moveRight,
-.player.invincible.player.moveLeft,
-.player.invincible.player.moveDown,
-.player.invincible.player.moveUp {
-    animation: blinker 0.9s linear infinite;
-}
-
 .player.invincible {
   animation: blinker 0.9s linear infinite;
 }
@@ -270,14 +262,14 @@ body {
   }
 }
 
-.dead{
-    
-    /* url("/img/explosionBM.png"); */
+.dead {
+     /* url("/img/explosionBM.png"); */
     background-image: url('/img/playerDeadBM.png');
     /* url('/img/explosionBM.png');  */
     background-size:cover;
     animation: playerDeath 1000ms steps(1);
 }
+
 
 @keyframes playerDeath {
     0%{background-position: 176px -3px;}
@@ -307,6 +299,7 @@ body {
   animation: enemyMove 400ms steps(4);
   background-image: url("/img/enemyBM2.png");
   background-position: -2px 0;
+  background-size: auto;
 }
 
 @keyframes enemyMove {
@@ -411,8 +404,8 @@ body {
   padding-top: 15%;
   font-size: 60px;
   font-weight: 800;
-  color: green;
-  text-shadow: 2px 2px 0px black, 4px 4px 0px green;
+  color: white;
+  text-shadow: 2px 2px 0px black, 5px 5px 0px green;
 }
 
 .congratulations {
@@ -478,7 +471,7 @@ body {
   font-size: 60px;
   font-weight: 900;
   position: relative;
-  text-shadow: -4px 3px 1px black, -8px 5px 0px white;
+  text-shadow: -4px 3px 1px black, -9px 6px 0px green;
 }
 
 .startButton {

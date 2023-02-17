@@ -144,6 +144,7 @@ export function loadingBar() {
 }
 
 export function gameOver() {
+  setTimeout(()=>{
   let gameOverScreen = document.getElementById("gameOverScreen");
   // sfx.timeUpFull.play();
   gameOverScreen.style.display = "block";
@@ -152,6 +153,7 @@ export function gameOver() {
   document.body.addEventListener("keydown", (e) => {
     if (e.key === " " || e.key === "Enter" ) window.location.reload();
   });
+},900)
 }
 
 
