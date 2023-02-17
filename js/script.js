@@ -28,7 +28,7 @@ export function pauseShift() {
   }
 }
 startScreen();
-export const ENEMY_NUM = 1;
+export const ENEMY_NUM = 4;
 let startTime;
 let startTime2;
 let startTime3;
