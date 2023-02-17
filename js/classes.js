@@ -221,7 +221,7 @@ export class Player extends MovingElement {
     setTimeout(() => {
       spot.classList.remove('dead')
 			this.respawn();
-    }, 700);
+    }, 1000);
 		
   }
   respawn() {

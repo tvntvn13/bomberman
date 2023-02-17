@@ -95,8 +95,7 @@ export function timer(time = 200) {
 
 export function lives() {
   if (player.lives < 1) {
-    gameOver();
-    // pause = true;
+      gameOver();
   } else if (player.lives === 3) {
     let livesDiv = document.getElementById("lives");
     for (i = 0; i < player.lives; i++) {
@@ -166,7 +165,7 @@ function reloadEvent(e) {
 export function winner() {
   let congrats = document.createElement("h1");
   let win = document.createElement("p");
-  win.textContent = "you cleared the level! press ENTER to proceed to the next level";
+  win.textContent = `you cleared level ${currentLevel}! press ENTER to proceed to level ${currentLevel + 1}`;
   win.classList.add("winP");
   congrats.classList.add("congratulations");
   congrats.textContent = "CONGRATULATIONS";
