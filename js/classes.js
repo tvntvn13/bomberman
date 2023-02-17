@@ -217,9 +217,12 @@ export class Player extends MovingElement {
     this.invincible = true;
     this.lives--;
     console.log(this.lives);
+		spot.classList.add('dead')
     setTimeout(() => {
-      this.respawn();
+      spot.classList.remove('dead')
+			this.respawn();
     }, 700);
+		
   }
   respawn() {
     let respawn = setStartpoint();

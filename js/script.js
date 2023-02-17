@@ -28,7 +28,7 @@ export function pauseShift() {
   }
 }
 startScreen();
-export const ENEMY_NUM = 4;
+export const ENEMY_NUM = 1;
 let startTime;
 let startTime2;
 let startTime3;
@@ -108,9 +108,7 @@ export function update(timestamp) {
   ) {
     // sfx.playerDies.play();
     player.death();
-    playerPosition.classList.add('dead')
     lives(1);
-    playerPosition.classList.remove('dead')
   }
   aliveEnemies = 0;
   for (let enemy of allEnemies) {
@@ -210,13 +208,13 @@ function togglePause() {
   pauseDiv.className = "pauseScreen";
   pauseDiv.id = "pauseScreen";
   let text = document.createElement("h1");
-  text.innerHTML = "Game Paused";
+  text.innerHTML = "GAME PAUSED";
   pauseDiv.append(text);
   let continueButton = document.createElement("button");
   // continueButton.onclick = function(){continueGame};
   continueButton.className = "pauseButton";
   continueButton.id = "continueButton";
-  continueButton.innerHTML = "Continue";
+  continueButton.innerHTML = "CONTINUE";
   continueButton.addEventListener("click", () => {
     status = 0;
     continueGame();
@@ -226,7 +224,7 @@ function togglePause() {
   let restartButton = document.createElement("button");
   restartButton.className = "pauseButton";
   restartButton.id = "restartButton";
-  restartButton.innerHTML = "Restart";
+  restartButton.innerHTML = "RESTART";
   restartButton.addEventListener("click", restart);
   pauseDiv.append(restartButton);
   document.body.prepend(pauseDiv);

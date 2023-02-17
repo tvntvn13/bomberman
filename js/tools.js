@@ -151,7 +151,7 @@ export function gameOver() {
   document.getElementById("wrapper").style.display = "none";
   cancelAnimationFrame(rafID);
   document.body.addEventListener("keydown", (e) => {
-    if (e.key === " " || e.key === "Enter") window.location.reload();
+    if (e.key === " " || e.key === "Enter" ) window.location.reload();
   });
 }
 
