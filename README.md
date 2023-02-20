@@ -2,7 +2,7 @@
 
 ## Welcome to our solution to 01 Edu's make-your-game project!
 
-In this project, the background logic of the game is written in Javascript, on the front end we used HTML & CSS. No Javascript frameworks, nor the use of canvas was allowed.
+In this project, the background logic of the game is written in Javascript, on the front end we used HTML, CSS and Javascript. No Javascript frameworks, nor the use of canvas was allowed.
 
 The goal of the project was to recreate our own version of a classic game (chosen from a pre-approved list) using Javascript. We had to use requestAnimationFrame, use some kind of scoring system and some kind of level progression, keep the framerate between 50-60 frames-per-second, avoid excessive repaint and excessive use of layers.
 
