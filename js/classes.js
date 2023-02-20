@@ -22,11 +22,9 @@ export class MovingElement {
       if (this.type === "enemy" && nextSpot.classList.contains("enemy")) {
         return false;
       }
-      // nextSpot.classList.toggle('empty-field');
       nextSpot.classList.toggle(this.type);
       nextSpot.classList.add("moveUp");
       this.y--;
-      // currentSpot.classList.toggle('empty-field');
       currentSpot.classList.toggle(this.type);
       currentSpot.classList.remove(
         "moveRight",
@@ -52,11 +50,9 @@ export class MovingElement {
       if (this.type === "enemy" && nextSpot.classList.contains("enemy")) {
         return false;
       }
-      // nextSpot.classList.toggle('empty-field');
       nextSpot.classList.toggle(this.type);
       nextSpot.classList.add("moveDown");
       this.y++;
-      // currentSpot.classList.toggle('empty-field');
       currentSpot.classList.toggle(this.type);
       currentSpot.classList.remove(
         "moveRight",
@@ -82,11 +78,9 @@ export class MovingElement {
       if (this.type === "enemy" && nextSpot.classList.contains("enemy")) {
         return false;
       }
-      // nextSpot.classList.toggle('empty-field');
       nextSpot.classList.toggle(this.type);
       nextSpot.classList.add("moveLeft");
       this.x--;
-      // currentSpot.classList.toggle('empty-field');
       currentSpot.classList.toggle(this.type);
       currentSpot.classList.remove(
         "moveRight",
@@ -112,11 +106,9 @@ export class MovingElement {
       if (this.type === "enemy" && nextSpot.classList.contains("enemy")) {
         return false;
       }
-      // nextSpot.classList.toggle('empty-field');
       nextSpot.classList.toggle(this.type);
       nextSpot.classList.add("moveRight");
       this.x++;
-      // currentSpot.classList.toggle('empty-field');
       currentSpot.classList.toggle(this.type);
       currentSpot.classList.remove(
         "moveRight",
@@ -191,8 +183,6 @@ export class Player extends MovingElement {
       let y = this.y;
       let currentSpot = document.getElementById(`block-${x}:${y}`);
       if (!currentSpot.classList.contains("bomb")) {
-        // currentSpot.classList.add('bomb');
-        // bomb(x, y);
         let thisBomb = new Bomb(x, y);
         this.bombs++;
       }
@@ -267,8 +257,6 @@ export class Enemy extends MovingElement {
   }
   moveUp() {
     if (super.moveUp()) {
-    //   delete allEnemies[`${this.x}:${this.y}`];
-      // allEnemies[`${this.x}:${this.y-1}`] = this;
       return true;
     } else {
       return false;
@@ -276,8 +264,6 @@ export class Enemy extends MovingElement {
   }
   moveDown() {
     if (super.moveDown()) {
-    //   delete allEnemies[`${this.x}:${this.y}`];
-      // allEnemies[`${this.x}:${this.y+1}`] = this;
       return true;
     } else {
       return false;
@@ -285,8 +271,6 @@ export class Enemy extends MovingElement {
   }
   moveLeft() {
     if (super.moveLeft()) {
-    //   delete allEnemies[`${this.x}:${this.y}`];
-      // allEnemies[`${this.x-1}:${this.y}`] = this;
       return true;
     } else {
       return false;
@@ -294,8 +278,6 @@ export class Enemy extends MovingElement {
   }
   moveRight() {
     if (super.moveRight()) {
-    //   delete allEnemies[`${this.x}:${this.y}`];
-      // allEnemies[`${this.x+1}:${this.y}`] = this;
       return true;
     } else {
       return false;
@@ -344,8 +326,6 @@ export class Enemy extends MovingElement {
     this.alive = false;
     let spot = document.getElementById(`block-${this.x}:${this.y}`);
     spot.classList.remove("enemy");
-    // delete allEnemies[`${this.x}:${this.y}`];
-    // console.log("enemy died");
   }
 }
 

@@ -47,24 +47,6 @@ function enemyStartpoint(enemies) {
       }
     }
   }
-  // while (enemies > 0) {
-  //   let rY = Math.ceil((Math.random() * (map.length - 4)) + 3);
-  //   let rX = Math.ceil((Math.random() * (map[0].length - 4)) + 3);
-  //   let currBlock = document.getElementById(`block-${rX}:${rY}`)
-  //   if (currBlock.classList.contains("empty-field") && !currBlock.classList.contains("starting-point") && !currBlock.classList.contains("enemy")) {
-  //     enemies--
-  //     set.push([rX, rY]);
-  //   }
-  //   // if (map[rX][rY] === undefined || map[rX][rY] === '') {
-  //   //   map[rX][rY] = 'E';
-  //   //   enemies--
-  //   //   sp.push(rY,rX)
-  //   //   set.push(sp)
-  //   //   sp = [];
-  //   // } else {
-  //   //   continue
-  //   // }
-  // }
   return emptyFields;
 }
 
@@ -80,7 +62,6 @@ export function createEnemies(num) {
   for (let elem of sampled) {
     let enemy = new Enemy(elem[0], elem[1]);
   }
-  // return enemies
 }
 
 export function score(amount) {
@@ -231,7 +212,6 @@ function removeStart() {
   //startScreen.style.display="none";
   startScreen.remove();
   continueGame(1);
-  //requestAnimationFrame(update)
 }
 
 let infoText = `You are the BOMBMAN.

@@ -1,22 +1,5 @@
 import { map } from "./maps.js";
 
-// template is the default level design, the '▉' characters are solid walls, the 'x' characters are the starting points and the neighbouring areas
-// export let template = [
-//     ['▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉'],
-//     ['▉', '', '', , , , , , , , , , '', '', '▉'],
-//     ['▉', '', '▉', , '▉', , '▉', , '▉', , '▉', , '▉', '', '▉'],
-//     ['▉', '', , , , , , , , , , , , '', '▉'],
-//     ['▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉'],
-//     ['▉', , , , , , , , , , , , , , '▉'],
-//     ['▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉'],
-//     ['▉', , , , , , , , , , , , , , '▉'],
-//     ['▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉', , '▉'],
-//     ['▉', , , , , , , , , , , , , '', '▉'],
-//     ['▉', '', '▉', , '▉', , '▉', , '▉', , '▉', , '▉', '', '▉'],
-//     ['▉', '', '', , , , , , , , , , '', '', '▉'],
-//     ['▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉', '▉']
-// ];
-
 const SOFTWALL_CHANCE = 5.5;
 export let template = map;
 
@@ -47,7 +30,6 @@ export function drawMap(templ = template) {
       } else if (templ[i][j].includes("W")) {
         mapBlock.classList.add("softWall");
       }
-      // mapBlock.innerHTML = templ[i][j] === undefined ? ' ' : templ[i][j];
       mainMap.append(mapBlock);
     }
   }
@@ -55,5 +37,4 @@ export function drawMap(templ = template) {
   let goalBlock = document.getElementById(softWalls[goalIndex]);
   goalBlock.classList.add("goal");
   game.append(mainMap);
-  //requestAnimationFrame(drawMap);
 }

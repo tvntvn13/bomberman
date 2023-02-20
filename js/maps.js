@@ -14,6 +14,9 @@
 //   ["▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉"],
 // ];
 
+// template is the default level design, the '▉' characters are solid walls,
+// the 'x' characters are the starting points and the neighbouring areas,
+// 'W' are the default soft walls, so the player is walled in/protected at the start
 export let map = [
   ["▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉"],
   ["▉", "x", "x", "W", , , , , , , , "W", "x", "x", "▉"],

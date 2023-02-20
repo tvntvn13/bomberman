@@ -2,7 +2,6 @@ import { drawMap } from "./field.js";
 // import { sfx } from "./soundFx.js";
 import {
   setStartpoint,
-  loadingBar,
   score,
   timer,
   lives,
@@ -12,7 +11,7 @@ import {
   startScreen,
   levelDisplay
 } from "./tools.js";
-import { Enemy, Player, allEnemies, bombsPlaced } from "./classes.js";
+import { Player, allEnemies, bombsPlaced } from "./classes.js";
 
 export let currentLevel = 1;
 export function incrementLevel() {
@@ -50,8 +49,6 @@ export let rafID = requestAnimationFrame(update);
 // document.getElementById("loadingScreen").remove();
 // },3200);
 
-// ^^^ loading bar shit above ^^^
-
 timer(time);
 drawMap();
 // sfx.stageIntro.play();
@@ -60,16 +57,11 @@ lives();
 levelDisplay()
 createEnemies(ENEMY_NUM);
 
-// let enemy2 = new Enemy(8, 5);
-// let enemy2 = new Enemy(8, 5);
-// let enemyStartPoint = document.getElementById(`block-${enemy.x}:${enemy.y}`);
-// enemyStartPoint.classList.add('enemy');
 let startPoint = document.getElementById(`block-${player.x}:${player.y}`);
 startPoint.classList.add("player");
 let pauseScreen = document.getElementById("pauseScreen");
 score(player.getScore);
 update();
-//requestAnimationFrame(update)
 
 document.body.addEventListener("keyup", (e) => {
   if (e.key !== " ") keyPressed = null;
@@ -221,7 +213,6 @@ function togglePause() {
   text.innerHTML = "GAME PAUSED";
   pauseDiv.append(text);
   let continueButton = document.createElement("button");
-  // continueButton.onclick = function(){continueGame};
   continueButton.className = "pauseButton";
   continueButton.id = "continueButton";
   continueButton.innerHTML = "CONTINUE";
@@ -238,14 +229,5 @@ function togglePause() {
   restartButton.addEventListener("click", restart);
   pauseDiv.append(restartButton);
   document.body.prepend(pauseDiv);
-  // cancelAnimationFrame(rafID);
-  // if (pause) {
-  //   pause = false;
-  // } else {
-  //   pause = true;
-  // }
   pause = true;
-  // let cont = document.getElementById("continueButton");
-
-  // requestAnimationFrame(update);
 }
