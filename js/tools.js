@@ -300,7 +300,7 @@ export function gameEnd(){
   YOU TRULY DESERVE THE TITLE:`
   let ultimate = document.createElement('h4')
   ultimate.classList.add('ultimate')
-  ultimate.textContent = 'U L T I M A T E B O M B M A N'
+  ultimate.textContent = 'U L T I M A T E   B O M B M A N'
   endDiv.append(endH2,endP,ultimate)
   document.body.prepend(endDiv)
   setTimeout(()=>{

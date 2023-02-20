@@ -114,7 +114,7 @@ body {
 .solid-wall {
   background-image: url("/img/solidWallBM.png");
   background-size: cover;
-  z-index: 10;
+  
 }
 
 .softWall {
@@ -122,17 +122,17 @@ body {
   background-size: cover;
   background-color: brown;
   background-blend-mode: multiply;
-  z-index: 10;
+  /* will-change: background-image; */
 }
 
 .empty-field {
   background-color: green;
+  will-change: background-image;
 }
 
 .empty-field.goal {
   background-image: url("/img/goalBM.png");
   background-size: cover;
-  z-index: 1;
 }
 
 .empty-field.goal.player {
