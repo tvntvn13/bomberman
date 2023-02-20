@@ -326,17 +326,20 @@ body {
   0% {
     transform: scale(85%);
   }
-  25% {
-    transform: scale(90%);
+  20% {
+    transform: scale(95%);
   }
-  50% {
+  40% {
     transform: scale(85%);
   }
-  75% {
-    transform: scale(90%);
+  60% {
+    transform: scale(95%);
+  }
+  80% {
+    transform: scale(85%);
   }
   100% {
-    transform: scale(100%);
+    transform: scale(95%);
   }
 }
 
