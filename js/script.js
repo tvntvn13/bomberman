@@ -12,7 +12,7 @@ import {
   startScreen,
   levelDisplay
 } from "./tools.js";
-import { Enemy, Player, allEnemies } from "./classes.js";
+import { Enemy, Player, allEnemies, bombsPlaced } from "./classes.js";
 
 export let currentLevel = 1;
 export function incrementLevel() {
@@ -197,12 +197,21 @@ export function continueGame() {
     document.body.removeChild(pauseDiv);
   }
   pause = false;
+  for (let elem of Object.values(bombsPlaced)) {
+    elem.timerId = elem.explodeOnTimer(elem.timer);
+  }
   requestAnimationFrame(update);
 }
 
 let status = 1;
 
 function togglePause() {
+  let pauseTime = new Date().getTime();
+  for (let elem of Object.values(bombsPlaced)) {
+    let timePassed = pauseTime - elem.placementTime;
+    clearTimeout(elem.timerId);
+    elem.timer = elem.timer - timePassed;
+  }
   status = 1;
   let pauseDiv = document.createElement("div");
   pauseDiv.className = "pauseScreen";

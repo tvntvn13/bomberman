@@ -358,7 +358,9 @@ export class Bomb {
     this.isTicking = true;
     let bombBlock = document.getElementById(`block-${x}:${y}`);
     bombBlock.classList.add("bomb");
-    this.timerId = this.explodeOnTimer(this.range);
+    this.placementTime = new Date().getTime();
+    this.timer = 3000;
+    this.timerId = this.explodeOnTimer(this.timer);
     bombsPlaced[`${x}:${y}`] = this;
   }
   explosionPrep() {
@@ -436,10 +438,10 @@ export class Bomb {
     player.bombs--;
     delete bombsPlaced[`${this.x}:${this.y}`];
   }
-  explodeOnTimer(fields) {
+  explodeOnTimer(timer=3000) {
     let id = setTimeout(() => {
-      this.explodeNow(fields);
-    }, 3000);
+      this.explodeNow();
+    }, timer);
     return id;
   }
   bombClearOut() {

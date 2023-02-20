@@ -314,6 +314,7 @@ body {
 .bomb {
   background-image: url("/img/bombBM.png");
   animation-name: bombTimer;
+  animation-iteration-count: infinite;
   background-size:contain;
   background-position: -2px -1px;
   animation-duration: 3s;
