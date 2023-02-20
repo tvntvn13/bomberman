@@ -198,6 +198,7 @@ export function continueGame() {
   }
   pause = false;
   for (let elem of Object.values(bombsPlaced)) {
+    elem.placementTime = new Date().getTime();
     elem.timerId = elem.explodeOnTimer(elem.timer);
   }
   requestAnimationFrame(update);
