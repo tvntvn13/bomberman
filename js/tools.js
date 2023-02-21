@@ -261,6 +261,9 @@ function help() {
   backButton.textContent = "BACK";
   helpScreen.classList.add("help");
   helpScreen.id = "helpScreen";
+  document.addEventListener('keydown', ()=>{
+    backButton.focus()
+  })
   backButton.addEventListener("click", goBack);
   helpScreen.append(helpText, backButton);
   helpWrap.append(helpScreen);
