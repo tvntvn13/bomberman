@@ -126,6 +126,7 @@ export function loadingBar() {
 }
 
 export function gameOver() {
+  cancelAnimationFrame(rafID)
   setTimeout(()=>{
   let gameOverScreen = document.getElementById("gameOverScreen");
   // sfx.timeUpFull.play();
@@ -209,6 +210,15 @@ export function startScreen() {
   startDiv.append(startButton, infoButton);
   startWrap.append(title2, startDiv);
   document.body.prepend(startWrap);
+  document.addEventListener('keydown', (e)=>{
+    if(e.key == 'ArrowDown' || e.key == 'ArrowLeft'){
+      infoButton.focus()
+      e.preventDefault()
+    } else if (e.key == 'ArrowUp' || e.key == 'ArrowRight'){
+      startButton.focus()
+      e.preventDefault()
+    }
+  })
   infoButton.addEventListener("click", help);
   startButton.addEventListener("click", removeStart);
 }

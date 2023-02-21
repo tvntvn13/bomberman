@@ -228,6 +228,16 @@ function togglePause() {
   restartButton.innerHTML = "RESTART";
   restartButton.addEventListener("click", restart);
   pauseDiv.append(restartButton);
+  document.addEventListener('keydown',(e)=>{
+    if(e.key == 'ArrowRight') {
+      restartButton.focus();
+      e.preventDefault();
+    }
+    else if(e.key == 'ArrowLeft') {
+      continueButton.focus();
+      e.preventDefault();
+    }
+  })
   document.body.prepend(pauseDiv);
   pause = true;
 }
