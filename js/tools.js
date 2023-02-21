@@ -76,7 +76,8 @@ export function timer(time = 200) {
 
 export function lives() {
   if (player.lives < 1) {
-      gameOver();
+    cancelAnimationFrame(rafID)  
+    gameOver();
   } else if (player.lives === 3) {
     let livesDiv = document.getElementById("lives");
     for (i = 0; i < player.lives; i++) {
@@ -128,6 +129,11 @@ export function gameOver() {
   setTimeout(()=>{
   let gameOverScreen = document.getElementById("gameOverScreen");
   // sfx.timeUpFull.play();
+  let gameOverH1 = document.getElementById('gameOverScreenH1')
+  let scoreDisplay = document.createElement('p')
+  scoreDisplay.textContent = player.score.toString().padStart(6,'0')
+  scoreDisplay.classList.add('winP')
+  gameOverH1.append(scoreDisplay)
   gameOverScreen.style.display = "block";
   document.getElementById("wrapper").style.display = "none";
   cancelAnimationFrame(rafID);
