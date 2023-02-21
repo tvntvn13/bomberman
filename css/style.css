@@ -41,10 +41,13 @@ body {
 }
 
 .wrapper {
-  position: relative;
+  position: fixed;
   width: 100vw;
+  /* height: 100vh; */
   display: grid;
   background-color: black;
+  size: cover;
+  resize: none;
 }
 
 #game {
@@ -54,6 +57,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   z-index: 1;
+  display: block;
 }
 
 .info {
@@ -94,7 +98,7 @@ body {
 }
 
 .grid-container {
-  position: relative;
+  /* position: relative; */
   margin-left: auto;
   margin-right: auto;
   margin-top: auto;
@@ -109,6 +113,7 @@ body {
 
 .grid-item {
   color: white;
+  size: initial;
 }
 
 .solid-wall {
@@ -127,7 +132,6 @@ body {
 
 .empty-field {
   background-color: green;
-  will-change: background-image;
 }
 
 .empty-field.goal {
@@ -171,8 +175,9 @@ body {
 
 .player {
   background-image: url("/img/bombBasic2.png");
-  background-position: 0px 90px;
-  background-position-x: 4px;
+  background-position: -6% 65%;
+  /* background-position-x: 4px; */
+  background-size: 255% auto;
   
 }
 
@@ -194,7 +199,7 @@ body {
 
 @keyframes moveUp {
   0% {
-    background-position: 0px 1px;
+    background-position: 0px 1%;
     background-position-x: center;
     transform: translateY(25%);
   }
@@ -245,7 +250,7 @@ body {
 
 @keyframes moveLeft {
   0% {
-    background-position: 0px 46px;
+    background-position: 0 46px;
     background-position-x: center;
     background-position-y: 43px;
     transform: translateX(25%);
@@ -296,18 +301,18 @@ body {
 } 
 
 .enemy {
-  animation: enemyMove 400ms steps(4);
+  animation: enemyMove 400ms steps(3);
   background-image: url("/img/enemyBM2.png");
-  background-position: -2px 0;
-  background-size: auto;
+  background-position: -2% 0;
+  background-size: 395% auto;
 }
 
 @keyframes enemyMove {
   from {
-    background-position: -2px, 0;
+    background-position: -2%, 0;
   }
   to {
-    background-position: 174px, 0px;
+    background-position: 300%, 0;
   }
 }
 
