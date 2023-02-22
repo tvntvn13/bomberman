@@ -138,8 +138,8 @@ body {
 
 .empty-field.goal.player {
   background-image: url("/img/bombBasic2.png"),url("/img/goalBM.png") ;
-  background-position: 2px 90px, 0 0;
-  background-size: auto, auto;
+  background-position: 2px 66%, 0 0;
+  background-size: 257%, contain;
 }
 
 .empty-field.goal.explosion {
@@ -179,11 +179,16 @@ body {
   
 }
 
+/* .goal.player.bomb {
+    background-image: url("/img/bombBM.png"), url('/img/goalBM.png'), url("/img/bombBasic2.png");
+    background-position: auto, auto, -2px 66%;
+    background-size: contain, contain, 257% auto;
+} */
+
 .player.bomb {
     background-image: url("/img/bombBasic2.png"), url("/img/bombBM.png"); ;
     background-position: 0px 70%, -2px 0;
     background-size: 250% auto, contain; 
-    background-position-x: center, auto;
 }
 
 .player.invincible {
