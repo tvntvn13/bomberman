@@ -2,7 +2,6 @@ import { map } from "./maps.js";
 import {
   player,
   rafID,
-  pause,
   continueGame,
   time,
   ENEMY_NUM,
@@ -284,6 +283,15 @@ export function levelDisplay(level=currentLevel){
 }
 
 export function gameEnd(){
+  let time = 5;
+  player.score += 1000 * player.lives
+  let scoreP = document.createElement('p')
+  let counter = document.createElement('p')
+  counter.classList.add('endP')
+  counter.textContent = time.toString() + "...";
+  scoreP.classList.add('endP')
+  score.id = 'scoreP'
+  scoreP.textContent = `\n\nSCORE: ${player.score.toString()}`
   document.getElementById('wrapper').remove()
   document.getElementById('gameOverScreen').remove()
   let endDiv = document.createElement('div')
@@ -300,9 +308,20 @@ export function gameEnd(){
   let ultimate = document.createElement('h4')
   ultimate.classList.add('ultimate')
   ultimate.textContent = 'U L T I M A T E   B O M B M A N'
-  endDiv.append(endH2,endP,ultimate)
+  endDiv.append(endH2,endP,ultimate,scoreP,counter)
   document.body.prepend(endDiv)
-  setTimeout(()=>{
-    document.addEventListener('keydown',window.location.reload())
-  },5000)
+  
+  let endTimer = setInterval(()=>{
+    time--;
+    counter.textContent = time.toString() + "...";
+    if (time === 0) {
+      clearInterval(endTimer);
+      counter.textContent = "Press ENTER to restart"
+      document.addEventListener('keypress', (e) => {
+        if (e.key === "Enter") {
+        window.location.reload()
+        }
+      })
+    }
+  },1000);
 }

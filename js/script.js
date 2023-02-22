@@ -9,7 +9,8 @@ import {
   winner,
   createEnemies,
   startScreen,
-  levelDisplay
+  levelDisplay,
+  gameEnd
 } from "./tools.js";
 import { Player, allEnemies, bombsPlaced } from "./classes.js";
 
@@ -126,8 +127,8 @@ export function update(timestamp) {
   
   if (playerPosition.classList.contains("goal") && aliveEnemies === 0 ) {
     pause = true;
-    // player.score += Math.floor((time * 100) / 60);
-    // score(player.getScore);
+    player.score += Math.floor((time * 100) / 60);
+    score(player.getScore);
     // sfx.stageClear.play();
     playerPosition.classList.add("winner")
     winner();
@@ -220,7 +221,7 @@ function togglePause() {
   let continueButton = document.createElement("button");
   continueButton.className = "pauseButton";
   continueButton.id = "continueButton";
-  continueButton.innerHTML = "CONTINUE";
+  continueButton.innerHTML = "<< CONTINUE";
   continueButton.addEventListener("click", () => {
     status = 0;
     continueGame();
@@ -230,7 +231,7 @@ function togglePause() {
   let restartButton = document.createElement("button");
   restartButton.className = "pauseButton";
   restartButton.id = "restartButton";
-  restartButton.innerHTML = "RESTART";
+  restartButton.innerHTML = "RESTART >>";
   restartButton.addEventListener("click", restart);
   pauseDiv.append(restartButton);
   document.addEventListener('keydown',(e)=>{
