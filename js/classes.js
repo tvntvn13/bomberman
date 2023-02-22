@@ -3,6 +3,7 @@ import { template } from "./field.js";
 import { setStartpoint } from "./tools.js";
 // import { sfx } from "./soundFx.js";
 
+// MovingElement is the parent class to Player and Enemy, it is not used itself anywhere
 export class MovingElement {
   constructor(x, y, type) {
     this.x = x;
@@ -144,6 +145,7 @@ export class MovingElement {
   }
 }
 
+// Player is the class for the single player object, inherits properties and methods from MovingElement
 export class Player extends MovingElement {
   constructor(x, y) {
     super(x, y);
@@ -177,6 +179,7 @@ export class Player extends MovingElement {
       super.moveRight();
     }
   }
+  // placeBomb creates a new Bomb object at the player's position
   placeBomb() {
     if (this.bombs < 3 && this.alive) {
       let x = this.x;
@@ -235,6 +238,8 @@ export class Player extends MovingElement {
 }
 
 export let allEnemies = [];
+
+// Enemy is the class for enemy objects, inherits from MovingElement
 export class Enemy extends MovingElement {
   constructor(x, y) {
     super(x, y);
@@ -283,6 +288,9 @@ export class Enemy extends MovingElement {
       return false;
     }
   }
+  // move contains the logic for enemy movement,
+  // keeps track of which way the enemy is heading as long as the way forward is clear,
+  // if not, chooses another direction until it can move, or skip the movement if enemy is walled in
   move() {
     if (!this.alive) {
       return;
@@ -331,6 +339,7 @@ export class Enemy extends MovingElement {
 
 export let bombsPlaced = {};
 
+// Bomb is the class for bomb objects, keeps track of the remaining time and handles the explosion
 export class Bomb {
   constructor(x, y) {
     this.x = x;

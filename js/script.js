@@ -14,12 +14,17 @@ import {
 } from "./tools.js";
 import { Player, allEnemies, bombsPlaced } from "./classes.js";
 
+// currentLevel keeps track of the level the player is on
 export let currentLevel = 1;
+// we need the incrementLevel to increment the currentLevel from outside
 export function incrementLevel() {
   currentLevel++;
 }
+
+// if pause is true, the update function doesn't call the next animationFrame
 export let pause = true;
 
+// pauseShift is needed to toggle the pause from outside
 export function pauseShift() {
   if (pause) {
     pause = false;
@@ -28,6 +33,8 @@ export function pauseShift() {
   }
 }
 startScreen();
+
+// the starting enemy number
 export const ENEMY_NUM = 4;
 let startTime;
 let startTime2;
@@ -91,7 +98,8 @@ document.body.addEventListener("keydown", (e) => {
   }
 });
 
-
+// update is one of the main functions that runs the game, it keeps track of explosions, player lives, the game over screen, etc.
+// when pause or game over is toggled, it doesn't call the next animationFrame
 export function update(timestamp) {
   let playerPosition = document.getElementById(`block-${player.x}:${player.y}`);  
   if (
@@ -104,8 +112,9 @@ export function update(timestamp) {
       player.death();
       lives();
     } else {
-      pause=true
-      gameOver()
+      player.death();
+      pause=true;
+      gameOver();
     }
   }
   aliveEnemies = 0;
@@ -189,6 +198,7 @@ function restart() {
   window.location.reload();
 }
 
+// continueGame removes the pauseScreen, resets the bomb timers, and calls the next animationFrame
 export function continueGame() {
   if (status == 0) {
     let pauseDiv = document.getElementById("pauseScreen");
@@ -204,6 +214,7 @@ export function continueGame() {
 
 let status = 1;
 
+// togglePause cancels bomb timers, saves the remaining time as the Bomb objects' property, and brings up a pauseScreen
 function togglePause() {
   let pauseTime = new Date().getTime();
   for (let elem of Object.values(bombsPlaced)) {
