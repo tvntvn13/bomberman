@@ -125,6 +125,7 @@ export function loadingBar() {
   document.body.prepend(loadingScreen)
 }
 
+// when the player loses all lives, gameOver is called, which brings up the gameOver screen
 export function gameOver() {
   cancelAnimationFrame(rafID)
   setTimeout(()=>{
@@ -169,6 +170,7 @@ export function winner(end) {
   }
 }
 
+// nextLevel is called when a level is finished, it reloads the map, enemies, resets the timer, but keeps the Player object intact
 export function nextLevel() {
   document.body.removeEventListener("keydown", reloadEvent);
   let mainMap = document.getElementById("mainMap");
@@ -188,6 +190,7 @@ export function nextLevel() {
   update();
 }
 
+// startScreen creates the first screen the player sees
 export function startScreen() {
   let startWrap = document.createElement("div");
   startWrap.id = "startWrap";
@@ -223,6 +226,7 @@ export function startScreen() {
   startButton.addEventListener("click", removeStart);
 }
 
+// removeStart removes the startScreen
 function removeStart() {
   let startScreen = document.getElementById("startWrap");
   //startScreen.style.display="none";
@@ -283,6 +287,7 @@ export function levelDisplay(level=currentLevel){
   document.getElementById('mainMap').append(levelDiv)
 }
 
+// when level 10 is finished, it's game over, player receives a bonus
 export function gameEnd(){
   document.getElementById('wrapper').remove()
   document.getElementById('gameOverScreen').remove()
