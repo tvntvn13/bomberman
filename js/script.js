@@ -103,8 +103,9 @@ export function update(timestamp) {
       player.death();
       lives();
     } else {
-      pause=true
-      gameOver()
+      player.death();
+      pause=true;
+      gameOver();
     }
   }
   aliveEnemies = 0;
