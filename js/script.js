@@ -135,11 +135,15 @@ export function update(timestamp) {
   
   if (playerPosition.classList.contains("goal") && aliveEnemies === 0 ) {
     pause = true;
+    for (let elem of Object.values(bombsPlaced)) {
+      clearTimeout(elem.timerId);
+    }
     // player.score += Math.floor((time * 100) / 60);
     // score(player.getScore);
     // sfx.stageClear.play();
     playerPosition.classList.add("winner")
     winner();
+    player.clearAllBombs();
     return;
   }
 
