@@ -139,8 +139,8 @@ export function update(timestamp) {
     for (let elem of Object.values(bombsPlaced)) {
       clearTimeout(elem.timerId);
     }
-    // player.score += Math.floor((time * 100) / 60);
-    // score(player.getScore);
+    player.score += Math.floor((time * 100) / 60);
+    score(player.getScore);
     // sfx.stageClear.play();
     playerPosition.classList.add("winner")
     winner();
