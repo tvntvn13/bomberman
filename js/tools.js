@@ -76,7 +76,7 @@ export function timer(time = 200) {
 
 export function lives() {
   if (player.lives < 1) {
-    cancelAnimationFrame(rafID)  
+    cancelAnimationFrame(rafID)
     gameOver();
   } else if (player.lives === 3) {
     let livesDiv = document.getElementById("lives");
@@ -264,7 +264,7 @@ function help() {
   document.addEventListener('keydown', ()=>{
     backButton.focus()
   })
-  backButton.addEventListener("click", goBack);
+   backButton.addEventListener("click", goBack);
   helpScreen.append(helpText, backButton);
   helpWrap.append(helpScreen);
   document.body.prepend(helpWrap);

@@ -171,20 +171,22 @@ body {
     background-image: url("/img/victoryBM.png"),url('/img/goalBM.png');
     background-position: 2px -3px, 0 0;
     background-position-x: center, auto;
+    background-size: contain, contain;
   }
 
 .player {
   background-image: url("/img/bombBasic2.png");
   background-position: -6% 65%;
   /* background-position-x: 4px; */
-  background-size: 255% auto;
+  background-size: 257% auto;
   
 }
 
 .player.bomb {
     background-image: url("/img/bombBasic2.png"), url("/img/bombBM.png"); ;
-    background-position: 2px 90px, -2px 0;
-    background-size: auto, cover; 
+    background-position: 4px 70%, -2px 0;
+    background-size: 250%, cover; 
+    background-position-x: center,auto;
 }
 
 .player.invincible {
@@ -197,81 +199,98 @@ body {
   }
 }
 
+.player.moveUp {
+    animation: moveUp 200ms steps(3);
+  }
+
+.player.moveRight {
+  animation: moveRight 200ms steps(3);
+}
+
+.player.moveLeft {
+  animation: moveLeft 200ms steps(3);
+}
+
+.player.moveDown {
+   animation: moveDown 200ms steps(3);
+} 
+
 @keyframes moveUp {
-  0% {
-    background-position: 0px 1%;
-    background-position-x: center;
-    transform: translateY(25%);
-  }
-  50% {
-    background-position: 87px 0;
-    background-position-x: center;
-  }
-  100% {
-    background-position: 122px 1px;
-    background-position-x: center;
-    transform: translateY(-25%);
-  }
+    0% {
+     background-position: 2px 1px;
+     transform: translateY(100%);
+     background-position-x: center;
+    }
+    50% {
+        background-position: -50% 1px;
+        /* transform: translateY(0%); */
+        background-position-x: center;
+    }
+    100% {
+        background-position: -100% 1px;
+        transform: translateY(-100%);
+        background-position-x: center;
+    }
 }
 
 @keyframes moveRight {
   0% {
-    background-position: 0px 141px;
+    background-position: 0px 27%;
     background-position-x: center;
-    transform: translateX(-25%);
+    transform: translateX(-100%);
   }
   50% {
-    background-position: 87px 141px;
+    background-position: -50% 27%;
     background-position-x: center;
   }
   100% {
-    background-position: 125px 141px;
+    background-position: -100% 27%;
     background-position-x: center;
-    transform: translateX(25%);
+    transform: translateX(100%);
   }
 }
 
 @keyframes moveDown {
   0% {
-    background-position: 0px 93px;
+    background-position: 3px 66%;
     background-position-x: center;
-    transform: translateY(-25%);
+    transform: translateY(-100%);
   }
   50% {
-    background-position: 87px 93px;
+    background-position: -50% 66%;
     background-position-x: center;
   }
   100% {
-    background-position: 122px 93px;
+    background-position: -100% 66%;
     background-position-x: center;
-    transform: translateY(25%);
+    transform: translateY(100%);
   }
 }
 
 @keyframes moveLeft {
   0% {
-    background-position: 0 46px;
+    background-position: 0 100%;
     background-position-x: center;
-    background-position-y: 43px;
-    transform: translateX(25%);
+    /* background-position-y: 43px; */
+    transform: translateX(100%);
   }
   50% {
-    background-position: 87px 43px;
+    background-position: -50% 100%;
     background-position-x: center;
   }
   100% {
-    background-position: 125px 46px;
+    background-position: -100% 100%;
     background-position-x: center;
-    background-position-y: 43px;
-    transform: translateX(-25%);
+    /* background-position-y: 43px; */
+    transform: translateX(-100%);
   }
-}
+} 
 
 .dead {
      /* url("/img/explosionBM.png"); */
     background-image: url('/img/playerDeadBM.png');
     /* url('/img/explosionBM.png');  */
-    background-size:cover;
+    background-size: 500% auto;
     animation: playerDeath 1000ms steps(1);
 }
 
@@ -283,22 +302,6 @@ body {
     75%{background-position: 43px 0px;} 
     100%{background: transparent};
 }
-
-.player.moveRight {
-  animation: moveRight 200ms steps(3);
-}
-
-.player.moveLeft {
-  animation: moveLeft 200ms steps(3);
-}
-
-.player.moveUp {
-  animation: moveUp 200ms steps(3);
-}
-
-.player.moveDown {
-   animation: moveDown 200ms steps(3);
-} 
 
 .enemy {
   animation: enemyMove 400ms steps(3);
@@ -312,7 +315,7 @@ body {
     background-position: -2%, 0;
   }
   to {
-    background-position: 300%, 0;
+    background-position: -100%, 0;
   }
 }
 

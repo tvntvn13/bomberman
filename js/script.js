@@ -99,8 +99,13 @@ export function update(timestamp) {
       playerPosition.classList.contains("explosion"))
   ) {
     // sfx.playerDies.play();
-    player.death();
-    lives();
+    if(player.lives>1){
+      player.death();
+      lives();
+    } else {
+      pause=true
+      gameOver()
+    }
   }
   aliveEnemies = 0;
   for (let enemy of allEnemies) {
@@ -159,8 +164,8 @@ export function update(timestamp) {
     if (time === 0) {
       
       // sfx.timeUpFull.play();
-      gameOver();
       pause=true
+      gameOver();
     }
     timer(time--);
   }
