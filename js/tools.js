@@ -283,7 +283,7 @@ export function levelDisplay(level=currentLevel){
   levelDiv.classList.add('level')
   levelDiv.id = 'level'
   levelDiv.textContent = `LEVEL ${currentLevel}`
-  document.getElementById('mainMap').append(levelDiv)
+  document.getElementById('game').append(levelDiv)
 }
 
 // when level 10 is finished, it's game over, player receives a bonus

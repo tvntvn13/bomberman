@@ -41,11 +41,11 @@ body {
 .wrapper {
   position: fixed;
   width: 100vw;
-  /* height: 100vh; */
+  height: 100vh;
   display: grid;
   background-color: black;
-  size: cover;
-  resize: none;
+  /* size: cover; */
+  /* resize: none; */
 }
 
 #game {
@@ -95,17 +95,18 @@ body {
 }
 
 .grid-container {
+  --grid-width: 80vh;
   /* position: relative; */
   margin-left: auto;
   margin-right: auto;
   margin-top: auto;
   margin-bottom: auto;
   z-index: 2;
-  width: 80vh;
-  height: 80vh;
+  width: var(--grid-width);
+  height: calc(var(--grid-width) * 13/15);
   display: grid;
   grid-template-columns: repeat(15, 1fr);
-  grid-template-rows: repeat(15, 1fr);
+  grid-template-rows: repeat(13, 1fr);
 }
 
 .grid-item {
@@ -122,8 +123,8 @@ body {
 .softWall {
   background-image: url("/img/softWallBM3.png");
   background-size: cover;
-  background-color: brown;
-  background-blend-mode: multiply;
+  /* background-color: brown;
+  background-blend-mode: multiply; */
   /* will-change: background-image; */
 }
 
@@ -553,7 +554,7 @@ body {
     position: absolute;
     color: white;
     display: block;
-    top: 90%;
+    top: 78%;
     left: 50%;
     transform: translateX(-50%);
     will-change: transform;
