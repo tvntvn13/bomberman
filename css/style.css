@@ -556,6 +556,7 @@ body {
     top: 90%;
     left: 50%;
     transform: translateX(-50%);
+    will-change: transform;
 }
 
 .endDiv {
