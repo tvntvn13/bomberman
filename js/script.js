@@ -96,6 +96,10 @@ document.body.addEventListener("keydown", (e) => {
         pause=true;
         winner();
         break;
+      case "w":
+        pause=true;
+        nextLevel();
+        break;  
       case "Escape":
         if(!pause)
         togglePause();
