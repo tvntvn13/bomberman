@@ -69,6 +69,7 @@ let map2 = [
 ];
 
 let maps = [{
+  "background-color": "cyan",
   mapName: map0,
   softWall: {
     "background-image": "url('/img/wall_textures.png')",
@@ -80,6 +81,7 @@ let maps = [{
   }
 },
 {
+  "background-color": "green",
   mapName: map1,
   softWall: {
     "background-image": "url('/img/wall_textures.png')",
@@ -91,6 +93,7 @@ let maps = [{
   }
 },
 {
+  "background-color": "grey",
   mapName: map2,
   softWall: {
     "background-image": "url('/img/wall_textures.png')",
@@ -108,16 +111,20 @@ export function mapEngine() {
   let styleSheet = document.styleSheets[1];
   let softWall;
   let hardWall;
+  let gridContainer;
   for (let elem of styleSheet.cssRules) {
     if (elem.selectorText === ".softWall") {
       softWall = elem;
     } else if (elem.selectorText === ".solid-wall") {
       hardWall = elem;
+    } else if (elem.selectorText === ".grid-container") {
+      gridContainer = elem;
     }
     if (softWall !== undefined && hardWall !== undefined) {
       break;
     }
   }
+  gridContainer.style["background-color"] = maps[randomMapNum]["background-color"];
   map = maps[randomMapNum].mapName;
   softWall.style["background-image"] = maps[randomMapNum].softWall["background-image"];
   softWall.style["background-position"] = maps[randomMapNum].softWall["background-position"];

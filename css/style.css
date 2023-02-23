@@ -49,7 +49,7 @@ body {
 }
 
 #game {
-  background-color: green;
+  background-color: black;
   padding-left: 20px;
   padding-right: 20px;
   margin-left: auto;
@@ -134,7 +134,8 @@ body {
 }
 
 .empty-field {
-  background-color: green;
+  background-color: transparent;
+  /* opacity: 0; */
 }
 
 .empty-field.goal {
@@ -357,8 +358,8 @@ body {
 }
 
 .explosion {
-  background-color: rgb(255, 0, 0, 0.4);
-  color: rgb(255, 0, 0);
+  /* background-color: rgb(255, 0, 0, 0.4); */
+  /* color: rgb(255, 0, 0); */
   background-image: url("/img/explosionBM.png");
   background-size: contain;
 }
