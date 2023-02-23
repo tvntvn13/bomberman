@@ -120,7 +120,7 @@ export function mapEngine() {
     } else if (elem.selectorText === ".grid-container") {
       gridContainer = elem;
     }
-    if (softWall !== undefined && hardWall !== undefined) {
+    if (softWall !== undefined && hardWall !== undefined && gridContainer !== undefined) {
       break;
     }
   }
