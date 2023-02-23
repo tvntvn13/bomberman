@@ -145,8 +145,8 @@ export function gameOver() {
 }
 
 
-function reloadEvent(e) {
-  if (e.key === "Enter") {
+export function reloadEvent(e) {
+  if (e.key == "Enter") {
     // congrats.style.display = "none";
     document.getElementById("info").querySelector(".congratulations").remove();
     nextLevel();
@@ -183,7 +183,6 @@ export function nextLevel() {
   timer(time);
   incrementLevel();
   createEnemies(ENEMY_NUM + currentLevel - 1);
-  console.log(bombsPlaced);
   player.respawn();
   pauseShift();
   levelDisplay();

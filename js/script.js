@@ -10,7 +10,9 @@ import {
   createEnemies,
   startScreen,
   levelDisplay,
-  gameEnd
+  gameEnd,
+  nextLevel,
+  reloadEvent
 } from "./tools.js";
 import { Player, allEnemies, bombsPlaced } from "./classes.js";
 
@@ -89,6 +91,10 @@ document.body.addEventListener("keydown", (e) => {
         break;
       case "ArrowDown":
         keyPressed = "down";
+        break;
+      case "e":
+        pause=true;
+        nextLevel();
         break;
       case "Escape":
         if(!pause)
