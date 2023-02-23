@@ -1,6 +1,7 @@
-import { map } from "./maps.js";
+import { map, mapEngine } from "./maps.js";
 
 const SOFTWALL_CHANCE = 5.5;
+mapEngine();
 export let template = map;
 
 // drawMap creates the game field based on the template provided;
