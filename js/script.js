@@ -94,7 +94,7 @@ document.body.addEventListener("keydown", (e) => {
         break;
       case "e":
         pause=true;
-        nextLevel();
+        winner();
         break;
       case "Escape":
         if(!pause)
