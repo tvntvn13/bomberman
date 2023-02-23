@@ -115,8 +115,9 @@ body {
 }
 
 .border {
-  background-image: url("/img/bmo.png");
-  background-size: cover;
+  background-image: url("/img/wall_textures2.png");
+  background-position: 75% 0;
+  background-size: 900%;
 }
 
 .solid-wall {
