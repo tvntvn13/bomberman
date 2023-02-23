@@ -1,4 +1,4 @@
-import { map } from "./maps.js";
+import { map, mapEngine } from "./maps.js";
 import {
   player,
   rafID,
@@ -177,6 +177,7 @@ export function nextLevel() {
   while (allEnemies.length > 0) {
     allEnemies.pop();
   }
+  mapEngine();
   drawMap();
   resetTime();
   timer(time);

@@ -1,6 +1,6 @@
 import { player } from "./script.js";
-import { template } from "./field.js";
 import { setStartpoint } from "./tools.js";
+import { map } from "./maps.js";
 // import { sfx } from "./soundFx.js";
 
 // MovingElement is the parent class to Player and Enemy, it is not used itself anywhere
@@ -369,7 +369,7 @@ export class Bomb {
       }
     }
     // checking downwards
-    for (let i = this.y + 1; i < template.length - 1 && i <= this.y + 3; i++) {
+    for (let i = this.y + 1; i < map.length - 1 && i <= this.y + 3; i++) {
       let currentBlock = document.getElementById(`block-${this.x}:${i}`);
       if (currentBlock.classList.contains("solid-wall")) {
         break;
@@ -395,7 +395,7 @@ export class Bomb {
     // checking to the right
     for (
       let i = this.x + 1;
-      i < template[this.y].length - 1 && i <= this.x + 3;
+      i < map[this.y].length - 1 && i <= this.x + 3;
       i++
     ) {
       let currentBlock = document.getElementById(`block-${i}:${this.y}`);

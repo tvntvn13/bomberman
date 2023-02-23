@@ -2,10 +2,9 @@ import { map, mapEngine } from "./maps.js";
 
 const SOFTWALL_CHANCE = 5.5;
 mapEngine();
-export let template = map;
 
 // drawMap creates the game field based on the template provided;
-export function drawMap(templ = template) {
+export function drawMap(templ = map) {
   let game = document.getElementById("game");
   let mainMap = document.getElementById("mainMap");
   // document.querySelectorAll('.grid-container').forEach((e) => e.remove());
