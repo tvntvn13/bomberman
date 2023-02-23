@@ -17,7 +17,11 @@ export function drawMap(templ = template) {
       mapBlock.className = "grid-item";
       mapBlock.id = `block-${j}:${i}`;
       if (templ[i][j] === "▉") {
+        if ((i !== 0 && i !== templ.length-1) && (j !== 0 && j !== templ[i].length-1)){
         mapBlock.classList.add("solid-wall");
+        } else {
+          mapBlock.classList.add('border')
+        }
       } else if (templ[i][j] === "x") {
         mapBlock.classList.add("starting-point", "empty-field");
       } else if (templ[i][j] === undefined || templ[i][j] === "") {

@@ -1,7 +1,7 @@
 // map is the default level design, the '▉' characters are solid walls,
 // the 'x' characters are the starting points and the neighbouring areas,
 // 'W' are the default soft walls, so the player is walled in/protected at the start
-export let map = [
+export let map2 = [
   ["▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉", "▉"],
   ["▉", "x", "x", "W", , , , , , , , "W", "x", "x", "▉"],
   ["▉", "x", "▉", , "▉", , "▉", , "▉", , "▉", , "▉", "x", "▉"],
@@ -18,7 +18,7 @@ export let map = [
 ];
 
 
-export let map2 = [
+export let map = [
   ['▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉','▉'],
   ['▉','x','x',   ,   ,   ,   ,   ,   ,   ,   ,   ,'x','x','▉'],
   ['▉','x','▉','▉','▉','▉','▉',   ,'▉','▉','▉','▉','▉','x','▉'],

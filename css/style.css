@@ -113,6 +113,11 @@ body {
   size: initial;
 }
 
+.border {
+  background-image: url("/img/bmo.png");
+  background-size: cover;
+}
+
 .solid-wall {
   background-image: url("/img/solidWallBM.png");
   background-size: cover;
@@ -589,3 +594,4 @@ body {
     color: white;
     text-shadow: -3px 3px 1px black, -5px 5px 0px rgb(0, 255, 0);
 }
+
