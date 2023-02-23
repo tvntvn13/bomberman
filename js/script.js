@@ -13,7 +13,6 @@ import {
   gameEnd
 } from "./tools.js";
 import { Player, allEnemies, bombsPlaced } from "./classes.js";
-import { changeField } from "./maps.js";
 
 // currentLevel keeps track of the level the player is on
 export let currentLevel = 1;
@@ -70,7 +69,6 @@ let startPoint = document.getElementById(`block-${player.x}:${player.y}`);
 startPoint.classList.add("player");
 let pauseScreen = document.getElementById("pauseScreen");
 score(player.getScore);
-changeField();
 update();
 
 document.body.addEventListener("keyup", (e) => {
