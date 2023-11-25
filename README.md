@@ -2,6 +2,8 @@
 
 ## Welcome to our solution to 01 Edu's make-your-game project!
 
+The project is hosted on heroku and you can find it [here](https://bombman-js.herokuapp.com/). (You might have to wait for a second for the server to spin up, just give it some time)
+
 In this project, the background logic of the game is written in Javascript, on the front end we used HTML, CSS and Javascript. No Javascript frameworks, nor the use of canvas was allowed.
 
 The goal of the project was to recreate our own version of a classic game (chosen from a pre-approved list) using Javascript. We had to use requestAnimationFrame, use some kind of scoring system and some kind of level progression, keep the framerate between 50-60 frames-per-second, avoid excessive repaint and excessive use of layers.
@@ -10,7 +12,6 @@ In the game, you control the Bombman who can place bombs on empty fields to blow
 
 The game has 10 levels with one more enemy every new level (13 in the end). The timer resets every level. After clearing level 10 you get bonus points for every remaining life.
 
-Aside from using this verson on your own system locally, you can play the online version [here](https://bombman-js.herokuapp.com/).
 
 ### *Bomb behaviour:*
 
