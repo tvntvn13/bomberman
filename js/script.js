@@ -1,20 +1,17 @@
-import { drawMap } from "./field.js";
-// import { sfx } from "./soundFx.js";
+import { Player, allEnemies, bombsPlaced } from './classes.js';
+import { drawMap } from './field.js';
 import {
-  setStartpoint,
-  score,
-  timer,
-  lives,
-  gameOver,
-  winner,
   createEnemies,
-  startScreen,
+  gameOver,
   levelDisplay,
-  gameEnd,
+  lives,
   nextLevel,
-  reloadEvent
-} from "./tools.js";
-import { Player, allEnemies, bombsPlaced } from "./classes.js";
+  score,
+  setStartpoint,
+  startScreen,
+  timer,
+  winner,
+} from './tools.js';
 
 // currentLevel keeps track of the level the player is on
 export let currentLevel = 1;
@@ -52,78 +49,67 @@ export function resetTime() {
 let aliveEnemies;
 export let rafID = requestAnimationFrame(update);
 
-// comment out this part to get rid of the loading bar !!!
-// loadingBar();
-// setTimeout(() => {
-//this part needs to stay.
-// document.getElementById("loadingScreen").remove();
-// },3200);
-
 timer(time);
 drawMap();
-// sfx.stageIntro.play();
 export let player = new Player(sp[0], sp[1]);
 lives();
-levelDisplay()
+levelDisplay();
 createEnemies(ENEMY_NUM);
 
 let startPoint = document.getElementById(`block-${player.x}:${player.y}`);
-startPoint.classList.add("player");
-let pauseScreen = document.getElementById("pauseScreen");
+startPoint.classList.add('player');
 score(player.getScore);
 update();
 
-document.body.addEventListener("keyup", (e) => {
-  if (e.key !== " ") keyPressed = null;
+document.body.addEventListener('keyup', (e) => {
+  if (e.key !== ' ') keyPressed = null;
 });
 
-document.body.addEventListener("keydown", (e) => {
+document.body.addEventListener('keydown', (e) => {
   if (keyPressed === null) {
     switch (e.key) {
-      case "ArrowUp":
-        keyPressed = "up";
+      case 'ArrowUp':
+        keyPressed = 'up';
         break;
-      case "ArrowLeft":
-        keyPressed = "left";
+      case 'ArrowLeft':
+        keyPressed = 'left';
         break;
-      case "ArrowRight":
-        keyPressed = "right";
+      case 'ArrowRight':
+        keyPressed = 'right';
         break;
-      case "ArrowDown":
-        keyPressed = "down";
+      case 'ArrowDown':
+        keyPressed = 'down';
         break;
-      case "e":
-        pause=true;
+      case 'e':
+        pause = true;
         winner();
         break;
-      case "w":
-        pause=true;
+      case 'w':
+        pause = true;
         nextLevel();
-        break;  
-      case "Escape":
-        if(!pause)
-        togglePause();
+        break;
+      case 'Escape':
+        if (!pause) togglePause();
         break;
     }
   }
 });
 
-// update is one of the main functions that runs the game, it keeps track of explosions, player lives, the game over screen, etc.
+// update is one of the main functions that runs the game,
+// it keeps track of explosions, player lives, the game over screen, etc.
 // when pause or game over is toggled, it doesn't call the next animationFrame
 export function update(timestamp) {
-  let playerPosition = document.getElementById(`block-${player.x}:${player.y}`);  
+  let playerPosition = document.getElementById(`block-${player.x}:${player.y}`);
   if (
     !player.invincible &&
-    (playerPosition.classList.contains("enemy") ||
-      playerPosition.classList.contains("explosion"))
+    (playerPosition.classList.contains('enemy') || playerPosition.classList.contains('explosion'))
   ) {
-    // sfx.playerDies.play();
-    if(player.lives>1){
+    if (player.lives > 1) {
       player.death();
       lives();
     } else {
       player.death();
-      pause=true;
+      pause = true;
       gameOver();
     }
   }
@@ -131,28 +117,24 @@ export function update(timestamp) {
   for (let enemy of allEnemies) {
     if (enemy.alive) {
       aliveEnemies++;
-      let enemyPosition = document.getElementById(
-        `block-${enemy.x}:${enemy.y}`
-      );
+      let enemyPosition = document.getElementById(`block-${enemy.x}:${enemy.y}`);
 
-      if (enemyPosition.classList.contains("explosion")) {
-        // player.score += 100;
+      if (enemyPosition.classList.contains('explosion')) {
         player.addScore(100);
         score(player.getScore);
         enemy.death();
       }
     }
   }
-  
-  if (playerPosition.classList.contains("goal") && aliveEnemies === 0 ) {
+
+  if (playerPosition.classList.contains('goal') && aliveEnemies === 0) {
     pause = true;
     for (let elem of Object.values(bombsPlaced)) {
       clearTimeout(elem.timerId);
     }
     player.score += Math.floor((time * 100) / 60);
     score(player.getScore);
-    // sfx.stageClear.play();
-    playerPosition.classList.add("winner")
+    playerPosition.classList.add('winner');
     winner();
     player.clearAllBombs();
     return;
@@ -175,9 +157,7 @@ export function update(timestamp) {
   if (timestamp - startTime2 > 100) {
     startTime2 = timestamp;
     if (keyPressed) {
-      // sfx.walking2.play();
       player.movement(keyPressed);
-      // sfx.walking.play();
     }
   }
   if (startTime3 === undefined) {
@@ -186,9 +166,7 @@ export function update(timestamp) {
   if (timestamp - startTime3 > 1100) {
     startTime3 = timestamp;
     if (time === 0) {
-      
-      // sfx.timeUpFull.play();
-      pause=true
+      pause = true;
       gameOver();
     }
     timer(time--);
@@ -201,9 +179,8 @@ export function update(timestamp) {
   }
 }
 
-document.addEventListener("keypress", (e) => {
-  if (e.key === " " && !pause) {
-    // sfx.placeBomb.play();
+document.addEventListener('keypress', (e) => {
+  if (e.key === ' ' && !pause) {
     player.placeBomb();
   }
 });
@@ -215,7 +192,7 @@ function restart() {
 // continueGame removes the pauseScreen, resets the bomb timers, and calls the next animationFrame
 export function continueGame() {
   if (status == 0) {
-    let pauseDiv = document.getElementById("pauseScreen");
+    let pauseDiv = document.getElementById('pauseScreen');
     document.body.removeChild(pauseDiv);
   }
   pause = false;
@@ -228,7 +205,8 @@ export function continueGame() {
 
 let status = 1;
 
-// togglePause cancels bomb timers, saves the remaining time as the Bomb objects' property, and brings up a pauseScreen
+// togglePause cancels bomb timers, saves the remaining time as the Bomb objects' property,
+// and brings up a pauseScreen
 function togglePause() {
   let pauseTime = new Date().getTime();
   for (let elem of Object.values(bombsPlaced)) {
@@ -237,38 +215,37 @@ function togglePause() {
     elem.timer = elem.timer - timePassed;
   }
   status = 1;
-  let pauseDiv = document.createElement("div");
-  pauseDiv.className = "pauseScreen";
-  pauseDiv.id = "pauseScreen";
-  let text = document.createElement("h1");
-  text.innerHTML = "GAME PAUSED";
+  let pauseDiv = document.createElement('div');
+  pauseDiv.className = 'pauseScreen';
+  pauseDiv.id = 'pauseScreen';
+  let text = document.createElement('h1');
+  text.innerHTML = 'GAME PAUSED';
   pauseDiv.append(text);
-  let continueButton = document.createElement("button");
-  continueButton.className = "pauseButton";
-  continueButton.id = "continueButton";
-  continueButton.innerHTML = "<< CONTINUE";
-  continueButton.addEventListener("click", () => {
+  let continueButton = document.createElement('button');
+  continueButton.className = 'pauseButton';
+  continueButton.id = 'continueButton';
+  continueButton.innerHTML = '<< CONTINUE';
+  continueButton.addEventListener('click', () => {
     status = 0;
     continueGame();
   });
-  pauseDiv.style.display = "block";
+  pauseDiv.style.display = 'block';
   pauseDiv.append(continueButton);
-  let restartButton = document.createElement("button");
-  restartButton.className = "pauseButton";
-  restartButton.id = "restartButton";
-  restartButton.innerHTML = "RESTART >>";
-  restartButton.addEventListener("click", restart);
+  let restartButton = document.createElement('button');
+  restartButton.className = 'pauseButton';
+  restartButton.id = 'restartButton';
+  restartButton.innerHTML = 'RESTART >>';
+  restartButton.addEventListener('click', restart);
   pauseDiv.append(restartButton);
-  document.addEventListener('keydown',(e)=>{
-    if(e.key == 'ArrowRight') {
+  document.addEventListener('keydown', (e) => {
+    if (e.key == 'ArrowRight') {
       restartButton.focus();
       e.preventDefault();
-    }
-    else if(e.key == 'ArrowLeft') {
+    } else if (e.key == 'ArrowLeft') {
       continueButton.focus();
       e.preventDefault();
     }
-  })
+  });
   document.body.prepend(pauseDiv);
   pause = true;
 }

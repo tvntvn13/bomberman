@@ -1,0 +1,35 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "root": true,
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "prettier/prettier": [ "warn",
+      {
+        "semi": true,
+        "printWidth": 110,
+        "singleQuote": true,
+        "trailingComma": "es5"
+      }
+    ],
+    "linebreak-style": [
+      "warn",
+      "unix"
+    ],
+    "no-unused-vars": [
+      "warn"
+    ],
+    "max-len": [
+      "warn",
+      110
+    ]
+  }
+}

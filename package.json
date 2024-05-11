@@ -1,21 +1,23 @@
 {
   "name": "bomberman",
   "version": "1.0.0",
-  "description": "none",
+  "description": "bomberman clone made with vanilla javascript",
   "main": "index.html",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "http-server ."
+    "start": "http-server .",
+    "lint": "npx eslint js"
   },
   "repository": {
     "type": "git",
-    "url": "https://01.gritlab.ax/git/petrus_ambrosius/make-your-game.git"
+    "url": "https://github.com/tvntvn13/bomberman"
   },
-  "author": "",
+  "author": "tvntvn13,petervekony",
   "license": "ISC",
-  "dependencies": {
-    "http-server": "^14.1.1",
-    "nodemon": "^2.0.20"
+  "devDependencies": {
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3"
   }
 }
