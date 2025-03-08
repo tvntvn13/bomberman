@@ -1,8 +1,8 @@
 # Bombman-JS
 
-## Welcome to our solution to 01 Edu's make-your-game project!
+## Welcome to our solution to 01 Edu's make-your-game project
 
-The project is hosted on heroku and you can find it [here](https://bombman-js.herokuapp.com/). (You might have to wait for a second for the server to spin up, just give it some time)
+The project is hosted on Cloudflare and you can find it [here](https://bombman.tvntvn.me/).
 
 In this project, the background logic of the game is written in Javascript, on the front end we used HTML, CSS and Javascript. No Javascript frameworks, nor the use of canvas was allowed.
 
@@ -11,7 +11,6 @@ The goal of the project was to recreate our own version of a classic game (chose
 In the game, you control the Bombman who can place bombs on empty fields to blow up enemies, soft walls, and by mistake, the player itself. The level is cleared when all the enemies are dead and the player reaches the goal field (hidden randomly behind one of the soft walls on the map). Every enemy killed grants a 100 point reward to the player, and there is a time bonus upon finishing the level (based on how much time is left on the timer). If the 200 second timer runs out or the player loses all 3 lives, it's game over.
 
 The game has 10 levels with one more enemy every new level (13 in the end). The timer resets every level. After clearing level 10 you get bonus points for every remaining life.
-
 
 ### *Bomb behaviour:*
 
